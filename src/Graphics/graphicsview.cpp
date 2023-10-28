@@ -27,16 +27,21 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     scene->setBackgroundBrush(QColor(192, 192, 192));
     PreviewLine.setVisible(false);
 
-   nodeManager.AddNode(new StartNode(QPointF(100,100)));
-   nodeManager.AddNode(new AddIntNode(QPointF(300,350)));
-   nodeManager.AddNode(new DataNode(QPointF(100,200)));
-   nodeManager.AddNode(new DataNode(QPointF(100,300)));
+    DataNode *data1,*data2,*data3;
+    data1= new DataNode(QPointF(100,100));
+    data2= new DataNode(QPointF(170,200));
+    data3= new DataNode(QPointF(10,150));
+
+    //data2->SetPortDataType(0,Port::Output,Port::Float);
+    nodeManager.AddNode(data1);
+    nodeManager.AddNode(data2);
+    nodeManager.AddNode(data3);
+
+
+    nodeManager.AddNode(new StartNode(QPointF(130,200)));
    nodeManager.AddNode(new AddIntNode(QPointF(150,250)));
    nodeManager.AddNode(new AddIntNode(QPointF(300,450)));
    nodeManager.AddNode(new AddIntNode(QPointF(-150,250)));
-   nodeManager.AddNode(new AddIntNode(QPointF(300,450)));
-   nodeManager.AddNode(new AddIntNode(QPointF(-330,500)));
-   nodeManager.AddNode(new AddIntNode(QPointF(450,50)));
 
 }
 

@@ -6,8 +6,7 @@
 class DataNode: public Node
 {
 public:
-    DataNode(QPointF pos=QPointF(0,0), QVariant Dat=0,Port::PortDataType datatype=Port::Int);
-
+    DataNode(QPointF pos=QPointF(0,0), QVariant Dat=0);
 
 
     void execute();

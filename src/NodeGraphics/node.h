@@ -49,18 +49,21 @@ public:
     void SetOutStreamPort();
 
 
+    //设置端口数据类型
+    void SetPortDataType(uint portId,Port::PortType porttype,Port::PortDataType datatype);
+
+    //拿到控制端口信息
+    StreamPortinfo GetStreamInfo();
+    //检测点是否在端口上
+    bool CheckPortByPos(QPointF pos);
+   //获取点上的端口
+    Port*GetPortByPos(QPointF pos);
 
 
-
-   StreamPortinfo GetStreamInfo();//拿到程序控制端口信息
-
-    bool CheckPortByPos(QPointF pos);//检测点是否在端口上
-    Port*GetPortByPos(QPointF pos);//获取点上的端口
-
-
-
-    uint GetInputCount()const ; //获取输入端口数量
-    uint GetOutCount()const ;   //获取输出端口数量
+    //获取输入端口数量
+    uint GetInputCount()const ;
+     //获取输出端口数量
+    uint GetOutCount()const ;
 
 
     QList<Port*> GetInport();//获取输入端口
@@ -88,7 +91,7 @@ private:
     inline static QMap<NodeType,QColor> TitleColorMap
         {
             {BaseNode,QColor(100,100,100)},
-            {StartNode,QColor(100,0,0)},
+            {StartNode,QColor(200,0,0)},
             {FunctionNode,QColor(20,80,150)},
             {DataNode,QColor(220, 200, 20)},
 

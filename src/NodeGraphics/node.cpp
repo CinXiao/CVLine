@@ -46,8 +46,13 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
     // 绘制标题栏
     QRectF titleBarRect(0, 0, boundingRect().width(), 40);
-    painter->setBrush(TitleColor); // 设置标题栏的颜色
+    QLinearGradient gradient(titleBarRect.topLeft(), titleBarRect.bottomLeft());
+    gradient.setColorAt(0, TitleColor); // 起始颜色
+    gradient.setColorAt(1, QColor(50,50,50,180));   // 终止颜色
+    QBrush titleBarBrush(gradient);
+    painter->setBrush(titleBarBrush); // 设置标题栏的颜色
     painter->drawRoundedRect(titleBarRect,5,5);
+
 
 
     // 添加标题文本
@@ -65,20 +70,21 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
           //输入输出端口
           if(i->portType==Port::Input||i->portType==Port::Output)
           {
+
+              QPen pen(i->portColor,2.3);
+              pen.setCapStyle(Qt::RoundCap); // 设置线帽为圆滑
+              pen.setJoinStyle(Qt::RoundJoin);
+              painter->setPen(pen);
               //未连接画实心圆
               if(!i->IsConnected)
               {
-
                   //设置笔，不设置刷子画空心圆
-                  QPen pen(i->portColor,2.3);
-                  painter->setPen(pen);
                   painter->setBrush(Qt::NoBrush);
                   painter->drawEllipse(i->portRect);
               }//已连接画实心圆
               else
               {
                   //不设置笔，画实心圆
-                  painter->setPen(Qt::NoPen);
                   painter->setBrush(QColor(i->portColor));
                   painter->drawEllipse(i->portRect);
 
@@ -105,15 +111,16 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
                        << QPointF(i->portRect.left(), i->portRect.top())
                        << QPointF(i->portRect.left(), i->portRect.bottom());
 
+              QPen pen(i->portColor, 4);
+              pen.setCapStyle(Qt::RoundCap); // 设置线帽为圆滑
+              pen.setJoinStyle(Qt::RoundJoin);
+              painter->setPen(pen);
               if (!i->IsConnected) {
-                  // 未连接，画空心三角形
-                  QPen pen(i->portColor, 5);
-                  painter->setPen(pen);
+                   //未连接画空心三角形
                   painter->setBrush(Qt::NoBrush);
                   painter->drawPolygon(triangle);
               } else {
                   // 已连接，画实心三角形
-                  painter->setPen(Qt::NoPen);
                   painter->setBrush(i->portColor);
                   painter->drawPolygon(triangle);
               }
@@ -157,10 +164,7 @@ void Node::SetPortValue(uint portID, QVariant data, Port::PortType type)
 Port* Node::GetPort(uint portID, Port::PortType type)
 {
     auto i=std::find_if(portList.begin(),portList.end(),[type,portID](Port* port){
-
         return port->ID==portID&&port->portType==type;
-
-
     });
     if(i!=portList.end())
     {
@@ -218,7 +222,12 @@ void Node::SetOutStreamPort()
 
 }
 
-
+void Node::SetPortDataType(uint portId, Port::PortType porttype, Port::PortDataType datatype)
+{
+    Port *port=GetPort(portId,porttype);
+    port->portDataType=datatype;
+    port->update();
+}
 
 
 StreamPortinfo Node::GetStreamInfo()
