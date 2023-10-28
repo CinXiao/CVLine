@@ -23,7 +23,7 @@ QRectF Node::boundingRect() const
     uint   outputcount=GetOutCount();
     //节点高度是端口数量*50
     uint height=std::max(inputcount,outputcount);
-    uint normalheight=50;
+    uint normalheight=70;
     return QRectF(0, 0, 150,std::max(height*50,normalheight));
 }
 
@@ -45,7 +45,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 
     // 绘制标题栏
-    QRectF titleBarRect(0, 0, boundingRect().width(), 20);
+    QRectF titleBarRect(0, 0, boundingRect().width(), 40);
     painter->setBrush(TitleColor); // 设置标题栏的颜色
     painter->drawRoundedRect(titleBarRect,5,5);
 
@@ -107,7 +107,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
               if (!i->IsConnected) {
                   // 未连接，画空心三角形
-                  QPen pen(i->portColor, 2.3);
+                  QPen pen(i->portColor, 5);
                   painter->setPen(pen);
                   painter->setBrush(Qt::NoBrush);
                   painter->drawPolygon(triangle);

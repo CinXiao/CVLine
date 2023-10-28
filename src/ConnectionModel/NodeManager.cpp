@@ -142,10 +142,7 @@ bool NodeManager::EnableConnectCheck(PortInfo info1, PortInfo info2)
         return false;
     if(info2.port->IsConnected&&info2.port->portType==Port::InStream)
         return false;
-    if(info1.port->IsConnected&&info1.port->portType==Port::OutStream)
-        return false;
-    if(info2.port->IsConnected&&info2.port->portType==Port::OutStream)
-        return false;
+
     return true;
 }
 

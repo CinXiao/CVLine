@@ -33,14 +33,14 @@ public:
         if(portType==Input||portType==Output)
         {
             //设置端口颜色范围和端口文字范围和文字对齐方向
-            portRect=(portType==Input)?QRectF(1,28+ID*30,20,20):QRectF(129,28+ID*30,20,20);
-            portTextRect=(portType==Input)?QRectF(25,28+ID*28,50,28):QRectF(75,28+ID*28,50,28);
+            portRect=(portType==Input)?QRectF(1,45+ID*30,20,20):QRectF(129,45+ID*30,20,20);
+            portTextRect=(portType==Input)?QRectF(25,45+ID*28,50,28):QRectF(75,45+ID*28,50,28);
             TextAlign=(portType==Input)?Qt::AlignLeft:Qt::AlignRight;
         }
         else if(portType==InStream||portType==OutStream)
         {
             //设置端口颜色范围和端口文字范围和文字对齐方向
-            portRect=(portType==InStream)?QRectF(2,3,15,15):QRectF(133,3,15,15);
+            portRect=(portType==InStream)?QRectF(8,10,20,20):QRectF(125,10,20,20);
         }
 
 
