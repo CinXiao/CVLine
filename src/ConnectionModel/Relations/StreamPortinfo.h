@@ -10,7 +10,8 @@ class StreamPortinfo
 public:
     enum StreamState {NotStream,FullPort,OnlyInStream, OnlyOutStream};
     Port *InStreamPort{nullptr};
-    Port *OutStreamPort{nullptr};
+    //节点会有多个程序控制输出端口
+   Port *OutStreamPort;
     StreamState streamState;
     StreamPortinfo( Port *InStreamPort,Port *OutStreamPort):InStreamPort(InStreamPort),OutStreamPort(OutStreamPort)
     {

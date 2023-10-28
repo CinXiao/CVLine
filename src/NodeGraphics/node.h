@@ -52,7 +52,7 @@ public:
 
 
 
-    StreamPortinfo GetStreamInfo();//拿到程序控制端口信息
+   StreamPortinfo GetStreamInfo();//拿到程序控制端口信息
 
     bool CheckPortByPos(QPointF pos);//检测点是否在端口上
     Port*GetPortByPos(QPointF pos);//获取点上的端口
