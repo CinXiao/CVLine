@@ -122,22 +122,30 @@ PortInfo NodeManager::GetInStreamPortInfoByNode(Node *node)
 
 bool NodeManager::EnableConnectCheck(PortInfo info1, PortInfo info2)
 {
-    //端口是否能连接匹配
+    //端口类型是否能连接匹配
     if(!info1.port->PortEnableConnectCheck(info2.port->portType))
         return false;
     //回环检测，不能节点输入连自己的输出
     if(info1.node==info2.node)
         return false;
-    //输入输出单调性检测   一个输出可以连多个输入，但是一个输入只能连一个输出
+
+
+
+    //数据输入输出单调性检测   一个数据输出可以连多个数据输入，但是一个数据输入只能连一个数据输出   程序控制则只能输入输出都只能连一个
     if(info1.port->IsConnected&&info1.port->portType==Port::Input)
         return false;
     if(info2.port->IsConnected&&info2.port->portType==Port::Input)
         return false;
+
+    //程序控制输入输出 只能一对一，只要连接了就不能继续连接了
     if(info1.port->IsConnected&&info1.port->portType==Port::InStream)
         return false;
     if(info2.port->IsConnected&&info2.port->portType==Port::InStream)
         return false;
-
+    if(info1.port->IsConnected&&info1.port->portType==Port::OutStream)
+        return false;
+    if(info2.port->IsConnected&&info2.port->portType==Port::OutStream)
+        return false;
     return true;
 }
 
@@ -290,4 +298,10 @@ void NodeManager::AddNode(Node *node)
 {
     NodeList.append(node);
     view->scene()->addItem(node);
+}
+
+void NodeManager::NodeConnect(Node *node1, Node *node2)
+{
+
+
 }

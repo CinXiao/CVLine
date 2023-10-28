@@ -111,6 +111,7 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
            //连线端口类型判断,输入输出端口类型检测
            bool check= nodeManager.EnableConnectCheck(clickportinfo,releaseportinfo);
 
+           //可以连接
            if(check)
            {
            //获取开始点和结束点，即鼠标点击的位置和释放的位置
@@ -124,8 +125,11 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
             //端口和连线信息
             LineInfo portline;
             portline.line=curveItem;
-            portline.PortInfo1=nodeManager.GetPortByPos(MouseClikePos);
-            portline.PortInfo2=nodeManager.GetPortByPos(MouseReleasePos);
+            portline.PortInfo1=clickportinfo;
+            portline.PortInfo2=releaseportinfo;
+
+            //节点连接
+            nodeManager.NodeConnect(clickportinfo.node,releaseportinfo.node);
 
 
             //添加线

@@ -53,6 +53,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     // 添加标题文本
     QFont titleFont = painter->font();
     titleFont.setBold(true);
+    titleFont.setPixelSize(15);
     painter->setFont(titleFont);
     painter->setPen(Qt::white); // 设置标题文本颜色
     painter->drawText(titleBarRect, Qt::AlignCenter, NodeName);

@@ -61,6 +61,9 @@ public:
 
     //添加节点
     void AddNode(Node*node);
+    //连接两个节点
+    void NodeConnect(Node*node1,Node*node2);
+
 public:
     //端口连线信息列表
     QList<LineInfo> PortLineInfoList;
