@@ -328,7 +328,31 @@ void NodeManager::PortConnect(PortInfo port1,PortInfo port2)
 
 }
 
-void NodeManager::DeletePortConnect(PortInfo port1,PortInfo port)
+void NodeManager::DeletePortConnect(PortInfo portinfo1)
 {
+
+     auto i=std::find_if(PortLineInfoList.begin(),PortLineInfoList.end(),[portinfo1](const LineInfo &lineinfo)
+     {
+         return lineinfo.PortInfo1.port==portinfo1.port||lineinfo.PortInfo2.port==portinfo1.port;
+     });
+
+     if(i!=PortLineInfoList.end())
+     {
+        LineInfo lineinfo=*i;
+        // 计算迭代器位置
+        auto index = std::distance(PortLineInfoList.begin(), i);
+        //从场景移除连接线  删除线
+          BezierCurveItem *line=PortLineInfoList[index].line;
+             delete line;
+          line=nullptr;
+          //更新两个端口连接状态
+          lineinfo.PortInfo1.port->IsConnected=false;
+          lineinfo.PortInfo2.port->IsConnected=false;
+
+        // 删除找到连线信息
+        PortLineInfoList.erase(PortLineInfoList.begin() + index);
+
+     }
+
 
 }

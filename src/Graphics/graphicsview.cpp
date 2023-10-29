@@ -1,14 +1,6 @@
 #include "graphicsview.h"
 
 
-
-
-
-
-
-
-
-
 GraphicsView::GraphicsView()
 {
 
@@ -16,13 +8,17 @@ GraphicsView::GraphicsView()
 
 GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
 {
+    // 设置框选模式
+    setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
 
-    setRenderHint(QPainter::Antialiasing); // 提高渲染质量
-    setRenderHint(QPainter::SmoothPixmapTransform);
+
+    setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing
+                         | QPainter::LosslessImageRendering);
+    setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
     setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    setOptimizationFlag(QGraphicsView::DontAdjustForAntialiasing, true);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    setRenderHint(QPainter::Antialiasing);
     //添加连线预览线到场景
     scene->addItem(&PreviewLine);
     scene->setBackgroundBrush(QColor(192, 192, 192));
@@ -63,15 +59,25 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 
 void GraphicsView::mousePressEvent(QMouseEvent *event)
 {
+
+
+    // 禁用框选功能
+    if(event->button() == Qt::RightButton)
+    setDragMode(QGraphicsView::NoDrag);
+
     MouseClikePos=event->pos();
     MouseCurrentPos=event->pos();
 
     if(event->button() == Qt::LeftButton)
     {
+        // 启用框选功能
+         setDragMode(QGraphicsView::RubberBandDrag);
        //尝试获取点击位置的端口信息
        PortInfo portinfo=nodeManager.GetPortByPos(MouseClikePos);
        if(!portinfo.IsEmpty())
        {
+
+           setDragMode(QGraphicsView::NoDrag);
            //设置画线标识
            isDrawing=true;
            //设置画线颜色
@@ -85,6 +91,7 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
 
 void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
+
     MouseReleasePos=event->pos();
     PreviewLine.setVisible(false);
     //左键释放
@@ -114,25 +121,28 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
             nodeManager.PortConnect(clickportinfo,releaseportinfo);
            }
 
-           //单调性检测没通过，但是端口类型和端口数据类型是匹配的，更改线
+           //单调性检测没通过，但是端口类型和端口数据类型是匹配的，则需要更改两个端口之间的连线
            if(portcheck&&!monotonicitycheck&&portdatatype)
            {
-                qDebug()<<"需要更改连线了！";
-                //取消之前两个端点之间的连接关系
+               // qDebug()<<"需要更改连线了！";
 
+                //删除输入端口的连线，因为输入端口只能连一条线，所以只要删除与输入端口连接的那一条连接信息就行了
+
+                 //判断两个端口谁是输入端口
+            if(clickportinfo.port->portType==Port::Input||clickportinfo.port->portType==Port::InStream)
+                {
+                    nodeManager.DeletePortConnect(clickportinfo);
+                }
+                if(releaseportinfo.port->portType==Port::Input||releaseportinfo.port->portType==Port::InStream)
+                {
+                    nodeManager.DeletePortConnect(releaseportinfo);
+                }
                 //端点连接
                 nodeManager.PortConnect(clickportinfo,releaseportinfo);
 
            }
-
-
-
-
-
        }
     }
-
-
     //重置画线标识
     isDrawing=false;
     QGraphicsView::mouseReleaseEvent(event);
@@ -157,14 +167,12 @@ void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
 
     // 使用exec函数显示菜单
     QAction *selectedAction = contextMenu.exec(event->globalPos());
-
     //获取选中的菜单创建出来的节点
     Node *node=contextMenu.GetSelectedNode(selectedAction,mapToScene(event->pos()));
     if(node!=nullptr)
     {
        nodeManager.AddNode(node);
     }
-
 
     event->accept();
 }

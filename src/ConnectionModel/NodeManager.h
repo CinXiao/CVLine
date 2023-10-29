@@ -67,8 +67,8 @@ public:
     void AddNode(Node*node);
     //连接两个端点
     void PortConnect(PortInfo port1, PortInfo port2);
-    //删除两个端点之间的连接
-    void DeletePortConnect(PortInfo port1,PortInfo port);
+    //删除一个端点之间所有连接的线
+    void DeletePortConnect(PortInfo portinfo1);
 
 public:
     //端口连线信息列表

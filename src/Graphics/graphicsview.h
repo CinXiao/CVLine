@@ -33,7 +33,6 @@ public:
     void mouseReleaseEvent(QMouseEvent *event)override;
     bool viewportEvent(QEvent *event)override;
     void keyReleaseEvent(QKeyEvent* event) override;
-
     void contextMenuEvent(QContextMenuEvent *event)override;
 
 private:
@@ -46,7 +45,6 @@ private:
     BezierCurveItem PreviewLine{QPointF(0,0),QPointF(0,0)};
     //预览线的颜色
     QColor lineColor;
-
     //鼠标当前位置
     QPoint MouseCurrentPos;
     //鼠标点击位置

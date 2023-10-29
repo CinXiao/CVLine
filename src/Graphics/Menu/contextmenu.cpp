@@ -35,6 +35,7 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
     if(action==StartAction)
     {
         node=new StartNode(pos);
+        action->setEnabled(false);
     }else if(action==IntAction)
     {
         node=new DataNode(pos,0,Port::Int);

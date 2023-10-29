@@ -83,7 +83,7 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
           if(i->portType==Port::Input||i->portType==Port::Output)
           {
 
-              QPen pen(i->portColor,2.3);
+              QPen pen(i->portColor,5);
               pen.setCapStyle(Qt::RoundCap); // 设置线帽为圆滑
               pen.setJoinStyle(Qt::RoundJoin);
               painter->setPen(pen);
