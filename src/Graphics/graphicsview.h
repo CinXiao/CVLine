@@ -1,17 +1,22 @@
 #ifndef GRAPHICSVIEW_H
 #define GRAPHICSVIEW_H
 
+#include <QMenu>
 #include<QtTypes>
 #include<QPainter>
+#include <QAction>
 #include <QWheelEvent>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 
 
+
+
 #include "src/NodeGraphics/node.h"
+#include "src/Graphics/Menu/contextmenu.h"
 #include "src/LineGraphics/beziercurveitem.h"
 #include "src/NodeGraphics/Nodes/startnode.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/addintnode.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/Add.h"
 #include "src/NodeGraphics/Nodes/DataNode/DataNode.h"
 #include "src/ConnectionModel/NodeManager.h"
 
@@ -29,18 +34,19 @@ public:
     bool viewportEvent(QEvent *event)override;
     void keyReleaseEvent(QKeyEvent* event) override;
 
+    void contextMenuEvent(QContextMenuEvent *event)override;
 
 private:
     NodeManager nodeManager{this};//节点管理器
 
-
+    ContextMenu contextMenu{this};
     //画线判断标识
     bool isDrawing=false;
     //画线预览
     BezierCurveItem PreviewLine{QPointF(0,0),QPointF(0,0)};
-
-    //画线的颜色
+    //预览线的颜色
     QColor lineColor;
+
     //鼠标当前位置
     QPoint MouseCurrentPos;
     //鼠标点击位置

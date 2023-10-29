@@ -120,24 +120,25 @@ PortInfo NodeManager::GetInStreamPortInfoByNode(Node *node)
     return info;
 }
 
-bool NodeManager::EnableConnectCheck(PortInfo info1, PortInfo info2)
+bool NodeManager::PortTypeCheck(PortInfo info1, PortInfo info2)
 {
     //端口类型是否能连接匹配
-    if(!info1.port->PortEnableConnectCheck(info2.port->portType))
+    if(!info1.port->PortTypeCheck(info2.port->portType))
         return false;
     //回环检测，不能节点输入连自己的输出
     if(info1.node==info2.node)
         return false;
 
+    return true;
+}
 
-
-    //数据输入输出单调性检测   一个数据输出可以连多个数据输入，但是一个数据输入只能连一个数据输出   程序控制则只能输入输出都只能连一个
+bool NodeManager::PortMonotonicityCheck(PortInfo info1, PortInfo info2)
+{
+    //端口类型单调性检测   一个数据输出可以连多个数据输入，但是一个数据输入只能连一个数据输出   程序控制则只能输入输出都只能连一个
     if(info1.port->IsConnected&&info1.port->portType==Port::Input)
         return false;
     if(info2.port->IsConnected&&info2.port->portType==Port::Input)
         return false;
-
-    //程序控制输入输出 只能一对一，只要连接了就不能继续连接了
     if(info1.port->IsConnected&&info1.port->portType==Port::InStream)
         return false;
     if(info2.port->IsConnected&&info2.port->portType==Port::InStream)
@@ -146,9 +147,18 @@ bool NodeManager::EnableConnectCheck(PortInfo info1, PortInfo info2)
     return true;
 }
 
-bool NodeManager::CycleCheck()
+bool NodeManager::PortDataTypeCheck(PortInfo info1, PortInfo info2)
 {
 
+
+    //端口数据类型是否能匹配
+    return info1.port->portDataType==info2.port->portDataType;
+}
+
+
+
+bool NodeManager::CycleCheck()
+{
 
     return true;
 }
@@ -297,8 +307,28 @@ void NodeManager::AddNode(Node *node)
     view->scene()->addItem(node);
 }
 
-void NodeManager::NodeConnect(Node *node1, Node *node2)
+void NodeManager::PortConnect(PortInfo port1,PortInfo port2)
 {
+    //获取开始点和结束点，即鼠标点击的位置和释放的位置
+    QPointF startPoint(port1.node->mapToScene(port1.port->portRect.center()));
+    QPointF endPoint(port2.node->mapToScene(port2.port->portRect.center()));
+    //线
+    BezierCurveItem* curveItem = new BezierCurveItem(startPoint, endPoint);
+    //这时候线的颜色是port1的端口颜色，所已port1要是鼠标点击的端口
+    curveItem->LineColor=port1.port->portColor;
+    //端口和连线信息
+    LineInfo portline;
+    portline.line=curveItem;
+    portline.PortInfo1=port1;
+    portline.PortInfo2=port2;
+    //添加线
+    view->scene()->addItem(curveItem);
+    //添加一条节点和线的连接关系
+     AddRelation(portline);
 
+}
+
+void NodeManager::DeletePortConnect(PortInfo port1,PortInfo port)
+{
 
 }

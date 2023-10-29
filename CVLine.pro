@@ -10,10 +10,12 @@ CONFIG += c++17
 
 SOURCES += \
      src/ConnectionModel/NodeManager.cpp \
+     src/Graphics/Menu/contextmenu.cpp \
      src/Graphics/graphicsview.cpp \
      src/LineGraphics/beziercurveitem.cpp \
+     src/NodeGraphics/Nodes/DataNode/TextInput/textinput.cpp \
      src/NodeGraphics/Nodes/DataNode/datanode.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/addintnode.cpp \
+     src/NodeGraphics/Nodes/FunctionNodes/Add.cpp \
      src/NodeGraphics/Nodes/startnode.cpp \
      src/NodeGraphics/node.cpp \
      src/Windows/nodeeditingwindow.cpp \
@@ -26,10 +28,12 @@ HEADERS += \
      src/ConnectionModel/Relations/NodeInfo.h \
      src/ConnectionModel/Relations/PortInfo.h \
      src/ConnectionModel/Relations/StreamPortinfo.h \
+     src/Graphics/Menu/contextmenu.h \
      src/Graphics/graphicsview.h \
      src/LineGraphics/beziercurveitem.h \
+     src/NodeGraphics/Nodes/DataNode/TextInput/textinput.h \
      src/NodeGraphics/Nodes/DataNode/datanode.h \
-     src/NodeGraphics/Nodes/FunctionNodes/addintnode.h \
+     src/NodeGraphics/Nodes/FunctionNodes/Add.h \
      src/NodeGraphics/Nodes/startnode.h \
      src/NodeGraphics/Port/Port.h \
      src/NodeGraphics/node.h \

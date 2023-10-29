@@ -11,7 +11,7 @@ public:
     //端口类型
     enum PortType { None,InStream,OutStream, Input, Output };
     //端口数据类型
-    enum PortDataType {Stream,Int, Bool,Float,String,Double,Vector2,Vector3,Color,Array};
+    enum PortDataType {Stream,Int,Bool,String,Double,Vector2,Vector3,Color};
 
 
     bool IsValid()
@@ -33,7 +33,7 @@ public:
         if(portType==Input||portType==Output)
         {
             //设置端口颜色范围和端口文字范围和文字对齐方向
-            portRect=(portType==Input)?QRectF(1,45+ID*30,20,20):QRectF(129,45+ID*30,20,20);
+            portRect=(portType==Input)?QRectF(3,45+ID*30,20,20):QRectF(127,45+ID*30,20,20);
             portTextRect=(portType==Input)?QRectF(25,45+ID*28,50,28):QRectF(75,45+ID*28,50,28);
             TextAlign=(portType==Input)?Qt::AlignLeft:Qt::AlignRight;
         }
@@ -46,8 +46,15 @@ public:
 
     }
 
-    //端口类型是否可以连接判断
-    bool PortEnableConnectCheck(PortType traporttype)
+
+
+
+
+    //端口数据类型检测
+
+
+    // 端口类型检测
+    bool PortTypeCheck(PortType traporttype)
     {
         if(traporttype==InStream)
             return portType==OutStream;
@@ -90,7 +97,7 @@ public:
         if(portType==Input||portType==Output)
         {
             //设置端口颜色范围和端口文字范围和文字对齐方向
-            portRect=(portType==Input)?QRectF(1,45+ID*30,20,20):QRectF(129,45+ID*30,20,20);
+            portRect=(portType==Input)?QRectF(3,45+ID*30,20,20):QRectF(127,45+ID*30,20,20);
             portTextRect=(portType==Input)?QRectF(25,45+ID*28,50,28):QRectF(75,45+ID*28,50,28);
             TextAlign=(portType==Input)?Qt::AlignLeft:Qt::AlignRight;
         }
@@ -108,15 +115,25 @@ public:
       {Stream,QColor(240,240,240)},
       {Int,QColor(106,34,136)},
       {Bool,QColor(136,34,34)},
-      {Float,QColor(34, 136, 150)},
       {String,QColor(56,136,34)},
       {Double, QColor(34, 136, 204)},
       {Vector2, QColor(136, 84, 68)},
       {Vector3, QColor(136, 34, 68)},
-      {Color, QColor(85, 34, 136)},
-      {Array, QColor(68, 136, 34)}
+      {Color, QColor(85, 34, 136)}
     };
 
+    //端口数据类型名字表
+    inline static QMap<PortDataType,QString> PortDataTypeNameMap
+        {
+            {Stream,"程序控制流"},
+            {Int,"整数"},
+            {Bool,"布尔值"},
+            {String,"字符串"},
+            {Double,"小数"},
+            {Vector2,"2维向量"},
+            {Vector3,"3维向量"},
+            {Color, "颜色"}
+        };
 
 };
 

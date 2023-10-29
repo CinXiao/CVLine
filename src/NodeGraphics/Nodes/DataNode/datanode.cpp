@@ -2,30 +2,34 @@
 
 
 
-DataNode::DataNode(QPointF pos, QVariant Dat):Node(Node::DataNode,pos)
+void DataNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
 
-        NodeName="数据输入";
+
+     Node::paint(painter, option, widget);
+    // 绘制底色//绘制文本输入框背景
+     painter->setPen(Qt::NoPen);
+    QRectF backgroundRect(textItem->x(),textItem->y(),50,25);
+    painter->setBrush(QBrush(QColor(30, 30, 30,100))); // 设置底色
+    painter->drawRoundedRect(backgroundRect,5,5);
+
+}
+
+DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(Node::DataNode,pos)
+{
+
+        TitleColor=Port::PortColorMap[datatype];
+
+    NodeName=Port::PortDataTypeNameMap[datatype];
         setFlag(QGraphicsItem::ItemIsFocusable, true);
-        AddPort(new Port(0,"整数",Port::Output,Port::Int));
-        textItem = new QGraphicsTextItem(Dat.toString(), this);
-
-
-        QFont font ;
-        font.setBold(true);
-        font.setPixelSize(15);
-        textItem->setFont(font);
-
-
-        textItem->setPos(2, 42); // 设置文本框位置
-        textItem->setTextInteractionFlags(Qt::TextEditorInteraction); // 允许编辑文本
-        textItem->setDefaultTextColor(Qt::white);
-
+        AddPort(new Port(0,"0",Port::Output,datatype));
+        textItem = new TextInput(Dat.toString(), this);
 
 
 
 }
+
 
 void DataNode::execute()
 {
@@ -33,11 +37,15 @@ void DataNode::execute()
 
         if(GetPort(0,Port::Output)->portDataType==Port::Int)
         {
-                int val=textItem->toPlainText().toInt();
+                QVariant val=textItem->toPlainText().toInt();
                  SetPortValue(0,val,Port::Output);
-        }else if(GetPort(0,Port::Output)->portDataType==Port::Float)
+        }else if(GetPort(0,Port::Output)->portDataType==Port::Double)
         {
-                 float val=textItem->toPlainText().toFloat();
+                 QVariant val(textItem->toPlainText().toDouble());
+                 SetPortValue(0,val,Port::Output);
+        }else if(GetPort(0,Port::Output)->portDataType==Port::String)
+        {
+                 QVariant val(textItem->toPlainText());
                  SetPortValue(0,val,Port::Output);
         }
 

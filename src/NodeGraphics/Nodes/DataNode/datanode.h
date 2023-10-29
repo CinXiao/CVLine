@@ -2,18 +2,20 @@
 #define DATANODE_H
 #include<QDebug>
 #include<QObject>
+
 #include "src/NodeGraphics/node.h"
+#include "src/NodeGraphics/Nodes/DataNode/TextInput/textinput.h"
 class DataNode: public Node
 {
 public:
-    DataNode(QPointF pos=QPointF(0,0), QVariant Dat=0);
-
+    DataNode(QPointF pos=QPointF(0,0), QVariant Dat=0,Port::PortDataType datatype=Port::Int);
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget);
 
     void execute();
 
 
 private:
-    QGraphicsTextItem* textItem;
+    TextInput* textItem;
 
 };
 

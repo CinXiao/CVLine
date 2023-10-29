@@ -34,13 +34,17 @@ public:
     //拿到与该节点控制输入端口节点信息  因为输入只能有一个，所以只会存在一个节点与输入端口连接
     PortInfo GetInStreamPortInfoByNode(Node*node);
 
-    //端口是否可以连接检测
-    bool EnableConnectCheck(PortInfo info1,PortInfo info2);
-
+    //端口类型检测
+    bool PortTypeCheck(PortInfo info1,PortInfo info2);
+    //端口连接单调性检测
+    bool PortMonotonicityCheck(PortInfo info1,PortInfo info2);
+    //端口数据类型检测
+    bool PortDataTypeCheck(PortInfo info1,PortInfo info2);
 
     //检测回环
     //从一个端口出发看看能不能到达这个端口，如果可以到达那么就是回环，如果最后是空的端口那么就不是回环
     bool CycleCheck();
+
 
 
 
@@ -61,8 +65,10 @@ public:
 
     //添加节点
     void AddNode(Node*node);
-    //连接两个节点
-    void NodeConnect(Node*node1,Node*node2);
+    //连接两个端点
+    void PortConnect(PortInfo port1, PortInfo port2);
+    //删除两个端点之间的连接
+    void DeletePortConnect(PortInfo port1,PortInfo port);
 
 public:
     //端口连线信息列表

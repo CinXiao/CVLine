@@ -8,6 +8,7 @@
 
 
 
+
 GraphicsView::GraphicsView()
 {
 
@@ -27,21 +28,6 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     scene->setBackgroundBrush(QColor(192, 192, 192));
     PreviewLine.setVisible(false);
 
-    DataNode *data1,*data2,*data3;
-    data1= new DataNode(QPointF(100,100));
-    data2= new DataNode(QPointF(170,200));
-    data3= new DataNode(QPointF(10,150));
-
-    //data2->SetPortDataType(0,Port::Output,Port::Float);
-    nodeManager.AddNode(data1);
-    nodeManager.AddNode(data2);
-    nodeManager.AddNode(data3);
-
-
-    nodeManager.AddNode(new StartNode(QPointF(130,200)));
-   nodeManager.AddNode(new AddIntNode(QPointF(150,250)));
-   nodeManager.AddNode(new AddIntNode(QPointF(300,450)));
-   nodeManager.AddNode(new AddIntNode(QPointF(-150,250)));
 
 }
 
@@ -104,45 +90,45 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
     //左键释放
     if (event->button() == Qt::LeftButton)
     {
-       //尝试获取释放位置的端口信息
-       //因为isDrawing是true的话 点击位置的端口信息肯定是获取可以获取到的所以不用再次获取点击位置的端口信息
-       PortInfo releaseportinfo=nodeManager.GetPortByPos(MouseReleasePos);
 
+       //尝试获取释放位置的端口信息
+       PortInfo releaseportinfo=nodeManager.GetPortByPos(MouseReleasePos);
        if(!releaseportinfo.IsEmpty()&&isDrawing)
        {
-
+           //因为isDrawing是true的话 点击位置的端口信息肯定是获取可以获取到的所以不用校验点击位置是否有节点
            //获取点击位置的端口信息
            PortInfo clickportinfo=nodeManager.GetPortByPos(MouseClikePos);
-           //连线端口类型判断,输入输出端口类型检测
-           bool check= nodeManager.EnableConnectCheck(clickportinfo,releaseportinfo);
+
+
+           //端口类型是否可以连接
+           bool portcheck=nodeManager.PortTypeCheck(clickportinfo,releaseportinfo);
+           //端口单调性检测
+           bool monotonicitycheck=nodeManager.PortMonotonicityCheck(clickportinfo,releaseportinfo);
+           //端口数据类型是否匹配
+           bool portdatatype=nodeManager.PortDataTypeCheck(clickportinfo,releaseportinfo);
 
            //可以连接
-           if(check)
+           if(portcheck&&monotonicitycheck&&portdatatype)
            {
-           //获取开始点和结束点，即鼠标点击的位置和释放的位置
-            QPointF startPoint(mapToScene(MouseClikePos));
-            QPointF endPoint(mapToScene(MouseReleasePos));
-
-            //线
-            BezierCurveItem* curveItem = new BezierCurveItem(startPoint, endPoint);
-            curveItem->LineColor=lineColor;
-
-            //端口和连线信息
-            LineInfo portline;
-            portline.line=curveItem;
-            portline.PortInfo1=clickportinfo;
-            portline.PortInfo2=releaseportinfo;
-
-            //节点连接
-            nodeManager.NodeConnect(clickportinfo.node,releaseportinfo.node);
-
-
-            //添加线
-            scene()->addItem(curveItem);
-
-            //添加一条节点和线的连接关系
-            nodeManager.AddRelation(portline);
+            //端点连接
+            nodeManager.PortConnect(clickportinfo,releaseportinfo);
            }
+
+           //单调性检测没通过，但是端口类型和端口数据类型是匹配的，更改线
+           if(portcheck&&!monotonicitycheck&&portdatatype)
+           {
+                qDebug()<<"需要更改连线了！";
+                //取消之前两个端点之间的连接关系
+
+                //端点连接
+                nodeManager.PortConnect(clickportinfo,releaseportinfo);
+
+           }
+
+
+
+
+
        }
     }
 
@@ -164,6 +150,23 @@ void GraphicsView::keyReleaseEvent(QKeyEvent *event)
        qDebug()<<"f5 run";
        nodeManager.Run();
     }
+}
+
+void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
+{
+
+    // 使用exec函数显示菜单
+    QAction *selectedAction = contextMenu.exec(event->globalPos());
+
+    //获取选中的菜单创建出来的节点
+    Node *node=contextMenu.GetSelectedNode(selectedAction,mapToScene(event->pos()));
+    if(node!=nullptr)
+    {
+       nodeManager.AddNode(node);
+    }
+
+
+    event->accept();
 }
 
 

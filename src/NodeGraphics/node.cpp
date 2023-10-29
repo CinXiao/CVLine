@@ -31,27 +31,39 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
-    //不设置笔
-    painter->setPen(Qt::NoPen);
+
+    qreal cornerRadius = 10.0; // 圆角的半径
+    qreal titlecornerRadius = 10.0; // 圆角的半径
+    QRectF titleBarRect(0, 0, boundingRect().width(), 40);
     // 根据高亮状态设置节点的颜色
     if (isHighlighted) {
-          painter->setBrush(QColor(20,20,20,240));
-    } else {
+        //选中设置笔，描绘边框颜色
+          QPen pen;
+          pen.setColor(Qt::white);
+          pen.setWidth(4);
+        //调整标题
+          titlecornerRadius=7;
+          titleBarRect=QRectF(2, 2, boundingRect().width()-4, 36);
+          painter->setPen(pen);
           painter->setBrush(QColor(50,50,50,240));
+    } else {
+          //没选中不设置笔
+          painter->setPen(Qt::NoPen);
+          painter->setBrush(QColor(70,70,70,240));
     }
-    // 使用 drawRoundedRect 绘制圆角矩形
-    qreal cornerRadius = 10.0; // 圆角的半径
+    // 使用 drawRoundedRect 绘制圆角矩形(底部)
+
     painter->drawRoundedRect(boundingRect(), cornerRadius, cornerRadius);
 
-
+    //不设置笔
+    painter->setPen(Qt::NoPen);
     // 绘制标题栏
-    QRectF titleBarRect(0, 0, boundingRect().width(), 40);
     QLinearGradient gradient(titleBarRect.topLeft(), titleBarRect.bottomLeft());
     gradient.setColorAt(0, TitleColor); // 起始颜色
-    gradient.setColorAt(1, QColor(50,50,50,180));   // 终止颜色
+    gradient.setColorAt(1, QColor(70,70,70,150));   // 终止颜色
     QBrush titleBarBrush(gradient);
     painter->setBrush(titleBarBrush); // 设置标题栏的颜色
-    painter->drawRoundedRect(titleBarRect,5,5);
+    painter->drawRoundedRect(titleBarRect,titlecornerRadius,titlecornerRadius);
 
 
 
@@ -224,6 +236,8 @@ void Node::SetOutStreamPort()
 
 void Node::SetPortDataType(uint portId, Port::PortType porttype, Port::PortDataType datatype)
 {
+
+    TitleColor=Port::PortColorMap[datatype];
     Port *port=GetPort(portId,porttype);
     port->portDataType=datatype;
     port->update();
