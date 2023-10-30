@@ -6,13 +6,19 @@
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
 
-    StartAction =addAction("开始");
-
+   StartAction =addAction("开始");
 
    DataMenu=new QMenu("数据");
    FunctionMenu=new QMenu("计算");
+   ProgramControlMenu=new QMenu("控制");
+
+
+   addMenu(ProgramControlMenu);
    addMenu(DataMenu);
    addMenu(FunctionMenu);
+    //程序控制项
+    IfAction= ProgramControlMenu->addAction("IF");
+
 
    //数据菜单项
    IntAction= DataMenu->addAction("整数");
@@ -31,17 +37,28 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
    Sub_IntAction=FunctionMenu->addAction("整数相减");
    Sub_DoubleAction=FunctionMenu->addAction("小数相减");
 
+   AndAction=FunctionMenu->addAction("与");;//与
+   OrAction=FunctionMenu->addAction("或");;//或
+   NoAction=FunctionMenu->addAction("非");;//非
+
 }
 
 Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
 {
     Node *node{nullptr};
-    //数据节点
-    if(action==StartAction)
+
+    //控制节点
+    if(action==IfAction)
+    {
+        node=new If(pos);
+    }
+    else if(action==StartAction)
     {
         node=new StartNode(pos);
         action->setEnabled(false);
-    }else if(action==IntAction)
+    }
+    //数据节点
+    else if(action==IntAction)
     {
         node=new DataNode(pos,0,Port::Int);
     }else if(action==DoubleAction)
@@ -70,10 +87,13 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
     }else if(action==Sub_IntAction)
     {
         node=new Subtract(pos,Port::Int);
-        qDebug()<<"Subtract";
     }else if(action==Sub_DoubleAction)
     {
         node=new Subtract(pos,Port::Double);
+    }//逻辑运算
+    else if(action==AndAction)
+    {
+        node=new And(pos);
     }
 
 

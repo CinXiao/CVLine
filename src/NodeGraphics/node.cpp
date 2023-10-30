@@ -258,7 +258,7 @@ uint Node::GetOutCount()const
 {
       //使用了count_if
     return std::count_if(portList.begin(), portList.end(), []( Port* port) {
-        return port->portType==Port::Output||port->portType==Port::InStream;
+        return port->portType==Port::Output||port->portType==Port::OutStream;
     });
 }
 

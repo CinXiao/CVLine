@@ -8,6 +8,8 @@
 #include "src/NodeGraphics/Nodes/DataNode/DataNode.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/And.h"
 class ContextMenu:public QMenu
 {
 public:
@@ -31,9 +33,15 @@ public:
     QAction *Add_IntAction;
     QAction *Add_DoubleAction;
     QAction *Add_StringAction;
-
     QAction *Sub_IntAction;
     QAction *Sub_DoubleAction;
+
+    QAction *AndAction;//与
+    QAction *OrAction;//或
+    QAction *NoAction;//非
+
+    QMenu *ProgramControlMenu;
+    QAction *IfAction;
 
 
 };

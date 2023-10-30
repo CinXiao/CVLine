@@ -5,8 +5,6 @@
 void DataNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
 
-
-
      Node::paint(painter, option, widget);
     // 绘制底色//绘制文本输入框背景
      painter->setPen(Qt::NoPen);
@@ -22,7 +20,16 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
         TitleColor=Port::PortColorMap[datatype];
         NodeName=Port::PortDataTypeNameMap[datatype];
         setFlag(QGraphicsItem::ItemIsFocusable, true);
-        AddPort(new Port(0,Dat.toString(),Port::Output,datatype));
+        if(datatype==Port::Int)
+        {
+            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,0));
+        }else if(datatype==Port::Double)
+        {
+            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,0.0));
+        }else if(datatype==Port::Bool)
+        {
+            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,false));
+        }
         textItem = new TextInput(Dat, this);
 }
 
@@ -43,6 +50,11 @@ void DataNode::execute()
         {
                  QVariant val(textItem->toPlainText());
                  SetPortValue(0,val,Port::Output);
+        }else if(GetPort(0,Port::Output)->portDataType==Port::Bool)
+        {
+                 QVariant val(textItem->toPlainText());
+                 qDebug()<<val.toBool();
+                 SetPortValue(0,val.toBool(),Port::Output);
         }
 
         Node::execute();

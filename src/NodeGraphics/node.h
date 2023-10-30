@@ -53,7 +53,8 @@ public:
 
     //拿到控制端口信息
     StreamPortinfo GetStreamInfo();
-    //
+
+    //控制输出端口有多个，默认全部添加，如果需要规定那几个输出端口激活，则需要重载这个函数  IF，Then节点之类的
     virtual QList<Port*> OutputStreamLogicExecution();
 
 

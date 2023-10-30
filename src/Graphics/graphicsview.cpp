@@ -25,7 +25,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
 }
 void GraphicsView::wheelEvent(QWheelEvent *event)
 {
-    scaleView(pow(1.2, event->angleDelta().y() / 240.0));
+   // scaleView(pow(1.2, event->angleDelta().y() / 240.0));
     QGraphicsView::wheelEvent(event);
 }
 

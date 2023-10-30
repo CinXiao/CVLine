@@ -49,11 +49,11 @@ void TextInput::wheelEvent(QGraphicsSceneWheelEvent *event)
     {
         if(dat.toBool())
         {
-            setPlainText("True");
+            setPlainText("true");
             dat=false;
         }else
         {
-        setPlainText("False");
+        setPlainText("false");
              dat=true;
         }
 
