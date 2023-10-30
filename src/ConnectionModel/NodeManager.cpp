@@ -79,14 +79,13 @@ PortInfo NodeManager::GetNodeAndPortByPort(Port *port)
         {
             portInfo=info.GetOtherPortNodeInfoByPort(port);
         }
-
     }
-
     return portInfo;
 }
 
 QList<PortInfo> NodeManager::GetOutStreamPortInfoByNode(Node *node)
 {
+    //默认会返回所有控制输出节点
     QList<PortInfo> PortInfolist;
     //拿到节点控制端口信息
     StreamPortinfo stream=node->GetStreamInfo();
@@ -95,8 +94,15 @@ QList<PortInfo> NodeManager::GetOutStreamPortInfoByNode(Node *node)
     if(stream.streamState==StreamPortinfo::NotStream||stream.streamState==StreamPortinfo::OnlyInStream)
         return PortInfolist;
 
-    //通过端口拿到与他连接的另外的端口信息列表
-    PortInfolist=GetNodeAndPortListByPort(stream.OutStreamPort);
+    //遍历控制输出端口
+    for(auto i:stream.OutStreamPortList)
+    {
+        //拿到其中一个输出端口连接的端口列表
+         QList<PortInfo> outstreamportlist=GetNodeAndPortListByPort(i);
+         //将这个输出端口连接的段口列表添加到返回列表中
+         std::copy(outstreamportlist.begin(),outstreamportlist.end(),std::back_inserter(PortInfolist));
+    }
+
 
     return PortInfolist;
 }
@@ -106,14 +112,15 @@ PortInfo NodeManager::GetInStreamPortInfoByNode(Node *node)
     PortInfo info;
 
     QList<PortInfo> PortInfolist;
-    //拿到节点控制端口信息
+
+    //拿到该节点控制端口信息
     StreamPortinfo stream=node->GetStreamInfo();
 
     //如果只有程序控制输出口或者无程序控制端口那么自然不会有与该节点程序控制输出端口连接的端口
     if(stream.streamState==StreamPortinfo::NotStream||stream.streamState==StreamPortinfo::OnlyOutStream)
         return info;
 
-    PortInfolist=GetNodeAndPortListByPort(stream.OutStreamPort);
+  //  PortInfolist=GetNodeAndPortListByPort(stream.OutStreamPort);
 
     if(!PortInfolist.isEmpty())
         info=PortInfolist[0];

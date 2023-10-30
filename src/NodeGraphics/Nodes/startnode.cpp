@@ -3,7 +3,8 @@
 StartNode::StartNode(QPointF pos):Node(Node::StartNode,pos)
 {
     NodeName="开始";
-    SetOutStreamPort();
+    //添加输出控制端口
+    AddPort(new Port(0,"",Port::OutStream,Port::Stream));
 
 }
 

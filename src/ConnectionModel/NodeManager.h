@@ -29,7 +29,7 @@ public:
 
 
     //拿到节点程序控制输出端口节点信息表  控制输出端口连接的所有的节点
-    QList<PortInfo> GetOutStreamPortInfoByNode(Node*node);
+    virtual QList<PortInfo> GetOutStreamPortInfoByNode(Node*node);
 
     //拿到与该节点控制输入端口节点信息  因为输入只能有一个，所以只会存在一个节点与输入端口连接
     PortInfo GetInStreamPortInfoByNode(Node*node);

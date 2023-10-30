@@ -22,21 +22,10 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     scene->addItem(&PreviewLine);
     scene->setBackgroundBrush(QColor(192, 192, 192));
     PreviewLine.setVisible(false);
-
-
-
-
-
-
-
 }
-
-
 void GraphicsView::wheelEvent(QWheelEvent *event)
 {
-    //scaleView(pow(1.2, event->angleDelta().y() / 240.0));
-
-
+    scaleView(pow(1.2, event->angleDelta().y() / 240.0));
     QGraphicsView::wheelEvent(event);
 }
 

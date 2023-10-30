@@ -45,8 +45,7 @@ public:
     void SetPortValue(uint portID,QVariant data,Port::PortType type);
     Port *GetPort(uint portID,Port::PortType type);
 
-    void SetInStreamPort();
-    void SetOutStreamPort();
+
 
 
     //设置端口数据类型
@@ -54,6 +53,9 @@ public:
 
     //拿到控制端口信息
     StreamPortinfo GetStreamInfo();
+    //
+    virtual QList<Port*> OutputStreamLogicExecution();
+
 
     //检测点是否在端口上
     bool CheckPortByPos(QPointF pos);
@@ -68,9 +70,9 @@ public:
 
 
     QList<Port*> GetInport();//获取输入端口
-    QList<Port*> GetConnectedInport();//获取已经连接的输入端口
     QList<Port*> GetOutport();//获取输入端口
-    QList<Port*> GetConnectedOutport();//获取已经连接的输入端口
+    QList<Port*> GetConnectedInport();//获取已经连接的输入端口
+    QList<Port*> GetConnectedOutport();//获取已经连接的输出端口
 
     QString NodeName{"Node"};   //节点名字
 
@@ -82,6 +84,7 @@ public:
 
 
     virtual void execute();//节点执行逻辑
+
 private:
     QList<Port*> portList;//端口列表
 

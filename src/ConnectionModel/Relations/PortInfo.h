@@ -13,7 +13,6 @@ public:
     bool IsEmpty()//判空
     {
         return node==nullptr||port==nullptr;
-
     }
 };
 #endif // PORTINFO_H

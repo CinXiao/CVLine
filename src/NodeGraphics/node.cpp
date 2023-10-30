@@ -181,21 +181,6 @@ Port* Node::GetPort(uint portID, Port::PortType type)
 }
 
 
-
-void Node::SetInStreamPort()
-{
-
-    Port *port=new Port(0,"",Port::InStream,Port::Stream);
-    AddPort(port);
-}
-
-
-void Node::SetOutStreamPort()
-{
-    Port *port=new Port(0,"",Port::OutStream,Port::Stream);
-    AddPort(port);
-}
-
 void Node::SetPortDataType(uint portId, Port::PortType porttype, Port::PortDataType datatype)
 {
 
@@ -205,12 +190,13 @@ void Node::SetPortDataType(uint portId, Port::PortType porttype, Port::PortDataT
     port->update();
 }
 
-
+//拿到控制端口信息表
 StreamPortinfo Node::GetStreamInfo()
 {
-    Port *in{nullptr},*out{nullptr};
+    Port *in{nullptr};
 
 
+    //输入端口只有一个
     auto in_it = std::find_if(portList.begin(), portList.end(), [](Port* port){
         return port->portType==Port::InStream;
     });
@@ -218,16 +204,19 @@ StreamPortinfo Node::GetStreamInfo()
     {
         in=*in_it;
     }
-    auto out_it = std::find_if(portList.begin(), portList.end(), [](Port *port){
-            return port->portType==Port::OutStream;
-    });
-    if (out_it != portList.end())
-    {
-        out=*out_it;
-    }
 
-    StreamPortinfo info(in,out);
+    StreamPortinfo info(in,OutputStreamLogicExecution());
     return info;
+}
+
+QList<Port *> Node::OutputStreamLogicExecution()
+{
+    QList<Port*>outList;
+    // 控制输出端口有多个，默认全部添加，如果需要规定那几个输出端口激活，则需要重载这个函数  IF，Then节点之类的
+    std::copy_if(portList.begin(), portList.end(),std::back_inserter(outList),[](Port* port){
+        return port->portType==Port::OutStream;
+    });
+    return outList;
 }
 
 
@@ -361,15 +350,14 @@ void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 }
 
 
-
-
-
-
-
 void Node::execute()
 {
 
-    IsExecuted=true;
+     IsExecuted=true;
 }
+
+
+
+
 
 

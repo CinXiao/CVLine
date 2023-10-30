@@ -24,8 +24,6 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
         setFlag(QGraphicsItem::ItemIsFocusable, true);
         AddPort(new Port(0,Dat.toString(),Port::Output,datatype));
         textItem = new TextInput(Dat, this);
-
-
 }
 
 
