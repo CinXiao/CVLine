@@ -15,7 +15,9 @@ SOURCES += \
      src/LineGraphics/beziercurveitem.cpp \
      src/NodeGraphics/Nodes/DataNode/TextInput/textinput.cpp \
      src/NodeGraphics/Nodes/DataNode/datanode.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Add.cpp \
+     src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.cpp \
+     src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.cpp \
+     src/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.cpp \
      src/NodeGraphics/Nodes/startnode.cpp \
      src/NodeGraphics/node.cpp \
      src/Windows/nodeeditingwindow.cpp \
@@ -33,7 +35,9 @@ HEADERS += \
      src/LineGraphics/beziercurveitem.h \
      src/NodeGraphics/Nodes/DataNode/TextInput/textinput.h \
      src/NodeGraphics/Nodes/DataNode/datanode.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Add.h \
+     src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h \
+     src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h \
+     src/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h \
      src/NodeGraphics/Nodes/startnode.h \
      src/NodeGraphics/Port/Port.h \
      src/NodeGraphics/node.h \

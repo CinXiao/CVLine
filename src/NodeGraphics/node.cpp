@@ -6,13 +6,8 @@ Node::Node(NodeType nodetype,QPointF pos):nodeType(nodetype)
 
     setPos(pos);
     setFlag(QGraphicsItem::ItemIsMovable, true);
-
-    // 添加一个变量来跟踪节点的高亮状态
-    isHighlighted = false;
-
-
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
     TitleColor=TitleColorMap[nodeType];
-
 }
 
 QRectF Node::boundingRect() const
@@ -35,8 +30,8 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     qreal cornerRadius = 10.0; // 圆角的半径
     qreal titlecornerRadius = 10.0; // 圆角的半径
     QRectF titleBarRect(0, 0, boundingRect().width(), 40);
-    // 根据高亮状态设置节点的颜色
-    if (isHighlighted) {
+    // 根据选中状态设置节点的颜色
+    if (isSelected()) {
         //选中设置笔，描绘边框颜色
           QPen pen;
           pen.setColor(Qt::white);
@@ -246,9 +241,9 @@ void Node::SetPortDataType(uint portId, Port::PortType porttype, Port::PortDataT
 
 StreamPortinfo Node::GetStreamInfo()
 {
-
-
     Port *in{nullptr},*out{nullptr};
+
+
     auto in_it = std::find_if(portList.begin(), portList.end(), [](Port* port){
         return port->portType==Port::InStream;
     });
@@ -267,6 +262,8 @@ StreamPortinfo Node::GetStreamInfo()
     StreamPortinfo info(in,out);
     return info;
 }
+
+
 
 
 
@@ -374,12 +371,12 @@ void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(CheckPortByPos(event->pos()))
     {
         setFlag(QGraphicsItem::ItemIsMovable, false);
-        setHighlighted(false);
+
     }
     else
     {
         setFlag(QGraphicsItem::ItemIsMovable, true);
-        setHighlighted(true);
+
     }
 
      QGraphicsItem::mousePressEvent(event);
@@ -388,7 +385,6 @@ void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
 
-    setHighlighted(false);
      QGraphicsItem::mouseReleaseEvent(event);
 }
 
@@ -399,14 +395,7 @@ void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 
 
-void Node::setHighlighted(bool highlight)
-{
-    if (isHighlighted != highlight)
-    {
-        isHighlighted = highlight;
-        update();
-    }
-}
+
 
 
 

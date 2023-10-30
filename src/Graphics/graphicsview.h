@@ -14,19 +14,20 @@
 
 #include "src/NodeGraphics/node.h"
 #include "src/Graphics/Menu/contextmenu.h"
+#include "src/ConnectionModel/NodeManager.h"
 #include "src/LineGraphics/beziercurveitem.h"
 #include "src/NodeGraphics/Nodes/startnode.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Add.h"
 #include "src/NodeGraphics/Nodes/DataNode/DataNode.h"
-#include "src/ConnectionModel/NodeManager.h"
-
+#include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
 
 class GraphicsView : public QGraphicsView
 {
 public:
     GraphicsView();
     GraphicsView(QGraphicsScene* scene);
+
     void scaleView(qreal scaleFactor);
+
     void wheelEvent(QWheelEvent* event)override;
     void mouseMoveEvent(QMouseEvent* event)override;
     void mousePressEvent(QMouseEvent* event)override;
@@ -41,6 +42,13 @@ private:
     ContextMenu contextMenu{this};
     //画线判断标识
     bool isDrawing=false;
+    //鼠标右键按下标识
+    bool rightButtonPressed =false;
+    //鼠标左键按下标识
+    bool leftButtonPressed =false;
+
+
+
     //画线预览
     BezierCurveItem PreviewLine{QPointF(0,0),QPointF(0,0)};
     //预览线的颜色

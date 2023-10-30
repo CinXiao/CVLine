@@ -13,7 +13,7 @@ NodeEditingWindow::NodeEditingWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    scene.setSceneRect(0,0,500,500);
+    scene.setSceneRect(250,250,500,500);
     view=new GraphicsView(&scene);
     ui->verticalLayout->addWidget(view);
 

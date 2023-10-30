@@ -1,9 +1,11 @@
 #include "beziercurveitem.h"
 
+#include <QGraphicsSceneHoverEvent>
+
 BezierCurveItem::BezierCurveItem(const QPointF& startPoint, const QPointF& endPoint)
     : start(startPoint), end(endPoint)
 {
-
+   setAcceptHoverEvents(true);
 }
 
 QRectF BezierCurveItem::boundingRect() const
@@ -34,7 +36,7 @@ void BezierCurveItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
     }
     bezierPath.moveTo(start);
     bezierPath.cubicTo(control1, control2, end);
-    painter->setPen(QPen(LineColor, 5));
+    painter->setPen(QPen(LineColor, linewidth));
     painter->drawPath(bezierPath);
 }
 
@@ -44,3 +46,5 @@ void BezierCurveItem::UpdatePoint(const QPointF &startPoint, const QPointF &endP
     end=endPoint;
     update();
 }
+
+

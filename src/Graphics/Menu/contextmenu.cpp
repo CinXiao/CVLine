@@ -17,7 +17,10 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
    //数据菜单项
    IntAction= DataMenu->addAction("整数");
    DoubleAction= DataMenu->addAction("小数");
+   BoolAction=DataMenu->addAction("布尔");
+   BitAction=DataMenu->addAction("比特");
    StringAction= DataMenu->addAction("字符串");
+
 
 
    //计算菜单项
@@ -25,13 +28,15 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
    Add_DoubleAction=FunctionMenu->addAction("小数相加");
    Add_StringAction=FunctionMenu->addAction("字符串相加");
 
-
+   Sub_IntAction=FunctionMenu->addAction("整数相减");
+   Sub_DoubleAction=FunctionMenu->addAction("小数相减");
 
 }
 
 Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
 {
     Node *node{nullptr};
+    //数据节点
     if(action==StartAction)
     {
         node=new StartNode(pos);
@@ -45,7 +50,15 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
     }else if(action==StringAction)
     {
         node=new DataNode(pos,"",Port::String);
-    }else if(action==Add_IntAction)
+    }else if(action==BoolAction)
+    {
+        node=new DataNode(pos,false,Port::Bool);
+    }else if(action==BitAction)
+    {
+        node=new DataNode(pos,0,Port::Bit);
+    }
+    //功能节点
+    else if(action==Add_IntAction)
     {
         node=new AddNode(pos,Port::Int);
     }else if(action==Add_DoubleAction)
@@ -54,6 +67,13 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
     }else if(action==Add_StringAction)
     {
         node=new AddNode(pos,Port::String);
+    }else if(action==Sub_IntAction)
+    {
+        node=new Subtract(pos,Port::Int);
+        qDebug()<<"Subtract";
+    }else if(action==Sub_DoubleAction)
+    {
+        node=new Subtract(pos,Port::Double);
     }
 
 

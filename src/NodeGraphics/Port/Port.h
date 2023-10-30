@@ -11,7 +11,7 @@ public:
     //端口类型
     enum PortType { None,InStream,OutStream, Input, Output };
     //端口数据类型
-    enum PortDataType {Stream,Int,Bool,String,Double,Vector2,Vector3,Color};
+    enum PortDataType {Stream,Int,Bool,String,Double,Bit,Vector2,Vector3,Color};
 
 
     bool IsValid()
@@ -32,9 +32,9 @@ public:
     {
         if(portType==Input||portType==Output)
         {
-            //设置端口颜色范围和端口文字范围和文字对齐方向
-            portRect=(portType==Input)?QRectF(3,45+ID*30,20,20):QRectF(127,45+ID*30,20,20);
-            portTextRect=(portType==Input)?QRectF(25,45+ID*28,50,28):QRectF(75,45+ID*28,50,28);
+            //设置端口颜色范围和端口文字范围和文字框对齐方向
+            portRect=(portType==Input)?QRectF(5,45+ID*30,20,20):QRectF(125,45+ID*30,20,20);
+            portTextRect=(portType==Input)?QRectF(28,45+ID*28,50,28):QRectF(73,45+ID*28,50,28);
             TextAlign=(portType==Input)?Qt::AlignLeft:Qt::AlignRight;
         }
         else if(portType==InStream||portType==OutStream)
@@ -114,8 +114,9 @@ public:
     {
       {Stream,QColor(240,240,240)},
       {Int,QColor(106,34,136)},
-      {Bool,QColor(136,34,34)},
+      {Bool,QColor(200,50,170)},
       {String,QColor(56,136,34)},
+      {Bit,QColor(160,160,100)},
       {Double, QColor(34, 136, 204)},
       {Vector2, QColor(136, 84, 68)},
       {Vector3, QColor(136, 34, 68)},
@@ -130,6 +131,7 @@ public:
             {Bool,"布尔值"},
             {String,"字符串"},
             {Double,"小数"},
+            {Bit, "比特"},
             {Vector2,"2维向量"},
             {Vector3,"3维向量"},
             {Color, "颜色"}

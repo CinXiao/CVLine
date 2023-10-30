@@ -20,12 +20,10 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
 {
 
         TitleColor=Port::PortColorMap[datatype];
-
-    NodeName=Port::PortDataTypeNameMap[datatype];
+        NodeName=Port::PortDataTypeNameMap[datatype];
         setFlag(QGraphicsItem::ItemIsFocusable, true);
-        AddPort(new Port(0,"0",Port::Output,datatype));
-        textItem = new TextInput(Dat.toString(), this);
-
+        AddPort(new Port(0,Dat.toString(),Port::Output,datatype));
+        textItem = new TextInput(Dat, this);
 
 
 }

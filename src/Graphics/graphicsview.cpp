@@ -11,13 +11,12 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     // 设置框选模式
     setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
 
-
-    setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing
+    this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing
                          | QPainter::LosslessImageRendering);
-    setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    this->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     //添加连线预览线到场景
     scene->addItem(&PreviewLine);
@@ -25,12 +24,17 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     PreviewLine.setVisible(false);
 
 
+
+
+
+
+
 }
 
 
 void GraphicsView::wheelEvent(QWheelEvent *event)
 {
-    scaleView(pow(1.2, event->angleDelta().y() / 240.0));
+    //scaleView(pow(1.2, event->angleDelta().y() / 240.0));
 
 
     QGraphicsView::wheelEvent(event);
@@ -49,11 +53,8 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
         PreviewLine.UpdatePoint(startPoint,endPoint);
         PreviewLine.LineColor=lineColor;
     }
-
-
-
-    //鼠标移动时更新
-    nodeManager.UpdateLine(event->pos());
+    //鼠标移动时更新选中的节点
+    nodeManager.UpDateSelectedNode();
     QGraphicsView::mouseMoveEvent(event);
 }
 
@@ -63,13 +64,16 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
 
     // 禁用框选功能
     if(event->button() == Qt::RightButton)
-    setDragMode(QGraphicsView::NoDrag);
+    {
+        rightButtonPressed=true;
+        setDragMode(QGraphicsView::NoDrag);
+    }
 
     MouseClikePos=event->pos();
-    MouseCurrentPos=event->pos();
 
     if(event->button() == Qt::LeftButton)
     {
+        leftButtonPressed=true;
         // 启用框选功能
          setDragMode(QGraphicsView::RubberBandDrag);
        //尝试获取点击位置的端口信息
@@ -91,13 +95,17 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
 
 void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
-
-    MouseReleasePos=event->pos();
+    //不显示画线预览线
     PreviewLine.setVisible(false);
+    MouseReleasePos=event->pos();
+
+    if (event->button() == Qt::RightButton)
+        rightButtonPressed=false;
+
     //左键释放
     if (event->button() == Qt::LeftButton)
     {
-
+       leftButtonPressed=false;
        //尝试获取释放位置的端口信息
        PortInfo releaseportinfo=nodeManager.GetPortByPos(MouseReleasePos);
        if(!releaseportinfo.IsEmpty()&&isDrawing)
@@ -164,6 +172,9 @@ void GraphicsView::keyReleaseEvent(QKeyEvent *event)
 
 void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
 {
+    //右键点击然后拖动了，就不弹出菜单了
+    if(MouseClikePos!=MouseReleasePos)
+       return;
 
     // 使用exec函数显示菜单
     QAction *selectedAction = contextMenu.exec(event->globalPos());

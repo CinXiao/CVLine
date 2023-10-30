@@ -38,7 +38,7 @@ public:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event)override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event)override;
 
-    void setHighlighted(bool highlight);
+
 
 
     void AddPort(Port *port);
@@ -54,6 +54,7 @@ public:
 
     //拿到控制端口信息
     StreamPortinfo GetStreamInfo();
+
     //检测点是否在端口上
     bool CheckPortByPos(QPointF pos);
    //获取点上的端口
@@ -82,9 +83,6 @@ public:
 
     virtual void execute();//节点执行逻辑
 private:
-
-    bool isHighlighted;
-
     QList<Port*> portList;//端口列表
 
     //节点类型标题颜色表  各种颜色都是经过哥哥我精心挑选的

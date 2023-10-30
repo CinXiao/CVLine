@@ -45,11 +45,12 @@ public:
     //从一个端口出发看看能不能到达这个端口，如果可以到达那么就是回环，如果最后是空的端口那么就不是回环
     bool CycleCheck();
 
-
-
-
-    //更新线的位置
-    void UpdateLine(QPoint pos);
+    //通过点更新节点线的位置
+    void UpdateNode(QPoint pos);
+    //更新节点线的位置
+    void UpDateNode(Node*node);
+    //更新选中的节点线的位置
+    void UpDateSelectedNode();
 
     //添加一条连线关系
     void AddRelation(LineInfo info);

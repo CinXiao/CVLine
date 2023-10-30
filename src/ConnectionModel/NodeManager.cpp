@@ -163,35 +163,48 @@ bool NodeManager::CycleCheck()
     return true;
 }
 
-void NodeManager::UpdateLine(QPoint pos)
+void NodeManager::UpdateNode(QPoint pos)
 {
     //尝试拿到这个点的节点
      Node *node=GetNodeByPos(pos);
+    UpDateNode(node);
+}
 
-    if(node==nullptr)
+void NodeManager::UpDateNode(Node *node)
+{
+     if(node==nullptr)
         return;
-
-    //待更新的信息表
-    QList<LineInfo> updatainfolist;
-
-    //查找该节点的端口连接信息
+     //待更新的信息表
+     QList<LineInfo> updatainfolist;
+     //查找该节点的端口连接信息
      std::copy_if(PortLineInfoList.begin(),PortLineInfoList.end(),std::back_inserter(updatainfolist),[node](const LineInfo& info){
-       return info.PortInfo1.node==node|| info.PortInfo2.node==node;
-    });
-
-    //更新该节点的端口连接信息
-    for(auto i:updatainfolist)
-    {
-
+         return info.PortInfo1.node==node|| info.PortInfo2.node==node;
+     });
+     //更新该节点的端口连接信息
+     for(auto i:updatainfolist)
+     {
         QPointF startPos=i.PortInfo1.node->mapToScene(i.PortInfo1.port->portRect.center());
         QPointF endPos=i.PortInfo2.node->mapToScene(i.PortInfo2.port->portRect.center());
         i.PortInfo1.port->IsConnected=true;
         i.PortInfo2.port->IsConnected=true;
         i.line->UpdatePoint(startPos,endPos);
-    }
+     }
+}
 
+void NodeManager::UpDateSelectedNode()
+{
 
+     QList<QGraphicsItem *> selecteditem=view->scene()->selectedItems();
+     QList<QGraphicsItem *> nodelist;
 
+     std::copy_if(selecteditem.begin(),selecteditem.end(),std::back_inserter(nodelist),[](QGraphicsItem * item){
+         return dynamic_cast<Node *>(item)!=nullptr;
+     });
+
+     for(auto node:nodelist)
+     {
+        UpDateNode(dynamic_cast<Node *>(node));
+     }
 }
 
 void NodeManager::AddRelation(LineInfo info)
@@ -214,7 +227,7 @@ void NodeManager::Run()
 
     //检测输入输出端口是不是回环
 
-    //通过开始节点拿到和它程序控制线连接的下一个端口和节点信息列表
+    //通过开始节点拿到和它控制线连接的下一个端口和节点信息列表
     QList<PortInfo> portnodeinfolist=GetOutStreamPortInfoByNode(startNode);
 
     //回环检测
@@ -226,7 +239,8 @@ void NodeManager::Run()
     //刷新各个节点已经执行标识
     NodeReflush();
 
-
+    //刷新场景
+    view->scene()->update();
 }
 
 

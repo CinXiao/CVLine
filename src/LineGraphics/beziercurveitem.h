@@ -18,7 +18,9 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
     void UpdatePoint(const QPointF& startPoint, const QPointF& endPoint);
     QColor LineColor{Qt::blue};
+
 private:
+    uint linewidth{5};
     QPointF start;
     QPointF end;
     QPointF control1;

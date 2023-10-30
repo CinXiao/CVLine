@@ -4,7 +4,6 @@
 #include "src/NodeGraphics/node.h"
 
 
-
 class AddNode:public Node
 {
 public:

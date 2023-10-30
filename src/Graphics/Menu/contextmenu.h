@@ -6,7 +6,8 @@
 #include "src/NodeGraphics/node.h"
 #include "src/NodeGraphics/Nodes/startnode.h"
 #include "src/NodeGraphics/Nodes/DataNode/DataNode.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Add.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h"
 class ContextMenu:public QMenu
 {
 public:
@@ -23,12 +24,16 @@ public:
     QAction *IntAction;
     QAction *DoubleAction;
     QAction *StringAction;
-
+    QAction *BoolAction;
+    QAction *BitAction;
 
     QMenu *FunctionMenu;
     QAction *Add_IntAction;
     QAction *Add_DoubleAction;
     QAction *Add_StringAction;
+
+    QAction *Sub_IntAction;
+    QAction *Sub_DoubleAction;
 
 
 };
