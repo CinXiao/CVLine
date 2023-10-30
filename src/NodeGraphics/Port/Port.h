@@ -30,18 +30,13 @@ public:
         portDataType(portDataType),
         portColor(PortColorMap[portDataType])
     {
-        if(portType==Input||portType==Output)
-        {
+
             //设置端口颜色范围和端口文字范围和文字框对齐方向
-            portRect=(portType==Input)?QRectF(5,45+ID*30,20,20):QRectF(125,45+ID*30,20,20);
-            portTextRect=(portType==Input)?QRectF(28,45+ID*28,50,28):QRectF(73,45+ID*28,50,28);
-            TextAlign=(portType==Input)?Qt::AlignLeft:Qt::AlignRight;
-        }
-        else if(portType==InStream||portType==OutStream)
-        {
-            //设置端口颜色范围和端口文字范围和文字对齐方向
-            portRect=(portType==InStream)?QRectF(8,10,20,20):QRectF(125,10,20,20);
-        }
+            portRect=(portType==Input||portType==InStream)?QRectF(5,50+ID*30,20,20):QRectF(135,50+ID*30,20,20);
+            portTextRect=(portType==Input||portType==InStream)?QRectF(28,50+ID*28,50,28):QRectF(83,50+ID*28,50,28);
+            TextAlign=(portType==Input||portType==InStream)?Qt::AlignLeft:Qt::AlignRight;
+
+
 
 
     }

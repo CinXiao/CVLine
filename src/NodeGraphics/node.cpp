@@ -18,8 +18,8 @@ QRectF Node::boundingRect() const
     uint   outputcount=GetOutCount();
     //节点高度是端口数量*50
     uint height=std::max(inputcount,outputcount);
-    uint normalheight=70;
-    return QRectF(0, 0, 150,std::max(height*50,normalheight));
+    uint normalheight=80;
+    return QRectF(0, 0, 160,std::max(height*50,normalheight));
 }
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -185,48 +185,15 @@ Port* Node::GetPort(uint portID, Port::PortType type)
 void Node::SetInStreamPort()
 {
 
-    Port *port=new Port(-1,"",Port::InStream,Port::Stream);
-    //端口类型不正确
-    if(port->portType!=Port::InStream)
-          return;
-
-    auto it = std::find_if(portList.begin(), portList.end(), []( Port* port) {
-        return port->portType==Port::InStream;
-    });
-
-    //找到了原本的流程输入口，已经有了，就不添加了
-    if (it != portList.end())
-    {
-          return;
-    }else //没找到了原本的流程输入口，直接设置流程输入口
-    {
-        AddPort(port);
-
-    }
-
+    Port *port=new Port(0,"",Port::InStream,Port::Stream);
+    AddPort(port);
 }
 
 
 void Node::SetOutStreamPort()
 {
-    Port *port=new Port(-1,"",Port::OutStream,Port::Stream);
-    //端口类型不正确
-    if(port->portType!=Port::OutStream)
-         return;
-
-    auto it = std::find_if(portList.begin(), portList.end(), [](Port* port) {
-        return port->portType==Port::OutStream;
-    });
-
-    //找到了原本的流程输入口，已经有了，就不添加了
-    if (it != portList.end())
-    {
-         return;
-    }else //没找到了原本的流程输入口，直接设置流程输入口
-    {
-        AddPort(port);
-    }
-
+    Port *port=new Port(0,"",Port::OutStream,Port::Stream);
+    AddPort(port);
 }
 
 void Node::SetPortDataType(uint portId, Port::PortType porttype, Port::PortDataType datatype)
@@ -294,7 +261,7 @@ uint Node::GetInputCount()const
 {
     //使用了count_if
     return std::count_if(portList.begin(), portList.end(), [](  Port *port) {
-        return port->portType==Port::Input;
+        return port->portType==Port::Input||port->portType==Port::InStream;
     });
 }
 
@@ -302,7 +269,7 @@ uint Node::GetOutCount()const
 {
       //使用了count_if
     return std::count_if(portList.begin(), portList.end(), []( Port* port) {
-        return port->portType==Port::Output;
+        return port->portType==Port::Output||port->portType==Port::InStream;
     });
 }
 
