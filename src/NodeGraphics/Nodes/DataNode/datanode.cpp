@@ -2,17 +2,6 @@
 
 
 
-void DataNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-
-     Node::paint(painter, option, widget);
-    // 绘制底色//绘制文本输入框背景
-     painter->setPen(Qt::NoPen);
-    QRectF backgroundRect(textItem->x(),textItem->y(),50,25);
-    painter->setBrush(QBrush(QColor(30, 30, 30,100))); // 设置底色
-    painter->drawRoundedRect(backgroundRect,5,5);
-
-}
 
 DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(Node::DataNode,pos)
 {
@@ -25,7 +14,7 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
             AddPort(new Port(0,Dat.toString(),Port::Output,datatype,0));
         }else if(datatype==Port::Double)
         {
-            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,0.0));
+            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,0));
         }else if(datatype==Port::Bool)
         {
             AddPort(new Port(0,Dat.toString(),Port::Output,datatype,false));
@@ -33,7 +22,8 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
         {
             AddPort(new Port(0,Dat.toString(),Port::Output,datatype,false));
         }
-        textItem = new TextInput(Dat, this);
+        textItem = new TextInput(QRectF(3,45,50,30),Dat, this);
+
 }
 
 

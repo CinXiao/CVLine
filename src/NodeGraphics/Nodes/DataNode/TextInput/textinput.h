@@ -9,21 +9,25 @@
 #include <QGraphicsTextItem>
 
 
+#include <QGraphicsSceneWheelEvent>
+#include <QPainter>
 
 
 class TextInput : public QGraphicsTextItem
 {
 
 public:
-    TextInput(QVariant &dat,QGraphicsItem* parent = nullptr);
+    TextInput(QRectF rect,QVariant &dat,QGraphicsItem* parent = nullptr);
 
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;
     void wheelEvent(QGraphicsSceneWheelEvent *event)override;
     void mousePressEvent(QGraphicsSceneMouseEvent *event)override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 private:
     QVariant dat;
+    QRectF rect;
 
 
 };

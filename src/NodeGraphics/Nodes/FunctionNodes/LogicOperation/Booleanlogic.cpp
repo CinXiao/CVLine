@@ -3,9 +3,9 @@
 Booleanlogic::Booleanlogic(QPointF pos,OperationType optype):Node(Node::FunctionNode, pos),op(optype)
 {
     //数据端口
-    AddPort(new Port(0,"",Port::Input,Port::Bool));
-    AddPort(new Port(1,"",Port::Input,Port::Bool));
-    AddPort(new Port(0,"",Port::Output,Port::Bool));
+    AddPort(new Port(0,"",Port::Input,Port::Bool,false));
+    AddPort(new Port(1,"",Port::Input,Port::Bool,false));
+    AddPort(new Port(0,"",Port::Output,Port::Bool,false));
 
     if (op == AND)
         NodeName = "与";

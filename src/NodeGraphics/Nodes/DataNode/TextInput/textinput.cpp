@@ -1,13 +1,12 @@
 #include "textinput.h"
 
-#include <QGraphicsSceneWheelEvent>
 
 
-TextInput::TextInput(QVariant& dat, QGraphicsItem *parent):QGraphicsTextItem(dat.toString(),parent)
+TextInput::TextInput(QRectF rect,QVariant& dat, QGraphicsItem *parent):QGraphicsTextItem(dat.toString(),parent),rect(rect)
 {
     this->dat=dat;
     setFlag(QGraphicsTextItem::ItemIsFocusable, true);
-    setPos(4, 42); // 设置文本框位置
+    setPos(rect.x(),rect.y()); // 设置文本框位置
     setTextInteractionFlags(Qt::TextEditorInteraction); // 允许编辑文本
     setDefaultTextColor(Qt::white);
 
@@ -16,7 +15,6 @@ TextInput::TextInput(QVariant& dat, QGraphicsItem *parent):QGraphicsTextItem(dat
     textOption.setWrapMode(QTextOption::NoWrap);
     QTextDocument *textdocment=new QTextDocument();
     textdocment->setTextWidth(50);
-    textdocment->setMaximumBlockCount(10);
     textdocment->setDefaultTextOption(textOption);
     setDocument(textdocment);
 
@@ -65,4 +63,14 @@ void TextInput::mousePressEvent(QGraphicsSceneMouseEvent *event)
     setTextCursor(cursor);
 
     event->accept();
+}
+
+void TextInput::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+
+    painter->setPen(Qt::NoPen);
+    QRectF backgroundRect(0,0,rect.width(),rect.height());
+    painter->setBrush(QBrush(QColor(30, 30, 30,100))); // 设置底色
+    painter->drawRoundedRect(backgroundRect,5,5);
+    QGraphicsTextItem::paint(painter,option,widget);
 }

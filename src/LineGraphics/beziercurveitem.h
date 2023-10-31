@@ -17,6 +17,7 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
     void UpdatePoint(const QPointF& startPoint, const QPointF& endPoint);
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
     QColor LineColor{Qt::blue};
 
 private:

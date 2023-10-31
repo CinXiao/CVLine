@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
 
     (new NodeEditingWindow())->show();
 
+   // (new MainWindow())->show();
 
 
 

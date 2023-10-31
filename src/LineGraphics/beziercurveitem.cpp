@@ -56,4 +56,10 @@ void BezierCurveItem::UpdatePoint(const QPointF &startPoint, const QPointF &endP
     update();
 }
 
+void BezierCurveItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+
+    QGraphicsItem::mousePressEvent(event);
+}
+
 

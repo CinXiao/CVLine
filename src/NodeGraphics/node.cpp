@@ -99,15 +99,9 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
               }
               //设置笔用于画文本
               painter->setPen(Qt::white);
-              //文本
-              //如果没有连接绘制端口名字，有数据绘制数据值
-              if(!i->IsConnected)
-              {
-                  painter->drawText(i->portTextRect,i->TextAlign,i->Name);
-              }else
-              {
-                   painter->drawText(i->portTextRect,i->TextAlign,i->Data.toString());
-              }
+              painter->drawText(i->portTextRect,i->TextAlign,i->Data.toString());
+
+
           }
           //流程控制输入输出端口
           if(i->portType==Port::InStream||i->portType==Port::OutStream)
