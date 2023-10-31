@@ -2,4 +2,4 @@
 <h1>CVLine</h1>
 <h2>数据和图像处理的小工具</h2>
 
-![36F83E3F794FA739769DF215AAAF1DFF](https://github.com/CinXiao/CVLine/assets/54227677/b5010f88-6c46-4f39-8040-8b7c0b258978)
+![67649939b8f5d77f1ca261190741b6f4](https://github.com/CinXiao/CVLine/assets/54227677/5e418a73-004e-41f6-b5f5-c0a664f7d48c)
