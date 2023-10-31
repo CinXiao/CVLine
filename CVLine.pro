@@ -13,6 +13,7 @@ SOURCES += \
      src/Graphics/Menu/contextmenu.cpp \
      src/Graphics/graphicsview.cpp \
      src/LineGraphics/beziercurveitem.cpp \
+     src/NodeGraphics/Nodes/DataNode/ImageNode.cpp \
      src/NodeGraphics/Nodes/DataNode/TextInput/textinput.cpp \
      src/NodeGraphics/Nodes/DataNode/datanode.cpp \
      src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.cpp \
@@ -35,6 +36,7 @@ HEADERS += \
      src/Graphics/Menu/contextmenu.h \
      src/Graphics/graphicsview.h \
      src/LineGraphics/beziercurveitem.h \
+     src/NodeGraphics/Nodes/DataNode/ImageNode.h \
      src/NodeGraphics/Nodes/DataNode/TextInput/textinput.h \
      src/NodeGraphics/Nodes/DataNode/datanode.h \
      src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h \

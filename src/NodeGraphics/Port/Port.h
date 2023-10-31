@@ -21,7 +21,6 @@ public:
                         Vector3,//三维向量
                         Color,   //颜色
                         Image,//图像
-
                         };
 
 
@@ -126,7 +125,9 @@ public:
       {Double, QColor(34, 136, 204)},
       {Vector2, QColor(136, 84, 68)},
       {Vector3, QColor(136, 34, 68)},
-      {Color, QColor(85, 34, 136)}
+      {Color, QColor(85, 34, 136)},
+      {Image, QColor(100,200, 200)}
+
     };
 
     //端口数据类型名字表
@@ -140,7 +141,8 @@ public:
             {Bit, "比特"},
             {Vector2,"2维向量"},
             {Vector3,"3维向量"},
-            {Color, "颜色"}
+            {Color, "颜色"},
+            {Image, "图片"}
         };
 
 };

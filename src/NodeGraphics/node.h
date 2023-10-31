@@ -25,7 +25,11 @@ class Node: public QGraphicsItem
 public:
 
     //节点类型
-    enum NodeType {BaseNode,StartNode, FunctionNode, DataNode};
+    enum NodeType { BaseNode,
+                    StartNode,
+                    FunctionNode,
+                    ProgrammeControlNode,
+                    DataNode};
 
     Node(NodeType nodetype=Node::BaseNode, QPointF pos=QPointF(0,0));
 
@@ -83,7 +87,9 @@ public:
 
     NodeType nodeType{BaseNode};//节点类型
 
-    QColor TitleColor;
+    QColor TitleColor;//标题颜色
+    uint NodeHeight=80;
+    uint NodeWidth=160;
 
     bool IsExecuted=false;
 
@@ -98,6 +104,7 @@ private:
         {
             {BaseNode,QColor(100,100,100)},
             {StartNode,QColor(200,0,0)},
+            {ProgrammeControlNode,QColor(200,100,0)},
             {FunctionNode,QColor(20,80,150)},
             {DataNode,QColor(220, 200, 20)},
 

@@ -19,14 +19,11 @@ public:
     //通过端口拿到与该端口连接的所有端口信息信息
     QList<PortInfo> GetNodeAndPortListByPort(Port* port);
 
-
     //获取连接到节点上输入端口上的所有端口信息
     QList<PortInfo> GetConnectedInPortInfo(Port* port);
 
-
     //通过端口拿到与该端口连接的节点和端口信息列表  (只会拿到一个，比如输入口只能有一个输入节点)
     PortInfo GetNodeAndPortByPort(Port* port);
-
 
     //拿到节点程序控制输出端口节点信息表  控制输出端口连接的所有的节点
     virtual QList<PortInfo> GetOutStreamPortInfoByNode(Node*node);

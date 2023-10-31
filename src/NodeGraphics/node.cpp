@@ -8,6 +8,8 @@ Node::Node(NodeType nodetype,QPointF pos):nodeType(nodetype)
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     TitleColor=TitleColorMap[nodeType];
+
+
 }
 
 QRectF Node::boundingRect() const
@@ -18,8 +20,7 @@ QRectF Node::boundingRect() const
     uint   outputcount=GetOutCount();
     //节点高度是端口数量*50
     uint height=std::max(inputcount,outputcount);
-    uint normalheight=80;
-    return QRectF(0, 0, 160,std::max(height*55,normalheight));
+    return QRectF(0, 0, NodeWidth,std::max(height*55,NodeHeight));
 }
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

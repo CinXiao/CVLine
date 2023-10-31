@@ -10,6 +10,8 @@
 #include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.h"
+#include "src/NodeGraphics/Nodes/DataNode/ImageNode.h"
+
 class ContextMenu:public QMenu
 {
 public:
@@ -28,6 +30,8 @@ public:
     QAction *StringAction;
     QAction *BoolAction;
     QAction *BitAction;
+    QAction *ImageAction;
+
 
     QMenu *FunctionMenu;
     QAction *Add_IntAction;

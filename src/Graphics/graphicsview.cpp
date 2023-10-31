@@ -26,7 +26,7 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     Node *start=new StartNode(QPointF(300,300));
     Node *add=new  AddNode(QPointF(500,300));
     Node *int1=new DataNode(QPointF(300,400));
-    Node*int2=new DataNode(QPointF(300,500));
+    Node*int2=new ImageNode(QPointF(300,500));
     nodeManager.AddNode(start);
     nodeManager.AddNode(add);
     nodeManager.AddNode(int1);
@@ -133,12 +133,9 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
            //单调性检测没通过，但是端口类型和端口数据类型是匹配的，则需要更改两个端口之间的连线
            if(portcheck&&!monotonicitycheck&&portdatatype)
            {
-               // qDebug()<<"需要更改连线了！";
-
                 //删除输入端口的连线，因为输入端口只能连一条线，所以只要删除与输入端口连接的那一条连接信息就行了
-
-                 //判断两个端口谁是输入端口
-            if(clickportinfo.port->portType==Port::Input||clickportinfo.port->portType==Port::InStream)
+                //判断两个端口谁是输入端口
+                if(clickportinfo.port->portType==Port::Input||clickportinfo.port->portType==Port::InStream)
                 {
                     nodeManager.DeletePortConnect(clickportinfo);
                 }
@@ -148,7 +145,6 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
                 }
                 //端点连接
                 nodeManager.PortConnect(clickportinfo,releaseportinfo);
-
            }
        }
     }
@@ -164,8 +160,8 @@ bool GraphicsView::viewportEvent(QEvent *event)
 
 void GraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_F5) {
-
+    if (event->key() == Qt::Key_F5)
+    {
        qDebug()<<"f5 run";
        nodeManager.Run();
     }

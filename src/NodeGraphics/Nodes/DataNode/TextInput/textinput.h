@@ -16,6 +16,8 @@
 class TextInput : public QGraphicsTextItem
 {
 
+
+
 public:
     TextInput(QRectF rect,QVariant &dat,QGraphicsItem* parent = nullptr);
 

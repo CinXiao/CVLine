@@ -3,6 +3,7 @@
 
 
 
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
 
@@ -27,7 +28,7 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
    BoolAction=DataMenu->addAction("布尔");
    BitAction=DataMenu->addAction("比特");
    StringAction= DataMenu->addAction("字符串");
-
+   ImageAction= DataMenu->addAction("图像");
 
 
    //计算菜单项
@@ -63,7 +64,10 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
         action->setEnabled(false);
     }
     //数据节点
-    else if(action==IntAction)
+    else if(action==ImageAction)
+    {
+        node=new ImageNode(pos);
+    }else if(action==IntAction)
     {
         node=new DataNode(pos,0,Port::Int);
     }else if(action==DoubleAction)

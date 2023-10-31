@@ -1,6 +1,6 @@
 #include "If.h"
 
-If::If(QPointF pos):Node(Node::FunctionNode, pos)
+If::If(QPointF pos):Node(Node::ProgrammeControlNode, pos)
 {
     NodeName="IF";
 

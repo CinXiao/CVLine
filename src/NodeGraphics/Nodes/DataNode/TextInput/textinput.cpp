@@ -1,5 +1,8 @@
 #include "textinput.h"
 
+#include <QRegularExpression>
+#include <QRegularExpressionValidator>
+
 
 
 TextInput::TextInput(QRectF rect,QVariant& dat, QGraphicsItem *parent):QGraphicsTextItem(dat.toString(),parent),rect(rect)
@@ -10,15 +13,22 @@ TextInput::TextInput(QRectF rect,QVariant& dat, QGraphicsItem *parent):QGraphics
     setTextInteractionFlags(Qt::TextEditorInteraction); // 允许编辑文本
     setDefaultTextColor(Qt::white);
 
+
     // 创建一个 QTextOption 并设置 wrapMode
     QTextOption textOption;
     textOption.setWrapMode(QTextOption::NoWrap);
     QTextDocument *textdocment=new QTextDocument();
-    textdocment->setTextWidth(50);
     textdocment->setDefaultTextOption(textOption);
     setDocument(textdocment);
+    QFont font;
+    font.setPointSize(15); // 设置字体大小为 12
+    font.setBold(true);
+    setFont(font);
+    setTextWidth(50);
 
     setPlainText(dat.toString());
+
+
 }
 
 void TextInput::keyPressEvent(QKeyEvent *event)
@@ -27,6 +37,7 @@ void TextInput::keyPressEvent(QKeyEvent *event)
         event->accept();
         return;
     }
+
     QGraphicsTextItem::keyPressEvent(event);
 }
 
@@ -69,7 +80,7 @@ void TextInput::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 {
 
     painter->setPen(Qt::NoPen);
-    QRectF backgroundRect(0,0,rect.width(),rect.height());
+    QRectF backgroundRect(0,0,std::max(rect.width(),document()->size().width()),rect.height());
     painter->setBrush(QBrush(QColor(30, 30, 30,100))); // 设置底色
     painter->drawRoundedRect(backgroundRect,5,5);
     QGraphicsTextItem::paint(painter,option,widget);
