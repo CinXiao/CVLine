@@ -18,7 +18,7 @@ SOURCES += \
      src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.cpp \
      src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.cpp \
      src/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/And.cpp \
+     src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.cpp \
      src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.cpp \
      src/NodeGraphics/Nodes/startnode.cpp \
      src/NodeGraphics/node.cpp \
@@ -40,7 +40,7 @@ HEADERS += \
      src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h \
      src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h \
      src/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h \
-     src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/And.h \
+     src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.h \
      src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h \
      src/NodeGraphics/Nodes/startnode.h \
      src/NodeGraphics/Port/Port.h \

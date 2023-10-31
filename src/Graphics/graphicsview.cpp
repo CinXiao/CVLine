@@ -22,10 +22,22 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     scene->addItem(&PreviewLine);
     scene->setBackgroundBrush(QColor(192, 192, 192));
     PreviewLine.setVisible(false);
+
+    Node *start=new StartNode(QPointF(300,300));
+    Node *add=new  AddNode(QPointF(500,300));
+    Node *int1=new DataNode(QPointF(300,400));
+    Node*int2=new DataNode(QPointF(300,500));
+    nodeManager.AddNode(start);
+    nodeManager.AddNode(add);
+    nodeManager.AddNode(int1);
+    nodeManager.AddNode(int2);
+
+
 }
 void GraphicsView::wheelEvent(QWheelEvent *event)
 {
-   // scaleView(pow(1.2, event->angleDelta().y() / 240.0));
+
+    //scaleView(pow(1.2, event->angleDelta().y() / 240.0));
     QGraphicsView::wheelEvent(event);
 }
 

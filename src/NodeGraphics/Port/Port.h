@@ -11,7 +11,18 @@ public:
     //端口类型
     enum PortType { None,InStream,OutStream, Input, Output };
     //端口数据类型
-    enum PortDataType {Stream,Int,Bool,String,Double,Bit,Vector2,Vector3,Color};
+    enum PortDataType {Stream,//控制流
+                        Int,//整数
+                        Bool,//布尔值
+                        String,//字符串
+                        Double,//小数值
+                        Bit,    //位
+                        Vector2,//二维向量
+                        Vector3,//三维向量
+                        Color,   //颜色
+                        Image,//图像
+
+                        };
 
 
     bool IsValid()

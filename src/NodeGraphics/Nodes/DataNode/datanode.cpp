@@ -29,6 +29,9 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
         }else if(datatype==Port::Bool)
         {
             AddPort(new Port(0,Dat.toString(),Port::Output,datatype,false));
+        }else if(datatype==Port::Bit)
+        {
+            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,false));
         }
         textItem = new TextInput(Dat, this);
 }

@@ -3,13 +3,6 @@
 #include <QGraphicsSceneWheelEvent>
 
 
-
-
-
-
-
-
-
 TextInput::TextInput(QVariant& dat, QGraphicsItem *parent):QGraphicsTextItem(dat.toString(),parent)
 {
     this->dat=dat;
@@ -41,22 +34,21 @@ void TextInput::keyPressEvent(QKeyEvent *event)
 
 void TextInput::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
+
+    int fundamentalval;
+    if (event->delta() > 0)
+        fundamentalval=1;
+    else
+         fundamentalval=-1;
+
     if(dat.type()==QVariant::Int)
-        setPlainText(QString::number(toPlainText().toInt()+1));
+        setPlainText(QString::number(toPlainText().toInt()+1*fundamentalval));
     if(dat.type()==QVariant::Double)
-        setPlainText(QString::number(toPlainText().toFloat()+0.01f));
+        setPlainText(QString::number(toPlainText().toFloat()+0.01f*fundamentalval));
     if(dat.type()==QVariant::Bool)
     {
-        if(dat.toBool())
-        {
-            setPlainText("true");
-            dat=false;
-        }else
-        {
-        setPlainText("false");
-             dat=true;
-        }
-
+            setPlainText(dat.toString());
+            dat=!dat.toBool();
     }
 
     QGraphicsTextItem::wheelEvent(event);

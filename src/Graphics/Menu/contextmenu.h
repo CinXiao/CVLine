@@ -9,7 +9,7 @@
 #include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/And.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.h"
 class ContextMenu:public QMenu
 {
 public:
@@ -36,9 +36,16 @@ public:
     QAction *Sub_IntAction;
     QAction *Sub_DoubleAction;
 
+    //布尔逻辑运算
+    QMenu *BooleanMenu;
     QAction *AndAction;//与
     QAction *OrAction;//或
     QAction *NoAction;//非
+    QAction *NoAndAction;//与非
+    QAction *NoOrAction;//或非
+    QAction *NotOrAction;//异或
+    QAction *SOrAction;//同或
+
 
     QMenu *ProgramControlMenu;
     QAction *IfAction;

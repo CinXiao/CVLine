@@ -11,11 +11,12 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
    DataMenu=new QMenu("数据");
    FunctionMenu=new QMenu("计算");
    ProgramControlMenu=new QMenu("控制");
-
+   BooleanMenu=new QMenu("布尔逻辑");
 
    addMenu(ProgramControlMenu);
    addMenu(DataMenu);
    addMenu(FunctionMenu);
+   addMenu(BooleanMenu);
     //程序控制项
     IfAction= ProgramControlMenu->addAction("IF");
 
@@ -37,10 +38,14 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
    Sub_IntAction=FunctionMenu->addAction("整数相减");
    Sub_DoubleAction=FunctionMenu->addAction("小数相减");
 
-   AndAction=FunctionMenu->addAction("与");;//与
-   OrAction=FunctionMenu->addAction("或");;//或
-   NoAction=FunctionMenu->addAction("非");;//非
 
+   AndAction=BooleanMenu->addAction("与");
+   OrAction=BooleanMenu->addAction("或");
+   NoAction=BooleanMenu->addAction("非");
+   NotOrAction=BooleanMenu->addAction("异或");
+   SOrAction=BooleanMenu->addAction("同或");
+   NoAndAction=BooleanMenu->addAction("与非");
+   NoOrAction=BooleanMenu->addAction("或非");
 }
 
 Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
@@ -93,7 +98,31 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
     }//逻辑运算
     else if(action==AndAction)
     {
-        node=new And(pos);
+        node=new Booleanlogic(pos,Booleanlogic::AND);
+    }
+    else if(action==OrAction)
+    {
+        node=new Booleanlogic(pos,Booleanlogic::OR);
+    }
+    else if(action==NoAction)
+    {
+        node=new Booleanlogic(pos,Booleanlogic::NO);
+    }
+    else if(action==NotOrAction)
+    {
+        node=new Booleanlogic(pos,Booleanlogic::XOR);
+    }
+    else if(action==SOrAction)
+    {
+        node=new Booleanlogic(pos,Booleanlogic::SOR);
+    }
+    else if(action==NoAndAction)
+    {
+        node=new Booleanlogic(pos,Booleanlogic::NOAND);
+    }
+    else if(action==NoOrAction)
+    {
+        node=new Booleanlogic(pos,Booleanlogic::NOOR);
     }
 
 

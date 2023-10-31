@@ -361,7 +361,7 @@ void NodeManager::DeletePortConnect(PortInfo portinfo1)
      {
         LineInfo lineinfo=*i;
         // 计算迭代器位置
-        auto index = std::distance(PortLineInfoList.begin(), i);
+        const auto index = std::distance(PortLineInfoList.begin(), i);
         //从场景移除连接线  删除线
           BezierCurveItem *line=PortLineInfoList[index].line;
              delete line;
@@ -371,7 +371,7 @@ void NodeManager::DeletePortConnect(PortInfo portinfo1)
           lineinfo.PortInfo2.port->IsConnected=false;
 
         // 删除找到连线信息
-        PortLineInfoList.erase(PortLineInfoList.begin() + index);
+        PortLineInfoList.erase(PortLineInfoList.constBegin() + index);
 
      }
 

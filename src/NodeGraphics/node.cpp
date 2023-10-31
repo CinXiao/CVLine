@@ -19,13 +19,14 @@ QRectF Node::boundingRect() const
     //节点高度是端口数量*50
     uint height=std::max(inputcount,outputcount);
     uint normalheight=80;
-    return QRectF(0, 0, 160,std::max(height*50,normalheight));
+    return QRectF(0, 0, 160,std::max(height*55,normalheight));
 }
 
 void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option);
     Q_UNUSED(widget);
+
 
     qreal cornerRadius = 10.0; // 圆角的半径
     qreal titlecornerRadius = 10.0; // 圆角的半径
@@ -150,22 +151,25 @@ void Node::AddPort( Port *port)
     portList.push_back(port);
 }
 
+
+
 //给指定端口设置指定值
 void Node::SetPortValue(uint portID, QVariant data, Port::PortType type)
 {
 
     auto i=std::find_if(portList.begin(),portList.end(),[type,portID](Port* port){
-
         return port->ID==portID&&port->portType==type;
-
     });
     if(i!=portList.end())
     {
           Port *port=*i;
           port->Data=data;
     }
+}
 
-
+QVariant Node::GetPortValue(uint portID, Port::PortType type)
+{
+    return GetPort(portID,type)->Data;
 }
 
 Port* Node::GetPort(uint portID, Port::PortType type)

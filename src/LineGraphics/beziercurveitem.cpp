@@ -5,7 +5,8 @@
 BezierCurveItem::BezierCurveItem(const QPointF& startPoint, const QPointF& endPoint)
     : start(startPoint), end(endPoint)
 {
-   setAcceptHoverEvents(true);
+
+    setFlag(QGraphicsItem::ItemIsSelectable, true);
 }
 
 QRectF BezierCurveItem::boundingRect() const
@@ -34,6 +35,14 @@ void BezierCurveItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
          control1= QPointF (start.x() + 60, start.y()); // 偏离起点的第一个控制点
          control2= QPointF (end.x() -60, end.y());   // 偏离终点的第二个控制点
     }
+    if(isSelected())
+    {
+         linewidth=10;
+    }else
+    {
+         linewidth=5;
+    }
+
     bezierPath.moveTo(start);
     bezierPath.cubicTo(control1, control2, end);
     painter->setPen(QPen(LineColor, linewidth));

@@ -41,8 +41,16 @@ public:
 
 
 
+    //添加端口
     void AddPort(Port *port);
+
+
+
+    //设置端口值
     void SetPortValue(uint portID,QVariant data,Port::PortType type);
+    //获取端口值
+    QVariant GetPortValue(uint portID,Port::PortType type);
+    //获取端口
     Port *GetPort(uint portID,Port::PortType type);
 
 
