@@ -6,10 +6,11 @@
 
 
 
+
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
 
-   StartAction =addAction("开始");
 
    DataMenu=new QMenu("数据");
    FunctionMenu=new QMenu("计算");
@@ -23,9 +24,12 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
    addMenu(ImageMenu);
 
    //图像处理
-   GetImageInfoAction=ImageMenu->addAction("获取信息");//获取图像信息
+   GetImageInfoAction=ImageMenu->addAction("获取图像信息");//获取图像信息
+   ImageChannelSparateAction=ImageMenu->addAction("通道分离");//获取图像信息
+    ImageConvertAction=ImageMenu->addAction("图像转换");//图像转换
 
     //程序控制项
+    StartAction =ProgramControlMenu->addAction("开始");
     IfAction= ProgramControlMenu->addAction("IF");
     ThenAction= ProgramControlMenu->addAction("Then");
 
@@ -75,7 +79,14 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
     else if(action==GetImageInfoAction)
     {
         node=new GetImageInfo(pos);
-        action->setEnabled(false);
+    }
+    else if(action==ImageChannelSparateAction)
+    {
+        node=new ChannelSeparation(pos);
+    }
+    else if(action==ImageConvertAction)
+    {
+        node=new ImageConversion(pos);
     }
     //数据节点
     else if(action==ImageAction)

@@ -19,14 +19,27 @@ GetImageInfo::GetImageInfo(QPointF pos):Node(Node::FunctionNode, pos)
 
 }
 
+void GetImageInfo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Node::paint(painter,option,widget);
+
+    // 检查图片是否有效，然后绘制它
+    if (!Image.isNull()) {
+        // 定义图片位置和大小
+        QRectF imageRect(3, 120, 80, 80);
+
+        // 绘制图片
+        painter->drawImage(imageRect, Image);
+    }
+}
+
 void GetImageInfo::execute()
 {
     QVariant imgval=GetPortValue(1,Port::Input);
-    QImage  img=imgval.value<QImage>();
-    SetPortValue(1,img,Port::Output);
-
-    SetPortValue(2,img.width(),Port::Output);
-    SetPortValue(3,img.height(),Port::Output);
+    Image=imgval.value<QImage>();
+    SetPortValue(1,Image,Port::Output);
+    SetPortValue(2,Image.width(),Port::Output);
+    SetPortValue(3,Image.height(),Port::Output);
 
     Node::execute();
 }

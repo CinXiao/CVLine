@@ -11,7 +11,7 @@ If::If(QPointF pos):Node(Node::ProgrammeControlNode, pos)
 
 
     //数据端口
-    AddPort(new Port(1,"",Port::Input,Port::Bool));
+    AddPort(new Port(1,"",Port::Input,Port::Bool,false));
 
 }
 

@@ -12,11 +12,6 @@ Then::Then(QPointF pos):Node(Node::ProgrammeControlNode, pos)
     AddPort(new Port(2,"Execute Third",Port::OutStream,Port::Stream));
     AddPort(new Port(3,"Execute Fourth",Port::OutStream,Port::Stream));
     AddPort(new Port(4,"Execute Fifth",Port::OutStream,Port::Stream));
-    AddPort(new Port(5,"Execute Sixth",Port::OutStream,Port::Stream));
-    AddPort(new Port(6,"Execute Seventh",Port::OutStream,Port::Stream));
-    AddPort(new Port(7,"Execute Eighth",Port::OutStream,Port::Stream));
-    AddPort(new Port(8,"Execute Ninth",Port::OutStream,Port::Stream));
-    AddPort(new Port(9,"Execute Tenth",Port::OutStream,Port::Stream));
 }
 
 QList<Port *> Then::OutputStreamLogicExecution()
@@ -30,10 +25,5 @@ QList<Port *> Then::OutputStreamLogicExecution()
     outList.append(GetPort(2,Port::OutStream));
     outList.append(GetPort(3,Port::OutStream));
     outList.append(GetPort(4,Port::OutStream));
-    outList.append(GetPort(5,Port::OutStream));
-    outList.append(GetPort(6,Port::OutStream));
-    outList.append(GetPort(7,Port::OutStream));
-    outList.append(GetPort(8,Port::OutStream));
-    outList.append(GetPort(9,Port::OutStream));
     return outList;
 }

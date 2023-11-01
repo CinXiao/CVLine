@@ -33,6 +33,20 @@ void ImageNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 }
 
+void ImageNode::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
+{
+    // 打开文件对话框以选择图像文件
+    QString filePath = QFileDialog::getOpenFileName();
+    if (!filePath.isEmpty()) {
+        // 加载选择的图像文件到 QImage
+        QImage image(filePath);
+        if (!image.isNull()) {
+            Image = image;
+        }
+    }
+    Node::mouseDoubleClickEvent(event);
+}
+
 void ImageNode::execute()
 {
     QVariant val(Image);

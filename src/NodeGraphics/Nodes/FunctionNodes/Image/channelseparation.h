@@ -1,15 +1,16 @@
-#ifndef GETIMAGEINFO_H
-#define GETIMAGEINFO_H
+#ifndef CHANNELSEPARATION_H
+#define CHANNELSEPARATION_H
 #include "src/NodeGraphics/node.h"
 
-class GetImageInfo:public Node
+#include <QImage>
+class ChannelSeparation:public Node
 {
 public:
-    GetImageInfo(QPointF pos=QPointF(0,0));
+    ChannelSeparation(QPointF pos);
     void  paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     QImage Image;
     void execute();
 };
 
-#endif // GETIMAGEINFO_H
+#endif // CHANNELSEPARATION_H

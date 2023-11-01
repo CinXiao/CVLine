@@ -14,7 +14,7 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
             AddPort(new Port(0,"",Port::Output,datatype,0));
         }else if(datatype==Port::Double)
         {
-            AddPort(new Port(0,"",Port::Output,datatype,0));
+            AddPort(new Port(0,"",Port::Output,datatype,0.0f));
         }else if(datatype==Port::Bool)
         {
             AddPort(new Port(0,"",Port::Output,datatype,false));

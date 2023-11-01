@@ -13,6 +13,8 @@
 #include "src/NodeGraphics/Nodes/FunctionNodes/Image/getimageinfo.h"
 #include "src/NodeGraphics/Nodes/DataNode/ImageNode.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/Image/channelseparation.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/Image/imageconversion.h"
 
 class ContextMenu:public QMenu
 {
@@ -23,7 +25,6 @@ public:
 
 
 
-    QAction *StartAction;
 
 
     QMenu *DataMenu;
@@ -54,11 +55,13 @@ public:
     //图像处理
     QMenu *ImageMenu;
     QAction *GetImageInfoAction;//获取图像信息
-
+    QAction *ImageChannelSparateAction;//图像通道分离
+    QAction *ImageConvertAction;//图像格式转换
     //程序控制
     QMenu *ProgramControlMenu;
     QAction *IfAction;
     QAction *ThenAction;
+    QAction *StartAction;
 
 };
 

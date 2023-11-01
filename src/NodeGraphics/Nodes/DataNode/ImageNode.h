@@ -5,6 +5,7 @@
 #include<QDebug>
 #include <QImage>
 #include<QObject>
+#include<QFileDialog>
 #include "src/NodeGraphics/node.h"
 #include "src/NodeGraphics/Nodes/DataNode/TextInput/textinput.h"
 class ImageNode: public Node
@@ -13,7 +14,9 @@ public:
     ImageNode(QPointF pos=QPointF(0,0));
     void  paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    QImage Image{"C:\\Users\\Sun\\Pictures\\Image\\anno.jpg"};
+    QImage Image{""};
+
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event);
 
     void execute();
 };
