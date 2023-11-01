@@ -15,7 +15,8 @@
 #include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/Image/channelseparation.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/Image/imageconversion.h"
-
+#include "src/NodeGraphics/Nodes/FunctionNodes/Image/binarization.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/Image/imageadjustment.h"
 class ContextMenu:public QMenu
 {
 public:
@@ -57,6 +58,9 @@ public:
     QAction *GetImageInfoAction;//获取图像信息
     QAction *ImageChannelSparateAction;//图像通道分离
     QAction *ImageConvertAction;//图像格式转换
+    QAction *ImageBinarizationAction;//图像格式转换
+    QAction *ImageAdjustmentAction;//图像调整
+
     //程序控制
     QMenu *ProgramControlMenu;
     QAction *IfAction;

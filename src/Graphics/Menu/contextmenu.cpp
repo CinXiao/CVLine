@@ -8,6 +8,7 @@
 
 
 
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
 
@@ -25,8 +26,10 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 
    //图像处理
    GetImageInfoAction=ImageMenu->addAction("获取图像信息");//获取图像信息
+   ImageAdjustmentAction=ImageMenu->addAction("亮度和对比度");//图像调整
    ImageChannelSparateAction=ImageMenu->addAction("通道分离");//获取图像信息
-    ImageConvertAction=ImageMenu->addAction("图像转换");//图像转换
+   ImageConvertAction=ImageMenu->addAction("图像转换");//图像转换
+   ImageBinarizationAction=ImageMenu->addAction("二值化");//图像转换
 
     //程序控制项
     StartAction =ProgramControlMenu->addAction("开始");
@@ -79,6 +82,14 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
     else if(action==GetImageInfoAction)
     {
         node=new GetImageInfo(pos);
+    }
+    else if(action==ImageAdjustmentAction)
+    {
+        node=new ImageAdjustment(pos);
+    }
+    else if(action==ImageBinarizationAction)
+    {
+        node=new Binarization(pos);
     }
     else if(action==ImageChannelSparateAction)
     {

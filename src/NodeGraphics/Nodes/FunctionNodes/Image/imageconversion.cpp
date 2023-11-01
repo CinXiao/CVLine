@@ -42,9 +42,13 @@ void ImageConversion::execute()
     // 转换为RGB格式
     QImage rgbImage = Image.convertToFormat(QImage::Format_RGB32);
 
+
+
+
     SetPortValue(1,argbImage,Port::Output);
     SetPortValue(2,grayscaleImage,Port::Output);
     SetPortValue(3,rgbImage,Port::Output);
+
 
     Node::execute();
 
