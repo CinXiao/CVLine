@@ -146,9 +146,15 @@ bool NodeManager::PortMonotonicityCheck(PortInfo info1, PortInfo info2)
         return false;
     if(info2.port->IsConnected&&info2.port->portType==Port::Input)
         return false;
+
+
     if(info1.port->IsConnected&&info1.port->portType==Port::InStream)
         return false;
     if(info2.port->IsConnected&&info2.port->portType==Port::InStream)
+        return false;
+    if(info1.port->IsConnected&&info1.port->portType==Port::OutStream)
+        return false;
+    if(info2.port->IsConnected&&info2.port->portType==Port::OutStream)
         return false;
 
     return true;
@@ -305,7 +311,11 @@ void NodeManager::NodeRun(QList<PortInfo> portnodeinfolist)
              {
                     PortInfo inportinfo=i;
                     //把输出端口的值给与这个端口连接的输入端口
-                    inportinfo.port->Data= outPort->Data;
+                    //类型检测
+                    if(inportinfo.port->Data.type()==outPort->Data.type())
+                        inportinfo.port->Data= outPort->Data;
+                    else
+                        qDebug()<<"端口类型异常："<<inportinfo.port->Data<<outPort->Data;
              }
           }
         //拿到这个节点程序控制输出的端口和节点连接信息列表

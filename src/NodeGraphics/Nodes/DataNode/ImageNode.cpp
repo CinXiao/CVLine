@@ -32,3 +32,9 @@ void ImageNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
 
 
 }
+
+void ImageNode::execute()
+{
+    QVariant val(Image);
+     SetPortValue(0,val,Port::Output);
+}

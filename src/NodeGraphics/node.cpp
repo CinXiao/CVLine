@@ -100,8 +100,18 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
               }
               //设置笔用于画文本
               painter->setPen(Qt::white);
+              //画数据文本
               painter->drawText(i->portTextRect,i->TextAlign,i->Data.toString());
+              // 创建字体对象并设置字体大小
+              QFont font;
+              // 在绘制文本之前设置字体
+              QFont oldf=painter->font();
+              painter->setFont(font);
+              //画端口名字
+              painter->setPen(Qt::gray);
+              painter->drawText(i->portNameTextRect,i->TextAlign,i->Name);
 
+              painter->setFont(oldf);
 
           }
           //流程控制输入输出端口

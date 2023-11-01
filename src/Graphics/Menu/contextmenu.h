@@ -10,7 +10,9 @@
 #include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h"
 #include "src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/Image/getimageinfo.h"
 #include "src/NodeGraphics/Nodes/DataNode/ImageNode.h"
+#include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h"
 
 class ContextMenu:public QMenu
 {
@@ -49,11 +51,14 @@ public:
     QAction *NoOrAction;//或非
     QAction *NotOrAction;//异或
     QAction *SOrAction;//同或
+    //图像处理
+    QMenu *ImageMenu;
+    QAction *GetImageInfoAction;//获取图像信息
 
-
+    //程序控制
     QMenu *ProgramControlMenu;
     QAction *IfAction;
-
+    QAction *ThenAction;
 
 };
 

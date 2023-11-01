@@ -4,6 +4,8 @@
 
 
 
+
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
 
@@ -13,14 +15,19 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
    FunctionMenu=new QMenu("计算");
    ProgramControlMenu=new QMenu("控制");
    BooleanMenu=new QMenu("布尔逻辑");
-
+   ImageMenu=new QMenu("图像处理");
    addMenu(ProgramControlMenu);
    addMenu(DataMenu);
    addMenu(FunctionMenu);
    addMenu(BooleanMenu);
+   addMenu(ImageMenu);
+
+   //图像处理
+   GetImageInfoAction=ImageMenu->addAction("获取信息");//获取图像信息
+
     //程序控制项
     IfAction= ProgramControlMenu->addAction("IF");
-
+    ThenAction= ProgramControlMenu->addAction("Then");
 
    //数据菜单项
    IntAction= DataMenu->addAction("整数");
@@ -57,10 +64,17 @@ Node *ContextMenu::GetSelectedNode(QAction *action,QPointF pos)
     if(action==IfAction)
     {
         node=new If(pos);
+    }else if(action==ThenAction)
+    {
+        node=new Then(pos);
     }
     else if(action==StartAction)
     {
         node=new StartNode(pos);
+    }//图像处理
+    else if(action==GetImageInfoAction)
+    {
+        node=new GetImageInfo(pos);
         action->setEnabled(false);
     }
     //数据节点

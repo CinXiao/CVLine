@@ -11,16 +11,16 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
         setFlag(QGraphicsItem::ItemIsFocusable, true);
         if(datatype==Port::Int)
         {
-            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,0));
+            AddPort(new Port(0,"",Port::Output,datatype,0));
         }else if(datatype==Port::Double)
         {
-            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,0));
+            AddPort(new Port(0,"",Port::Output,datatype,0));
         }else if(datatype==Port::Bool)
         {
-            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,false));
+            AddPort(new Port(0,"",Port::Output,datatype,false));
         }else if(datatype==Port::Bit)
         {
-            AddPort(new Port(0,Dat.toString(),Port::Output,datatype,false));
+            AddPort(new Port(0,"",Port::Output,datatype,false));
         }
         textItem = new TextInput(QRectF(3,45,50,30),Dat, this);
 

@@ -8,9 +8,9 @@ AddNode::AddNode(QPointF pos,Port::PortDataType datatype):Node(Node::FunctionNod
     AddPort(new Port(0,"",Port::InStream,Port::Stream));
     AddPort(new Port(0,"",Port::OutStream,Port::Stream));
     //数据端口
-    AddPort(new Port(1,"0",Port::Input,datatype));
-    AddPort(new Port(2,"0",Port::Input,datatype));
-    AddPort(new Port(1,"0",Port::Output,datatype));
+    AddPort(new Port(1,"A",Port::Input,datatype));
+    AddPort(new Port(2,"B",Port::Input,datatype));
+    AddPort(new Port(1,"A+B",Port::Output,datatype));
 
 }
 void AddNode::execute()

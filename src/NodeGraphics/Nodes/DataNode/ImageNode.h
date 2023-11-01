@@ -14,6 +14,8 @@ public:
     void  paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     QImage Image{"C:\\Users\\Sun\\Pictures\\Image\\anno.jpg"};
+
+    void execute();
 };
 
 #endif // IMAGENODE_H

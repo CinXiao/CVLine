@@ -42,10 +42,11 @@ public:
     {
 
             //设置端口颜色范围和端口文字范围和文字框对齐方向
-            portRect=(portType==Input||portType==InStream)?QRectF(5,50+ID*30,20,20):QRectF(135,50+ID*30,20,20);
-            portTextRect=(portType==Input||portType==InStream)?QRectF(28,50+ID*28,50,28):QRectF(83,50+ID*28,50,28);
-            TextAlign=(portType==Input||portType==InStream)?Qt::AlignLeft:Qt::AlignRight;
+            portRect=(portType==Input||portType==InStream)?QRectF(5,50+ID*42,20,20):QRectF(135,50+ID*42,20,20);
 
+            portTextRect=(portType==Input||portType==InStream)?QRectF(28,50+ID*42,50,28):QRectF(83,50+ID*42,50,28);
+            TextAlign=(portType==Input||portType==InStream)?Qt::AlignLeft:Qt::AlignRight;
+            portNameTextRect=(portType==Input||portType==InStream)?QRectF(5,portRect.y()-20,50,20):QRectF(105,portRect.y()-20,50,20);
 
 
 
@@ -87,6 +88,9 @@ public:
     QRectF portRect;
     //端口文字范围
     QRectF portTextRect;
+    //端口名字文字范围
+    QRectF portNameTextRect;
+
     //端口文字对齐
     Qt::AlignmentFlag TextAlign;
 

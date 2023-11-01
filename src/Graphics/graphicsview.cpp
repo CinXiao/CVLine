@@ -27,6 +27,8 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     Node *add=new  AddNode(QPointF(500,300));
     Node *int1=new DataNode(QPointF(300,400));
     Node*int2=new ImageNode(QPointF(300,500));
+    Node*node1=new GetImageInfo(QPointF(500,500));
+    nodeManager.AddNode(node1);
     nodeManager.AddNode(start);
     nodeManager.AddNode(add);
     nodeManager.AddNode(int1);
@@ -135,15 +137,23 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
            {
                 //删除输入端口的连线，因为输入端口只能连一条线，所以只要删除与输入端口连接的那一条连接信息就行了
                 //判断两个端口谁是输入端口
-                if(clickportinfo.port->portType==Port::Input||clickportinfo.port->portType==Port::InStream)
+                if(clickportinfo.port->portType==Port::Input)
                 {
                     nodeManager.DeletePortConnect(clickportinfo);
                 }
-                if(releaseportinfo.port->portType==Port::Input||releaseportinfo.port->portType==Port::InStream)
+                if(releaseportinfo.port->portType==Port::Input)
                 {
                     nodeManager.DeletePortConnect(releaseportinfo);
                 }
-                //端点连接
+
+                //如果是控制流，端口之间的连线都删
+                if(clickportinfo.port->portType==Port::InStream||releaseportinfo.port->portType==Port::InStream)
+                {
+                    nodeManager.DeletePortConnect(clickportinfo);
+                    nodeManager.DeletePortConnect(releaseportinfo);
+                }
+
+                //端点重新连接
                 nodeManager.PortConnect(clickportinfo,releaseportinfo);
            }
        }
