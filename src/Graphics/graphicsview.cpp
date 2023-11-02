@@ -11,12 +11,14 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     // 设置框选模式
     setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
 
-    this->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing
-                         | QPainter::LosslessImageRendering);
-    this->setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
-    this->setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
-    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing
+                   | QPainter::LosslessImageRendering);
+    setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
+    setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+
 
     //添加连线预览线到场景
     scene->addItem(&PreviewLine);
@@ -34,6 +36,16 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
 
     MouseCurrentPos=event->pos();
+    if (event->buttons() & Qt::MiddleButton)
+    {
+
+        setDragMode(QGraphicsView::ScrollHandDrag);
+        QPointF delta = mapToScene(event->pos()) - mapToScene(MouseClikePos);
+        setSceneRect(sceneRect().translated(-delta));
+        MouseClikePos=MouseCurrentPos;
+    }
+
+
 
     if(isDrawing)
     {
@@ -50,14 +62,13 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 
 void GraphicsView::mousePressEvent(QMouseEvent *event)
 {
-    // 禁用框选功能
+    MouseClikePos=event->pos();
+    // 禁用右键框选功能
     if(event->button() == Qt::RightButton)
     {
         rightButtonPressed=true;
-        setDragMode(QGraphicsView::NoDrag);
     }
 
-    MouseClikePos=event->pos();
     if(event->button() == Qt::LeftButton)
     {
         leftButtonPressed=true;

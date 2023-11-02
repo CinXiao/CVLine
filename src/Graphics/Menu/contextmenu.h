@@ -19,6 +19,8 @@
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h"
+
 class ContextMenu:public QMenu
 {
 public:

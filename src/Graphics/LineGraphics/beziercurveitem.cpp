@@ -49,7 +49,17 @@ void BezierCurveItem::UpdatePoint(const QPointF &startPoint, const QPointF &endP
 
 void BezierCurveItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    // 创建一个 QPainterPath 来表示贝塞尔曲线
+    QPainterPath bezierPath;
+    bezierPath.moveTo(start);
+    bezierPath.cubicTo(control1, control2, end);
+    if (bezierPath.contains(event->pos())) {
+         // 鼠标点击在贝塞尔曲线上
+         qDebug() << "鼠标点击在贝塞尔曲线上";
+    } else {
+         // 鼠标点击不在贝塞尔曲线上
+         qDebug() << "鼠标点击不在贝塞尔曲线上";
+    }
     QGraphicsItem::mousePressEvent(event);
 }
 

@@ -20,7 +20,7 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
             AddPort(new Port(0,"",Port::Output,datatype,false));
         }else if(datatype==Port::Bit)
         {
-            AddPort(new Port(0,"",Port::Output,datatype,false));
+            AddPort(new Port(0,"",Port::Output,datatype,0));
         }
         textItem = new TextInput(QRectF(3,45,50,30),Dat, this);
 

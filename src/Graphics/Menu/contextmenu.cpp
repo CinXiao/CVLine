@@ -2,6 +2,7 @@
 
 
 
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
     ProgramControlMenu = CreateSubMenu("控制");
@@ -11,6 +12,7 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     ImageMenu = CreateSubMenu("图像处理");
 
     AddMenuItem(ImageMenu, "图像", [](QPointF pos) { return new ImageNode(pos); });
+    AddMenuItem(ImageMenu, "依次输出目录图像", [](QPointF pos) { return new ReadImage(pos); });
     AddMenuItem(ImageMenu, "获取图像信息", [](QPointF pos) { return new GetImageInfo(pos); });
     AddMenuItem(ImageMenu, "图像调整", [](QPointF pos) { return new ImageAdjustment(pos); });
     AddMenuItem(ImageMenu, "二值化", [](QPointF pos) { return new Binarization(pos); });

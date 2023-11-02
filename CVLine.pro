@@ -9,6 +9,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.cpp \
      src/Model/ConnectionModel/NodeManager.cpp \
@@ -36,6 +37,7 @@ SOURCES += \
      src/mainwindow.cpp
 
 HEADERS += \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h \
      src/Model/ConnectionModel/NodeManager.h \
@@ -71,6 +73,8 @@ FORMS += \
      src/Windows/nodeeditingwindow.ui \
      ui/mainwindow.ui
 
+INCLUDEPATH +=\
+    opencv/opencv2\
 
 
 # Default rules for deployment.
@@ -79,3 +83,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES +=
+
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/opencv/lib/ -lopencv_world480
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/opencv/lib/ -lopencv_world480d
+
+
+INCLUDEPATH += $$PWD/opencv
+DEPENDPATH += $$PWD/opencv
