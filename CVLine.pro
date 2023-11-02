@@ -9,58 +9,62 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-     src/ConnectionModel/NodeManager.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.cpp \
+     src/Model/ConnectionModel/NodeManager.cpp \
      src/Graphics/Menu/contextmenu.cpp \
      src/Graphics/graphicsview.cpp \
-     src/LineGraphics/beziercurveitem.cpp \
-     src/NodeGraphics/Nodes/DataNode/ImageNode.cpp \
-     src/NodeGraphics/Nodes/DataNode/TextInput/textinput.cpp \
-     src/NodeGraphics/Nodes/DataNode/datanode.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/binarization.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/channelseparation.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/getimageinfo.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/imageadjustment.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/imageconversion.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.cpp \
-     src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.cpp \
-     src/NodeGraphics/Nodes/startnode.cpp \
-     src/NodeGraphics/node.cpp \
+     src/Graphics/LineGraphics/beziercurveitem.cpp \
+     src/Graphics/NodeGraphics/Nodes/DataNode/ImageNode.cpp \
+     src/Graphics/NodeGraphics/Nodes/DataNode/TextInput/textinput.cpp \
+     src/Graphics/NodeGraphics/Nodes/DataNode/datanode.cpp \
+     src/Graphics//NodeGraphics/Nodes/FunctionNodes/Calculate/Add.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/binarization.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelseparation.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/getimageinfo.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/imageadjustment.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/imageconversion.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.cpp \
+     src/Graphics/NodeGraphics/Nodes/startnode.cpp \
+     src/Graphics/NodeGraphics/node.cpp \
      src/Windows/nodeeditingwindow.cpp \
      src/main.cpp \
      src/mainwindow.cpp
 
 HEADERS += \
-     src/ConnectionModel/NodeManager.h \
-     src/ConnectionModel/Relations/LineInfo.h \
-     src/ConnectionModel/Relations/NodeInfo.h \
-     src/ConnectionModel/Relations/PortInfo.h \
-     src/ConnectionModel/Relations/StreamPortinfo.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h \
+     src/Model/ConnectionModel/NodeManager.h \
+     src/Entity/Relations/LineInfo.h \
+     src/Entity/Relations/NodeInfo.h \
+     src/Entity/Relations/PortInfo.h \
+     src/Entity/Relations/StreamPortinfo.h \
      src/Graphics/Menu/contextmenu.h \
      src/Graphics/graphicsview.h \
-     src/LineGraphics/beziercurveitem.h \
-     src/NodeGraphics/Nodes/DataNode/ImageNode.h \
-     src/NodeGraphics/Nodes/DataNode/TextInput/textinput.h \
-     src/NodeGraphics/Nodes/DataNode/datanode.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/binarization.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/channelseparation.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/getimageinfo.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/imageadjustment.h \
-     src/NodeGraphics/Nodes/FunctionNodes/Image/imageconversion.h \
-     src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.h \
-     src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h \
-     src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h \
-     src/NodeGraphics/Nodes/startnode.h \
-     src/NodeGraphics/Port/Port.h \
-     src/NodeGraphics/node.h \
+     src/Graphics/LineGraphics/beziercurveitem.h \
+     src/Graphics/NodeGraphics/Nodes/DataNode/ImageNode.h \
+     src/Graphics/NodeGraphics/Nodes/DataNode/TextInput/textinput.h \
+     src/Graphics/NodeGraphics/Nodes/DataNode/datanode.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/binarization.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelseparation.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/getimageinfo.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/imageadjustment.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/imageconversion.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h \
+     src/Graphics/NodeGraphics/Nodes/startnode.h \
+     src/Graphics/NodeGraphics/Port/Port.h \
+     src/Graphics/NodeGraphics/node.h \
      src/Windows/nodeeditingwindow.h \
-     src/graphicsview.h \
+     src/Graphics/graphicsview.h \
      src/mainwindow.h
 
 FORMS += \

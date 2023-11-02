@@ -2,70 +2,46 @@
 #define CONTEXTMENU_H
 
 #include <QMenu>
-
-#include "src/NodeGraphics/node.h"
-#include "src/NodeGraphics/Nodes/startnode.h"
-#include "src/NodeGraphics/Nodes/DataNode/DataNode.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Image/getimageinfo.h"
-#include "src/NodeGraphics/Nodes/DataNode/ImageNode.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Image/channelseparation.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Image/imageconversion.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Image/binarization.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Image/imageadjustment.h"
+#include "src/Graphics/NodeGraphics/node.h"
+#include "src/Graphics/NodeGraphics/Port/Port.h"
+#include "src/Graphics/NodeGraphics/Nodes/startnode.h"
+#include "src/Graphics/NodeGraphics/Nodes/DataNode/DataNode.h"
+#include "src/Graphics/NodeGraphics/Nodes/DataNode/ImageNode.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Subtract.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/binarization.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/If.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/getimageinfo.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/LogicOperation/Booleanlogic.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/imageconversion.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelseparation.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/imageadjustment.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h"
 class ContextMenu:public QMenu
 {
 public:
     ContextMenu(QWidget *parent=nullptr);
     Node* GetSelectedNode(QAction *action,QPointF pos);
 
-
-
-
-
-
+   //数据节点
     QMenu *DataMenu;
-    QAction *IntAction;
-    QAction *DoubleAction;
-    QAction *StringAction;
-    QAction *BoolAction;
-    QAction *BitAction;
-    QAction *ImageAction;
-
-
+    //功能节点
     QMenu *FunctionMenu;
-    QAction *Add_IntAction;
-    QAction *Add_DoubleAction;
-    QAction *Add_StringAction;
-    QAction *Sub_IntAction;
-    QAction *Sub_DoubleAction;
 
     //布尔逻辑运算
     QMenu *BooleanMenu;
-    QAction *AndAction;//与
-    QAction *OrAction;//或
-    QAction *NoAction;//非
-    QAction *NoAndAction;//与非
-    QAction *NoOrAction;//或非
-    QAction *NotOrAction;//异或
-    QAction *SOrAction;//同或
     //图像处理
     QMenu *ImageMenu;
-    QAction *GetImageInfoAction;//获取图像信息
-    QAction *ImageChannelSparateAction;//图像通道分离
-    QAction *ImageConvertAction;//图像格式转换
-    QAction *ImageBinarizationAction;//图像格式转换
-    QAction *ImageAdjustmentAction;//图像调整
 
     //程序控制
     QMenu *ProgramControlMenu;
-    QAction *IfAction;
-    QAction *ThenAction;
-    QAction *StartAction;
+private:
+    QMenu* CreateSubMenu(const QString& title);
+    QAction* AddMenuItem(QMenu* menu, const QString& title, const std::function<Node*(QPointF)>& nodeCreator);
+    //菜单名称和函数map，通过菜单名称可以拿到菜单对应的节点
+    std::unordered_map<QAction*, std::function<Node*(QPointF)>> actionToNode;
 
 };
 

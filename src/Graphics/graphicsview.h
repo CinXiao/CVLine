@@ -11,14 +11,13 @@
 
 
 
-
-#include "src/NodeGraphics/node.h"
+#include "src/Graphics/NodeGraphics/node.h"
 #include "src/Graphics/Menu/contextmenu.h"
-#include "src/ConnectionModel/NodeManager.h"
-#include "src/LineGraphics/beziercurveitem.h"
-#include "src/NodeGraphics/Nodes/startnode.h"
-#include "src/NodeGraphics/Nodes/DataNode/DataNode.h"
-#include "src/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
+#include "src/Model/ConnectionModel/NodeManager.h"
+#include "src/Graphics/LineGraphics/beziercurveitem.h"
+#include "src/Graphics/NodeGraphics/Nodes/startnode.h"
+#include "src/Graphics/NodeGraphics/Nodes/DataNode/DataNode.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
 
 class GraphicsView : public QGraphicsView
 {

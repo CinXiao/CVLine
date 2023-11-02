@@ -3,9 +3,9 @@
 
 #include <QGraphicsRectItem>
 
-#include "src/NodeGraphics/node.h"
+#include "src/Graphics/NodeGraphics/node.h"
 
-#include "src/LineGraphics/beziercurveitem.h"
+#include "src/Graphics/LineGraphics/beziercurveitem.h"
 
 NodeEditingWindow::NodeEditingWindow(QWidget *parent) :
     QWidget(parent),
@@ -16,13 +16,6 @@ NodeEditingWindow::NodeEditingWindow(QWidget *parent) :
     scene.setSceneRect(250,250,500,500);
     view=new GraphicsView(&scene);
     ui->verticalLayout->addWidget(view);
-
-
-
-
-
-
-
 
 
 }
