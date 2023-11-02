@@ -38,8 +38,6 @@ public:
 
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)override;
     void mousePressEvent(QGraphicsSceneMouseEvent* event)override;
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent* event)override;
-    void mouseMoveEvent(QGraphicsSceneMouseEvent* event)override;
 
 
     //添加端口

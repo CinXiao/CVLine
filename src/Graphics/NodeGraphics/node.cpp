@@ -331,26 +331,13 @@ void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if(CheckPortByPos(event->pos()))
     {
         setFlag(QGraphicsItem::ItemIsMovable, false);
-
     }
     else
     {
         setFlag(QGraphicsItem::ItemIsMovable, true);
-
     }
 
      QGraphicsItem::mousePressEvent(event);
-}
-
-void Node::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
-{
-
-     QGraphicsItem::mouseReleaseEvent(event);
-}
-
-void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
-{
-     QGraphicsItem::mouseMoveEvent(event);
 }
 
 

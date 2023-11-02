@@ -23,31 +23,18 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     scene->setBackgroundBrush(QColor(192, 192, 192));
     PreviewLine.setVisible(false);
 
-//    Node *start=new StartNode(QPointF(300,300));
-//    Node *add=new  AddNode(QPointF(500,300));
-//    Node *int1=new DataNode(QPointF(300,400));
-//    Node*int2=new ImageNode(QPointF(300,500));
-//    Node*node1=new GetImageInfo(QPointF(500,500));
-//    nodeManager.AddNode(node1);
-//    nodeManager.AddNode(start);
-//    nodeManager.AddNode(add);
-//    nodeManager.AddNode(int1);
-//    nodeManager.AddNode(int2);
-
 
 }
 void GraphicsView::wheelEvent(QWheelEvent *event)
 {
-
-    //scaleView(pow(1.2, event->angleDelta().y() / 240.0));
     QGraphicsView::wheelEvent(event);
 }
-
 
 void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
 
     MouseCurrentPos=event->pos();
+
     if(isDrawing)
     {
         PreviewLine.setVisible(true);
@@ -63,8 +50,6 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 
 void GraphicsView::mousePressEvent(QMouseEvent *event)
 {
-
-
     // 禁用框选功能
     if(event->button() == Qt::RightButton)
     {
@@ -73,7 +58,6 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
     }
 
     MouseClikePos=event->pos();
-
     if(event->button() == Qt::LeftButton)
     {
         leftButtonPressed=true;
@@ -83,15 +67,12 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
        PortInfo portinfo=nodeManager.GetPortByPos(MouseClikePos);
        if(!portinfo.IsEmpty())
        {
-
            setDragMode(QGraphicsView::NoDrag);
            //设置画线标识
            isDrawing=true;
            //设置画线颜色
            lineColor=portinfo.port->portColor;
-
        }
-
     }
     QGraphicsView::mousePressEvent(event);
 }
@@ -111,6 +92,8 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
        leftButtonPressed=false;
        //尝试获取释放位置的端口信息
        PortInfo releaseportinfo=nodeManager.GetPortByPos(MouseReleasePos);
+
+       //可以连接两个端口了
        if(!releaseportinfo.IsEmpty()&&isDrawing)
        {
            //因为isDrawing是true的话 点击位置的端口信息肯定是获取可以获取到的所以不用校验点击位置是否有节点
@@ -152,10 +135,11 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
                     nodeManager.DeletePortConnect(clickportinfo);
                     nodeManager.DeletePortConnect(releaseportinfo);
                 }
-
-                //端点重新连接
+                //连个端点重新连接
                 nodeManager.PortConnect(clickportinfo,releaseportinfo);
            }
+           //两个点击节点可以移动，因为最开始点击端口时，为了画线设置了节点不允许移动，所以这个地方要重新设置
+           clickportinfo.node->setFlag(QGraphicsItem::ItemIsMovable, true);
        }
     }
     //重置画线标识
@@ -190,8 +174,8 @@ void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
     if(node!=nullptr)
     {
        nodeManager.AddNode(node);
+       node->setSelected(true);
     }
-
     event->accept();
 }
 

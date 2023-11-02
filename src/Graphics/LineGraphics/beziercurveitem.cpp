@@ -23,8 +23,6 @@ void BezierCurveItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
     Q_UNUSED(option);
     Q_UNUSED(widget);
     setZValue(-1);
-    // 绘制贝塞尔曲线
-    QPainterPath bezierPath;
     if(start.x()>=end.x())
     {
         control1= QPointF (start.x() - 30, start.y()); // 偏离起点的第一个控制点
@@ -34,7 +32,8 @@ void BezierCurveItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
          control1= QPointF (start.x() + 60, start.y()); // 偏离起点的第一个控制点
          control2= QPointF (end.x() -60, end.y());   // 偏离终点的第二个控制点
     }
-
+    // 贝塞尔曲线
+    QPainterPath bezierPath;
     bezierPath.moveTo(start);
     bezierPath.cubicTo(control1, control2, end);
     painter->setPen(QPen(LineColor, linewidth));
