@@ -8,6 +8,11 @@ CVline是一款基于QT开发的数据计算和图像处理的小工具
 - 语言：C++17
 - QT环境：QT6.5
 - 编译器：MSVC2019
+### 1.3 如何构建
+项目里面已经引入了OpenCV头文件和lib文件，不需要再设置opencv环境，只需要将dll文件拷贝到生成目录下
+如果你之前没有没有安装过OpenCV 作者已经打包了OpenCV的部分dll文件 下载链接：https://pan.baidu.com/s/1co7dduG7B4RzRPG7fXmwsA?pwd=4f1o
+![image](https://github.com/CinXiao/CVLine/assets/54227677/50817c49-ae25-4e8b-829c-d23436bde659)
+
 
 ## 2.CVLine开发进度
 ## 2.1 当前
