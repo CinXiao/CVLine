@@ -3,6 +3,8 @@
 
 #include "src/Graphics/NodeGraphics/node.h"
 #include <QImage>
+
+#include"src/Utils/ImageConversionUtil.h"
 class Binarization:public Node
 {
 public:

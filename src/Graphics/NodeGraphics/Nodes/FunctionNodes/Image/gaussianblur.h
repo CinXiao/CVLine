@@ -1,7 +1,7 @@
 #ifndef GAUSSIANBLUR_H
 #define GAUSSIANBLUR_H
 #include "src/Graphics/NodeGraphics/node.h"
-
+#include"src/Utils/ImageConversionUtil.h"
 
 class GaussianBlur:public Node
 {

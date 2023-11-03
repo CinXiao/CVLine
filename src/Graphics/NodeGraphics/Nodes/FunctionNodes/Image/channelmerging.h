@@ -1,6 +1,7 @@
 #ifndef CHANNELMERGING_H
 #define CHANNELMERGING_H
 
+#include"src/Utils/ImageConversionUtil.h"
 #include "src/Graphics/NodeGraphics/node.h"
 #include <QImage>
 class ChannelMerging:public Node

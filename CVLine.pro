@@ -65,6 +65,7 @@ HEADERS += \
      src/Graphics/NodeGraphics/Nodes/startnode.h \
      src/Graphics/NodeGraphics/Port/Port.h \
      src/Graphics/NodeGraphics/node.h \
+     src/Utils/ImageConversionUtil.h \
      src/Windows/nodeeditingwindow.h \
      src/Graphics/graphicsview.h \
      src/mainwindow.h

@@ -16,7 +16,7 @@ ImageAdjustment::ImageAdjustment(QPointF pos):Node(Node::FunctionNode, pos)
 
 
 
-    NodeHeight=GetInputCount()*60+100;
+    NodeHeight=300;
 }
 
 void ImageAdjustment::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

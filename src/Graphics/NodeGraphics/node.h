@@ -12,7 +12,7 @@
 #include<QGraphicsScene>
 #include <QStyleOptionGraphicsItem>
 #include <QGraphicsSceneMouseEvent>
-
+#include<opencv2/opencv.hpp>
 #include "src/Graphics/NodeGraphics/Port/Port.h"
 #include "src/Graphics/LineGraphics/beziercurveitem.h"
 #include "src/Entity/Relations/StreamPortinfo.h"
