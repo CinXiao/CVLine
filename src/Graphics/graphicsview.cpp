@@ -3,11 +3,6 @@
 
 GraphicsView::GraphicsView()
 {
-
-}
-
-GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
-{
     // 设置框选模式
     setRubberBandSelectionMode(Qt::IntersectsItemBoundingRect);
 
@@ -19,14 +14,15 @@ GraphicsView::GraphicsView(QGraphicsScene *scene): QGraphicsView(scene)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
-
+    QGraphicsScene *scene=new QGraphicsScene();
+    setScene(scene);
     //添加连线预览线到场景
     scene->addItem(&PreviewLine);
     scene->setBackgroundBrush(QColor(192, 192, 192));
     PreviewLine.setVisible(false);
-
-
 }
+
+
 void GraphicsView::wheelEvent(QWheelEvent *event)
 {
     QGraphicsView::wheelEvent(event);
@@ -36,16 +32,14 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
 
     MouseCurrentPos=event->pos();
-    if (event->buttons() & Qt::MiddleButton)
+    if (event->buttons() & Qt::RightButton)
     {
-
+        moveviewflag=true;
         setDragMode(QGraphicsView::ScrollHandDrag);
         QPointF delta = mapToScene(event->pos()) - mapToScene(MouseClikePos);
         setSceneRect(sceneRect().translated(-delta));
         MouseClikePos=MouseCurrentPos;
     }
-
-
 
     if(isDrawing)
     {
@@ -95,7 +89,10 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
     MouseReleasePos=event->pos();
 
     if (event->button() == Qt::RightButton)
-        rightButtonPressed=false;
+    {
+         rightButtonPressed=false;
+    }
+
 
     //左键释放
     if (event->button() == Qt::LeftButton)
@@ -174,10 +171,12 @@ void GraphicsView::keyReleaseEvent(QKeyEvent *event)
 
 void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
 {
-    //右键点击然后拖动了，就不弹出菜单了
-    if(MouseClikePos!=MouseReleasePos)
-       return;
-
+    //拖动了
+    if(moveviewflag)
+    {
+       moveviewflag=false;
+        return;
+    }
     // 使用exec函数显示菜单
     QAction *selectedAction = contextMenu.exec(event->globalPos());
     //获取选中的菜单创建出来的节点

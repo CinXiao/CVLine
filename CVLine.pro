@@ -32,7 +32,7 @@ SOURCES += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.cpp \
      src/Graphics/NodeGraphics/Nodes/startnode.cpp \
      src/Graphics/NodeGraphics/node.cpp \
-     src/Windows/nodeeditingwindow.cpp \
+     src/Widgets/outwidget.cpp \
      src/main.cpp \
      src/mainwindow.cpp
 
@@ -66,12 +66,11 @@ HEADERS += \
      src/Graphics/NodeGraphics/Port/Port.h \
      src/Graphics/NodeGraphics/node.h \
      src/Utils/ImageConversionUtil.h \
-     src/Windows/nodeeditingwindow.h \
      src/Graphics/graphicsview.h \
+     src/Widgets/outwidget.h \
      src/mainwindow.h
 
 FORMS += \
-     src/Windows/nodeeditingwindow.ui \
      ui/mainwindow.ui
 
 INCLUDEPATH +=\

@@ -25,8 +25,68 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="actioncreat"/>
+    <addaction name="actionopen"/>
+    <addaction name="actionsave"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>编辑</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>构建</string>
+    </property>
+    <addaction name="actionrun"/>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>分析</string>
+    </property>
+    <addaction name="actioncheck"/>
+   </widget>
+   <widget class="QMenu" name="menu_5">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_4"/>
+   <addaction name="menu_5"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actioncreat">
+   <property name="text">
+    <string>新建蓝图</string>
+   </property>
+  </action>
+  <action name="actionopen">
+   <property name="text">
+    <string>打开蓝图</string>
+   </property>
+  </action>
+  <action name="actionsave">
+   <property name="text">
+    <string>保存蓝图</string>
+   </property>
+  </action>
+  <action name="actionrun">
+   <property name="text">
+    <string>运行</string>
+   </property>
+  </action>
+  <action name="actioncheck">
+   <property name="text">
+    <string>节点连接检查</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

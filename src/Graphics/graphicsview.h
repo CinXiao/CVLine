@@ -45,7 +45,8 @@ private:
     bool rightButtonPressed =false;
     //鼠标左键按下标识
     bool leftButtonPressed =false;
-
+    //移动场景标识
+    bool moveviewflag =false;
 
 
     //画线预览

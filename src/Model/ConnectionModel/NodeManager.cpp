@@ -206,7 +206,8 @@ void NodeManager::UpDateNode(Node *node)
 
 void NodeManager::UpDateSelectedNode()
 {
-
+     if(view->scene()->selectedItems().count()==0)
+        return;
      QList<QGraphicsItem *> selecteditem=view->scene()->selectedItems();
      QList<QGraphicsItem *> nodelist;
 
