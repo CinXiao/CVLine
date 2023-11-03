@@ -1,4 +1,7 @@
 ![88a9352d69d5a18b5376ebdcdd741b7c](https://github.com/CinXiao/CVLine/assets/54227677/1cd0796e-8952-443d-ad80-67cbd304dcf5)
+![image](https://github.com/CinXiao/CVLine/assets/54227677/619593a9-d89c-4710-8476-2c5290a2e365)
+
+
 #  CVLine
 ## 1.什么是CVLine
 ### 1.1 CVLine介绍
