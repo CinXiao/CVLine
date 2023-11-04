@@ -49,7 +49,4 @@ void ImageConversion::execute()
     SetPortValue(2,grayscaleImage,Port::Output);
     SetPortValue(3,rgbImage,Port::Output);
 
-
-    Node::execute();
-
 }

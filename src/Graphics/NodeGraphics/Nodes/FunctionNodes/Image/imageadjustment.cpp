@@ -68,5 +68,4 @@ void ImageAdjustment::execute()
     }
 
     SetPortValue(1,outimg,Port::Output);
-    Node::execute();
 }

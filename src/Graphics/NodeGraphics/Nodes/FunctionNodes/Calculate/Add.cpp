@@ -13,7 +13,8 @@ AddNode::AddNode(QPointF pos,Port::PortDataType datatype):Node(Node::FunctionNod
             val=0;
     if(datatype==Port::Double)
         val=0.0f;
-
+    if(datatype==Port::String)
+        val=QString("");
     //数据端口
     AddPort(new Port(1,"A",Port::Input,datatype,val));
     AddPort(new Port(2,"B",Port::Input,datatype,val));
@@ -41,6 +42,4 @@ void AddNode::execute()
     if(inportDat1.type()==QVariant::String)
         SetPortValue(1,inportDat1.toString()+inportDat2.toString(),Port::Output);
 
-
-    Node::execute();
 }

@@ -1,6 +1,7 @@
 #include "graphicsview.h"
 
 
+
 GraphicsView::GraphicsView()
 {
     // 设置框选模式
@@ -20,6 +21,8 @@ GraphicsView::GraphicsView()
     scene->addItem(&PreviewLine);
     scene->setBackgroundBrush(QColor(192, 192, 192));
     PreviewLine.setVisible(false);
+
+    nodeManager.AddNode(new StartNode(QPoint(0,0)));
 }
 
 
@@ -61,6 +64,7 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
     if(event->button() == Qt::RightButton)
     {
         rightButtonPressed=true;
+
     }
 
     if(event->button() == Qt::LeftButton)
@@ -91,6 +95,7 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::RightButton)
     {
          rightButtonPressed=false;
+       setDragMode(QGraphicsView::NoDrag);
     }
 
 
@@ -123,6 +128,13 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
             nodeManager.PortConnect(clickportinfo,releaseportinfo);
            }
 
+           //输入输出端口匹配，但是数据类型不匹配
+           if(portcheck&&!portdatatype)
+           {
+            qDebug()<<"要创建转换节点了！";
+
+           }
+
            //单调性检测没通过，但是端口类型和端口数据类型是匹配的，则需要更改两个端口之间的连线
            if(portcheck&&!monotonicitycheck&&portdatatype)
            {
@@ -146,6 +158,10 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
                 //连个端点重新连接
                 nodeManager.PortConnect(clickportinfo,releaseportinfo);
            }
+
+
+
+
            //两个点击节点可以移动，因为最开始点击端口时，为了画线设置了节点不允许移动，所以这个地方要重新设置
            clickportinfo.node->setFlag(QGraphicsItem::ItemIsMovable, true);
        }
@@ -164,7 +180,9 @@ void GraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_F5)
     {
-       qDebug()<<"f5 run";
+
+
+       CVLineDebug::print("开始运行",CVLineDebug::Normal);
        nodeManager.Run();
     }
 }

@@ -228,28 +228,27 @@ void NodeManager::AddRelation(LineInfo info)
 
 void NodeManager::Run()
 {
-    //找到开始节点
-    auto it =std::find_if(NodeList.begin(),NodeList.end(),[](Node *node){
+    //找到各个开始节点
+    QList<Node*> startlist;
+    std::copy_if(NodeList.begin(),NodeList.end(),std::back_inserter(startlist),[](Node *node){
         return node->nodeType==Node::StartNode;
     });
 
-    if(it==NodeList.end())
-        return;
 
-    //拿到开始节点
-    Node* startNode = *it;
-
-    //检测输入输出端口是不是回环
-
-    //通过开始节点拿到和它控制线连接的下一个端口和节点信息列表
-    QList<PortInfo> portnodeinfolist=GetOutStreamPortInfoByNode(startNode);
-
-    //回环检测
-    if(CycleCheck())
+    for(auto it:startlist)
     {
-        //节点执行
-        NodeRun(portnodeinfolist);
+        //拿到开始节点
+        Node* startNode =it;
+        //通过开始节点拿到和它控制线连接的下一个端口和节点信息列表
+        QList<PortInfo> portnodeinfolist=GetOutStreamPortInfoByNode(startNode);
+        //回环检测
+        if(CycleCheck())
+        {
+            //节点执行
+            NodeRun(portnodeinfolist);
+        }
     }
+
     //刷新各个节点已经执行标识
     NodeReflush();
 
@@ -294,7 +293,7 @@ void NodeManager::NodeRun(QList<PortInfo> portnodeinfolist)
         if( !portInfo.node->IsExecuted)
         {
             //执行改节点的运算逻辑
-            portInfo.node->execute();
+            portInfo.node->NodeRun();
         }
 
     //这个时候已经算出来节点输出端口的值了

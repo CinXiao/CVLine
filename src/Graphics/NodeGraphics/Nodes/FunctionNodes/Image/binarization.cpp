@@ -51,7 +51,5 @@ void Binarization::execute()
 
         SetPortValue(1, outimg, Port::Output);
     }
-
-    Node::execute();
 }
 

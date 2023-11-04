@@ -53,9 +53,6 @@ void ReadImage::execute()
     CurrentImage=*ImageList.begin();
     ImageList.pop_front();
     }
-
-
     QVariant val(CurrentImage);
     SetPortValue(0,val,Port::Output);
-   Node::execute();
 }

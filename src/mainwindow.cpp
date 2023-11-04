@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <src/Model/DebugModel/cvlinedebug.h>
+
+#include <QTreeWidgetItem>
+
 
 
 
@@ -17,15 +21,31 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 创建下方的输出区
     outdock = new QDockWidget("输出",this);
-    outdock->setWidget(new OutWidget());
-    //中间编辑器选修卡
-    CentralTab=new  QTabWidget();
-    CentralTab->setTabsClosable(true);
 
-    setCentralWidget(CentralTab);
+     // 禁用关闭按钮
+    leftDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+    rightDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+    outdock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+
+    QTextEdit *debug=new QTextEdit();
+    debug->setReadOnly(true);
+    outdock->setWidget(debug);
+
+    view=new GraphicsView();
+
+    view->setParent(this);
+    setCentralWidget(view);
     addDockWidget(Qt::BottomDockWidgetArea, outdock);
     addDockWidget(Qt::LeftDockWidgetArea, leftDock);
     addDockWidget(Qt::RightDockWidgetArea, rightDock);
+
+
+    //绑定输出
+    connect(CVLineDebug::getInstance(),&CVLineDebug::Debug,this,[debug](QString str){
+    debug->append(str);
+    });
+
+
 }
 
 MainWindow::~MainWindow()
@@ -33,9 +53,4 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_actioncreat_triggered(bool checked)
-{
-    CentralTab->addTab(new GraphicsView(),"蓝图");
-}
 

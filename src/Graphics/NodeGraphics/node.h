@@ -16,7 +16,7 @@
 #include "src/Graphics/NodeGraphics/Port/Port.h"
 #include "src/Graphics/LineGraphics/beziercurveitem.h"
 #include "src/Entity/Relations/StreamPortinfo.h"
-
+#include "src/Model/DebugModel/cvlinedebug.h"
 typedef BezierCurveItem Line;
 
 class Node: public QGraphicsItem
@@ -93,6 +93,7 @@ public:
 
 
     virtual void execute();//节点执行逻辑
+    void NodeRun();//节点运行
 
 private:
     QList<Port*> portList;//端口列表

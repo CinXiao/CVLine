@@ -55,7 +55,5 @@ void GetImageInfo::execute()
     SetPortValue(1,Image,Port::Output);
     SetPortValue(2,Image.width(),Port::Output);
     SetPortValue(3,Image.height(),Port::Output);
-
-    Node::execute();
 }
 

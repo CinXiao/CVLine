@@ -19,6 +19,7 @@
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h"
 
 class ContextMenu:public QMenu
@@ -27,18 +28,18 @@ public:
     ContextMenu(QWidget *parent=nullptr);
     Node* GetSelectedNode(QAction *action,QPointF pos);
 
-   //数据节点
+    //数据节点
     QMenu *DataMenu;
     //功能节点
     QMenu *FunctionMenu;
-
     //布尔逻辑运算
     QMenu *BooleanMenu;
     //图像处理
     QMenu *ImageMenu;
-
     //程序控制
     QMenu *ProgramControlMenu;
+    //输入输出
+    QMenu *IOMenu;
 private:
     QMenu* CreateSubMenu(const QString& title);
     QAction* AddMenuItem(QMenu* menu, const QString& title, const std::function<Node*(QPointF)>& nodeCreator);

@@ -1,6 +1,7 @@
 #include "node.h"
 
 
+
 Node::Node(NodeType nodetype,QPointF pos):nodeType(nodetype)
 {
 
@@ -322,6 +323,8 @@ QList<Port *> Node::GetConnectedOutport()
 
 
 
+
+
 void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 
@@ -344,9 +347,15 @@ void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void Node::execute()
 {
 
+}
+void Node::NodeRun()
+{
+
+     //执行节点
+     execute();
+
      IsExecuted=true;
 }
-
 
 
 

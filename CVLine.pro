@@ -12,6 +12,7 @@ SOURCES += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.cpp \
      src/Model/ConnectionModel/NodeManager.cpp \
      src/Graphics/Menu/contextmenu.cpp \
      src/Graphics/graphicsview.cpp \
@@ -32,7 +33,7 @@ SOURCES += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/then.cpp \
      src/Graphics/NodeGraphics/Nodes/startnode.cpp \
      src/Graphics/NodeGraphics/node.cpp \
-     src/Widgets/outwidget.cpp \
+     src/Model/DebugModel/cvlinedebug.cpp \
      src/main.cpp \
      src/mainwindow.cpp
 
@@ -40,6 +41,7 @@ HEADERS += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.h \
      src/Model/ConnectionModel/NodeManager.h \
      src/Entity/Relations/LineInfo.h \
      src/Entity/Relations/NodeInfo.h \
@@ -65,9 +67,9 @@ HEADERS += \
      src/Graphics/NodeGraphics/Nodes/startnode.h \
      src/Graphics/NodeGraphics/Port/Port.h \
      src/Graphics/NodeGraphics/node.h \
+     src/Model/DebugModel/cvlinedebug.h \
      src/Utils/ImageConversionUtil.h \
      src/Graphics/graphicsview.h \
-     src/Widgets/outwidget.h \
      src/mainwindow.h
 
 FORMS += \

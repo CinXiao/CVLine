@@ -29,6 +29,4 @@ void Subtract::execute()
     if(inportDat1.type()==QVariant::Double)
         SetPortValue(1,inportDat1.toDouble()-inportDat2.toDouble(),Port::Output);
 
-
-    Node::execute();
 }

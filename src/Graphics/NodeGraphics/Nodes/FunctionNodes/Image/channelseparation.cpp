@@ -62,5 +62,4 @@ void ChannelSeparation::execute()
     SetPortValue(2,greenChannelImage,Port::Output);
     SetPortValue(3,blueChannelImage,Port::Output);
 
-    Node::execute();
 }

@@ -13,6 +13,7 @@
 
 #include "src/Graphics/NodeGraphics/node.h"
 #include "src/Graphics/Menu/contextmenu.h"
+#include "src/Model/DebugModel/cvlinedebug.h"
 #include "src/Model/ConnectionModel/NodeManager.h"
 #include "src/Graphics/LineGraphics/beziercurveitem.h"
 #include "src/Graphics/NodeGraphics/Nodes/startnode.h"
@@ -23,7 +24,6 @@ class GraphicsView : public QGraphicsView
 {
 public:
     GraphicsView();
-    GraphicsView(QGraphicsScene* scene);
 
     void scaleView(qreal scaleFactor);
 
@@ -59,6 +59,7 @@ private:
     QPoint MouseClikePos;
     //鼠标释放位置
     QPoint MouseReleasePos;
+
 
 
 

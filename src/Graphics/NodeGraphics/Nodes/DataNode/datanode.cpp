@@ -21,6 +21,9 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
         }else if(datatype==Port::Bit)
         {
             AddPort(new Port(0,"",Port::Output,datatype,0));
+        }else if(datatype==Port::String)
+        {
+            AddPort(new Port(0,"",Port::Output,datatype,QString("")));
         }
         textItem = new TextInput(QRectF(3,45,50,30),Dat, this);
 
@@ -41,15 +44,14 @@ void DataNode::execute()
                  SetPortValue(0,val,Port::Output);
         }else if(GetPort(0,Port::Output)->portDataType==Port::String)
         {
+
                  QVariant val(textItem->toPlainText());
-                 SetPortValue(0,val,Port::Output);
+                 SetPortValue(0,val.toString(),Port::Output);
         }else if(GetPort(0,Port::Output)->portDataType==Port::Bool)
         {
                  QVariant val(textItem->toPlainText());
                  qDebug()<<val.toBool();
                  SetPortValue(0,val.toBool(),Port::Output);
         }
-
-        Node::execute();
 
 }

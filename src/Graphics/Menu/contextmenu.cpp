@@ -3,6 +3,8 @@
 
 
 
+
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
     ProgramControlMenu = CreateSubMenu("控制");
@@ -10,6 +12,9 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     FunctionMenu = CreateSubMenu("计算");
     BooleanMenu = CreateSubMenu("布尔逻辑");
     ImageMenu = CreateSubMenu("图像处理");
+    IOMenu=CreateSubMenu("输入输出");
+
+    AddMenuItem(IOMenu, "打印", [](QPointF pos) { return new Print(pos); });
 
     AddMenuItem(ImageMenu, "图像", [](QPointF pos) { return new ImageNode(pos); });
     AddMenuItem(ImageMenu, "依次输出目录图像", [](QPointF pos) { return new ReadImage(pos); });

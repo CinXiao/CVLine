@@ -62,5 +62,4 @@ void ChannelMerging::execute()
         }
          SetPortValue(1,mergedImage,Port::Output);
 
-    Node::execute();
 }

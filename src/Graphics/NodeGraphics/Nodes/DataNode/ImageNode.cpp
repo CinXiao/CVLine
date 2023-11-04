@@ -50,5 +50,5 @@ void ImageNode::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 void ImageNode::execute()
 {
     QVariant val(Image);
-     SetPortValue(0,val,Port::Output);
+    SetPortValue(0,val,Port::Output);
 }
