@@ -1,5 +1,9 @@
 #include "NodeManager.h"
 
+#include <QList>
+
+
+
 NodeManager::NodeManager(QGraphicsView *view):view(view)
 {
 
@@ -54,6 +58,20 @@ QList<PortInfo> NodeManager::GetNodeAndPortListByPort(Port *port)
     }
 
     return result;
+}
+
+QList<LineInfo> NodeManager::GetLineInfoListByPort(Port *port)
+{
+
+    //拿到和这个端口连接的所有端口和节点信息
+    QList<LineInfo> result;
+    for( auto info:PortLineInfoList)
+    {
+        if(info.PortInfo1.port==port||info.PortInfo2.port==port)
+            result.append(info);
+    }
+    return result;
+
 }
 
    //获取连接到节点上输入端口上的所有端口信息
@@ -356,6 +374,57 @@ void NodeManager::PortConnect(PortInfo port1,PortInfo port2)
     view->scene()->addItem(curveItem);
     //添加一条节点和线的连接关系
      AddRelation(portline);
+
+}
+
+void NodeManager::PortConvertConnect(PortInfo port1, PortInfo port2)
+{
+
+     //先看看数据能不能转换
+     QList<Port::PortDataType> convertions;
+      for (auto it = Port::PortDataConvertionMap.constBegin(); it != Port::PortDataConvertionMap.constEnd(); ++it) {
+        if (it.key() == port1.port->portDataType) {
+             convertions.append(it.value());
+        }
+      }
+      if(convertions.contains(port2.port->portDataType))
+      {
+
+        // 计算两个节点的中点坐标
+        int centerX = (port1.node->x() + port2.node->x()) / 2;
+        int centerY = (port1.node->y() + port2.node->y()) / 2;
+        QPointF pos(centerX,centerY);
+
+        //
+        Node *node;
+        PortInfo outportinfo,inportinfo;
+        if(port1.port->portType==Port::Output)
+        {
+             outportinfo=port1;
+             inportinfo=port2;
+             node=new Convertion(port1.port->portDataType,port2.port->portDataType,pos);
+        }else
+        {
+             outportinfo=port2;
+             inportinfo=port1;
+             node=new Convertion(port2.port->portDataType,port1.port->portDataType,pos);
+        }
+        //添加转换节点
+        AddNode(node);
+
+        PortInfo convertioninport,convertionoutport;
+        //连接输出端口和转换节点的输入端口
+        convertioninport.port=node->GetPort(0,Port::Input);
+        convertioninport.node=node;
+        PortConnect(outportinfo,convertioninport);
+
+        //连接输入端口和转换节点的输出端口
+        convertionoutport.port=node->GetPort(0,Port::Output);
+        convertionoutport.node=node;
+        PortConnect(inportinfo,convertionoutport);
+
+
+      }
 
 }
 

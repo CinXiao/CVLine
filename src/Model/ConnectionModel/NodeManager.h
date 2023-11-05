@@ -2,6 +2,7 @@
 #define NODEMANAGER_H
 #include "src/Entity/Relations/PortInfo.h"
 #include "src/Entity/Relations/LineInfo.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h"
 
 #include <QGraphicsView>
 
@@ -18,6 +19,9 @@ public:
 
     //通过端口拿到与该端口连接的所有端口信息信息
     QList<PortInfo> GetNodeAndPortListByPort(Port* port);
+
+    //通过端口拿到与该端口连接的所有线信息
+    QList<LineInfo> GetLineInfoListByPort(Port* port);
 
     //获取连接到节点上输入端口上的所有端口信息
     QList<PortInfo> GetConnectedInPortInfo(Port* port);
@@ -65,6 +69,10 @@ public:
     void AddNode(Node*node);
     //连接两个端点
     void PortConnect(PortInfo port1, PortInfo port2);
+
+    //尝试连接两个类型不同的端点
+    void PortConvertConnect(PortInfo port1, PortInfo port2);
+
     //删除一个端点之间所有连接的线
     void DeletePortConnect(PortInfo portinfo1);
 

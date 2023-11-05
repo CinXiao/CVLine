@@ -11,10 +11,10 @@ DataNode::DataNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(
         setFlag(QGraphicsItem::ItemIsFocusable, true);
         if(datatype==Port::Int)
         {
-            AddPort(new Port(0,"",Port::Output,datatype,0));
+            AddPort(new Port(0,"",Port::Output,datatype,int(0)));
         }else if(datatype==Port::Double)
         {
-            AddPort(new Port(0,"",Port::Output,datatype,0.0f));
+            AddPort(new Port(0,"",Port::Output,datatype,double(0.0)));
         }else if(datatype==Port::Bool)
         {
             AddPort(new Port(0,"",Port::Output,datatype,false));

@@ -19,6 +19,7 @@
 #include "src/Graphics/NodeGraphics/Nodes/startnode.h"
 #include "src/Graphics/NodeGraphics/Nodes/DataNode/DataNode.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Add.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h"
 
 class GraphicsView : public QGraphicsView
 {

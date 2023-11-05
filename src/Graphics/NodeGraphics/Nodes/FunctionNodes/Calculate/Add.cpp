@@ -12,7 +12,7 @@ AddNode::AddNode(QPointF pos,Port::PortDataType datatype):Node(Node::FunctionNod
     if(datatype==Port::Int)
             val=0;
     if(datatype==Port::Double)
-        val=0.0f;
+            val=double(0.0);
     if(datatype==Port::String)
         val=QString("");
     //数据端口

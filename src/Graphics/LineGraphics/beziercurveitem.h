@@ -18,10 +18,13 @@ public:
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override;
     void UpdatePoint(const QPointF& startPoint, const QPointF& endPoint);
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
     QColor LineColor{Qt::blue};
 
+
+
+    uint linewidth{8};
 private:
-    uint linewidth{5};
     QPointF start;
     QPointF end;
     QPointF control1;

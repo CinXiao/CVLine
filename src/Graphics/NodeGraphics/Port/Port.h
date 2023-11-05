@@ -148,7 +148,18 @@ public:
             {Color, "颜色"},
             {Image, "图片"}
         };
+    //端口数据类型转换表
+    inline static QMultiMap<PortDataType,PortDataType> PortDataConvertionMap
+        {
+         {Int, Double},
+         {Int, String},
+         {Int, Bool},
 
+        {Double, Int},
+        {Double, String},
+        {Double, Bool}
+
+        };
 };
 
 

@@ -5,7 +5,8 @@
 BezierCurveItem::BezierCurveItem(const QPointF& startPoint, const QPointF& endPoint)
     : start(startPoint), end(endPoint)
 {
-
+    setFlag(GraphicsItemFlag::ItemIsSelectable,true);
+    setAcceptHoverEvents(true);
 }
 
 QRectF BezierCurveItem::boundingRect() const
@@ -32,6 +33,15 @@ void BezierCurveItem::paint(QPainter* painter, const QStyleOptionGraphicsItem* o
          control1= QPointF (start.x() + 60, start.y()); // 偏离起点的第一个控制点
          control2= QPointF (end.x() -60, end.y());   // 偏离终点的第二个控制点
     }
+
+    if(isSelected())
+    {
+        linewidth=15;
+    }else
+    {
+        linewidth=8;
+    }
+
     // 贝塞尔曲线
     QPainterPath bezierPath;
     bezierPath.moveTo(start);
@@ -49,18 +59,24 @@ void BezierCurveItem::UpdatePoint(const QPointF &startPoint, const QPointF &endP
 
 void BezierCurveItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    // 创建一个 QPainterPath 来表示贝塞尔曲线
-    QPainterPath bezierPath;
-    bezierPath.moveTo(start);
-    bezierPath.cubicTo(control1, control2, end);
-    if (bezierPath.contains(event->pos())) {
-         // 鼠标点击在贝塞尔曲线上
-         qDebug() << "鼠标点击在贝塞尔曲线上";
-    } else {
-         // 鼠标点击不在贝塞尔曲线上
-         qDebug() << "鼠标点击不在贝塞尔曲线上";
-    }
-    QGraphicsItem::mousePressEvent(event);
+
+
+      QGraphicsItem::mousePressEvent(event);
 }
+
+void BezierCurveItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+      QPainterPath bezierPath;
+      bezierPath.moveTo(start);
+      bezierPath.cubicTo(control1, control2, end);
+      if (bezierPath.intersects(QRectF(event->pos(), QSizeF(linewidth,linewidth))))
+        setSelected(true);
+      else
+        setSelected(false);
+      event->ignore();
+}
+
+
+
 
 

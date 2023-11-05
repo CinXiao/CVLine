@@ -2,6 +2,7 @@
 
 
 
+
 GraphicsView::GraphicsView()
 {
     // 设置框选模式
@@ -88,6 +89,8 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
 
 void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
+
+
     //不显示画线预览线
     PreviewLine.setVisible(false);
     MouseReleasePos=event->pos();
@@ -106,8 +109,7 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
        //尝试获取释放位置的端口信息
        PortInfo releaseportinfo=nodeManager.GetPortByPos(MouseReleasePos);
 
-       //可以连接两个端口了
-       if(!releaseportinfo.IsEmpty()&&isDrawing)
+      if(!releaseportinfo.IsEmpty()&&isDrawing)
        {
            //因为isDrawing是true的话 点击位置的端口信息肯定是获取可以获取到的所以不用校验点击位置是否有节点
            //获取点击位置的端口信息
@@ -121,22 +123,20 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
            //端口数据类型是否匹配
            bool portdatatype=nodeManager.PortDataTypeCheck(clickportinfo,releaseportinfo);
 
-           //可以连接
-           if(portcheck&&monotonicitycheck&&portdatatype)
+
+            //输入输出端口匹配，但是数据类型不匹配,创建转换节点
+           if(portcheck&&!portdatatype&&monotonicitycheck)
+           {
+               //尝试连接两个类型不同的端口
+               nodeManager.PortConvertConnect(clickportinfo,releaseportinfo);
+           } //可以连接
+           else if(portcheck&&monotonicitycheck&&portdatatype)
            {
             //端点连接
             nodeManager.PortConnect(clickportinfo,releaseportinfo);
            }
-
-           //输入输出端口匹配，但是数据类型不匹配
-           if(portcheck&&!portdatatype)
-           {
-            qDebug()<<"要创建转换节点了！";
-
-           }
-
            //单调性检测没通过，但是端口类型和端口数据类型是匹配的，则需要更改两个端口之间的连线
-           if(portcheck&&!monotonicitycheck&&portdatatype)
+           else if(portcheck&&!monotonicitycheck&&portdatatype)
            {
                 //删除输入端口的连线，因为输入端口只能连一条线，所以只要删除与输入端口连接的那一条连接信息就行了
                 //判断两个端口谁是输入端口
@@ -158,8 +158,6 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
                 //连个端点重新连接
                 nodeManager.PortConnect(clickportinfo,releaseportinfo);
            }
-
-
 
 
            //两个点击节点可以移动，因为最开始点击端口时，为了画线设置了节点不允许移动，所以这个地方要重新设置

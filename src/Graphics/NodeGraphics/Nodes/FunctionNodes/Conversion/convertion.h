@@ -2,10 +2,13 @@
 #define CONVERTION_H
 
 
-class Convertion
+#include "src/Graphics/NodeGraphics/node.h"
+class Convertion:public Node
 {
 public:
-    Convertion();
+    Convertion(Port::PortDataType port1type,Port::PortDataType port2type,QPointF pos=QPointF(0,0));
+    void execute();
+
 };
 
 #endif // CONVERTION_H
