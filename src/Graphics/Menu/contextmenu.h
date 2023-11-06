@@ -22,6 +22,10 @@
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h"
 
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Multiply.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/max.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/min.h"
 class ContextMenu:public QMenu
 {
 public:
@@ -32,6 +36,9 @@ public:
     QMenu *DataMenu;
     //功能节点
     QMenu *FunctionMenu;
+        QMenu *IntFunctionMenu;
+        QMenu *DoubleFunctionMenu;
+        QMenu *StringFunctionMenu;
     //布尔逻辑运算
     QMenu *BooleanMenu;
     //图像处理

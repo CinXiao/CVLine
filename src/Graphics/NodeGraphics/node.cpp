@@ -351,8 +351,11 @@ void Node::execute()
 void Node::NodeRun()
 {
 
+     Clock::TimingBegin();
      //执行节点
      execute();
+
+     CVLineDebug::print(NodeName+" "+QString::number(Clock::TimingEnd())+"ms",CVLineDebug::Warning);
 
      IsExecuted=true;
 }

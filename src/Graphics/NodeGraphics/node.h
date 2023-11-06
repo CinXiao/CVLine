@@ -17,6 +17,7 @@
 #include "src/Graphics/LineGraphics/beziercurveitem.h"
 #include "src/Entity/Relations/StreamPortinfo.h"
 #include "src/Model/DebugModel/cvlinedebug.h"
+#include "src/Model/clock.h"
 typedef BezierCurveItem Line;
 
 class Node: public QGraphicsItem

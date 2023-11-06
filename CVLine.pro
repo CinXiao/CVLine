@@ -9,6 +9,10 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Multiply.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/max.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/min.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.cpp \
@@ -34,10 +38,15 @@ SOURCES += \
      src/Graphics/NodeGraphics/Nodes/startnode.cpp \
      src/Graphics/NodeGraphics/node.cpp \
      src/Model/DebugModel/cvlinedebug.cpp \
+     src/Model/clock.cpp \
      src/main.cpp \
      src/mainwindow.cpp
 
 HEADERS += \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Multiply.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/max.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/min.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h \
@@ -68,6 +77,7 @@ HEADERS += \
      src/Graphics/NodeGraphics/Port/Port.h \
      src/Graphics/NodeGraphics/node.h \
      src/Model/DebugModel/cvlinedebug.h \
+     src/Model/clock.h \
      src/Utils/ImageConversionUtil.h \
      src/Graphics/graphicsview.h \
      src/mainwindow.h

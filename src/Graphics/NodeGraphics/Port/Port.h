@@ -151,14 +151,22 @@ public:
     //端口数据类型转换表
     inline static QMultiMap<PortDataType,PortDataType> PortDataConvertionMap
         {
+         //int可以转换的类型
          {Int, Double},
          {Int, String},
          {Int, Bool},
-
+        //Double
         {Double, Int},
         {Double, String},
-        {Double, Bool}
-
+        {Double, Bool},
+        //Bool
+        {Bool, Int},
+        {Bool, String},
+        {Bool, Double},
+        //String
+        {String, Int},
+        {String, Bool},
+        {String, Double}
         };
 };
 

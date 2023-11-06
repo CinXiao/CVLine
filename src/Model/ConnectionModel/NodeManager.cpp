@@ -207,6 +207,7 @@ void NodeManager::UpDateNode(Node *node)
         return;
      //待更新的信息表
      QList<LineInfo> updatainfolist;
+
      //查找该节点的端口连接信息
      std::copy_if(PortLineInfoList.begin(),PortLineInfoList.end(),std::back_inserter(updatainfolist),[node](const LineInfo& info){
          return info.PortInfo1.node==node|| info.PortInfo2.node==node;
@@ -377,6 +378,30 @@ void NodeManager::PortConnect(PortInfo port1,PortInfo port2)
 
 }
 
+void NodeManager::RePortConnect(PortInfo port1, PortInfo port2)
+{
+     //删除输入端口的连线，因为输入端口只能连一条线，所以只要删除与输入端口连接的那一条连接信息就行了
+     //判断两个端口谁是输入端口
+     if(port1.port->portType==Port::Input)
+     {
+        DeletePortConnect(port1);
+     }
+     if(port2.port->portType==Port::Input)
+     {
+       DeletePortConnect(port2);
+     }
+
+     //如果是控制流，端口之间的连线都删
+     if(port1.port->portType==Port::InStream||port2.port->portType==Port::InStream)
+     {
+        DeletePortConnect(port1);
+        DeletePortConnect(port2);
+     }
+     //连个端点重新连接
+     PortConnect(port1,port2);
+
+}
+
 void NodeManager::PortConvertConnect(PortInfo port1, PortInfo port2)
 {
 
@@ -426,6 +451,17 @@ void NodeManager::PortConvertConnect(PortInfo port1, PortInfo port2)
 
       }
 
+}
+
+bool NodeManager::PortIsConvertion(PortInfo port1, PortInfo port2)
+{
+      QList<Port::PortDataType> convertions;
+      for (auto it = Port::PortDataConvertionMap.constBegin(); it != Port::PortDataConvertionMap.constEnd(); ++it) {
+        if (it.key() == port1.port->portDataType) {
+             convertions.append(it.value());
+        }
+      }
+      return convertions.count()!=0;
 }
 
 void NodeManager::DeletePortConnect(PortInfo portinfo1)

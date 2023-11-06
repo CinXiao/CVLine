@@ -36,7 +36,7 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
 
     MouseCurrentPos=event->pos();
-    if (event->buttons() & Qt::RightButton)
+    if (event->buttons()&Qt::RightButton)
     {
         moveviewflag=true;
         setDragMode(QGraphicsView::ScrollHandDrag);
@@ -45,6 +45,8 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
         MouseClikePos=MouseCurrentPos;
     }
 
+    //鼠标移动时更新选中的节点
+    nodeManager.UpDateSelectedNode();
     if(isDrawing)
     {
         PreviewLine.setVisible(true);
@@ -53,8 +55,7 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
         PreviewLine.UpdatePoint(startPoint,endPoint);
         PreviewLine.LineColor=lineColor;
     }
-    //鼠标移动时更新选中的节点
-    nodeManager.UpDateSelectedNode();
+
     QGraphicsView::mouseMoveEvent(event);
 }
 
@@ -65,9 +66,7 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
     if(event->button() == Qt::RightButton)
     {
         rightButtonPressed=true;
-
     }
-
     if(event->button() == Qt::LeftButton)
     {
         leftButtonPressed=true;
@@ -114,8 +113,6 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
            //因为isDrawing是true的话 点击位置的端口信息肯定是获取可以获取到的所以不用校验点击位置是否有节点
            //获取点击位置的端口信息
            PortInfo clickportinfo=nodeManager.GetPortByPos(MouseClikePos);
-
-
            //端口类型是否可以连接
            bool portcheck=nodeManager.PortTypeCheck(clickportinfo,releaseportinfo);
            //端口单调性检测
@@ -123,14 +120,25 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
            //端口数据类型是否匹配
            bool portdatatype=nodeManager.PortDataTypeCheck(clickportinfo,releaseportinfo);
 
-
-            //输入输出端口匹配，但是数据类型不匹配,创建转换节点
-           if(portcheck&&!portdatatype&&monotonicitycheck)
+            //输入输出端口匹配，但是数据类型不匹配,如果可以转换 创建转换节点
+           if(portcheck&&!portdatatype&&nodeManager.PortIsConvertion(clickportinfo,releaseportinfo))
            {
+               //单调性没过，先断开之前的连接
+               if(!monotonicitycheck)
+               {
+                   if(clickportinfo.port->portType==Port::Input)
+                   {
+                       nodeManager.DeletePortConnect(clickportinfo);
+                   }
+                   if(releaseportinfo.port->portType==Port::Input)
+                   {
+                       nodeManager.DeletePortConnect(releaseportinfo);
+                   }
+               }
                //尝试连接两个类型不同的端口
                nodeManager.PortConvertConnect(clickportinfo,releaseportinfo);
            } //可以连接
-           else if(portcheck&&monotonicitycheck&&portdatatype)
+           if(portcheck&&monotonicitycheck&&portdatatype)
            {
             //端点连接
             nodeManager.PortConnect(clickportinfo,releaseportinfo);
@@ -138,25 +146,7 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
            //单调性检测没通过，但是端口类型和端口数据类型是匹配的，则需要更改两个端口之间的连线
            else if(portcheck&&!monotonicitycheck&&portdatatype)
            {
-                //删除输入端口的连线，因为输入端口只能连一条线，所以只要删除与输入端口连接的那一条连接信息就行了
-                //判断两个端口谁是输入端口
-                if(clickportinfo.port->portType==Port::Input)
-                {
-                    nodeManager.DeletePortConnect(clickportinfo);
-                }
-                if(releaseportinfo.port->portType==Port::Input)
-                {
-                    nodeManager.DeletePortConnect(releaseportinfo);
-                }
-
-                //如果是控制流，端口之间的连线都删
-                if(clickportinfo.port->portType==Port::InStream||releaseportinfo.port->portType==Port::InStream)
-                {
-                    nodeManager.DeletePortConnect(clickportinfo);
-                    nodeManager.DeletePortConnect(releaseportinfo);
-                }
-                //连个端点重新连接
-                nodeManager.PortConnect(clickportinfo,releaseportinfo);
+             nodeManager.RePortConnect(clickportinfo,releaseportinfo);
            }
 
 
@@ -178,8 +168,6 @@ void GraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_F5)
     {
-
-
        CVLineDebug::print("开始运行",CVLineDebug::Normal);
        nodeManager.Run();
     }

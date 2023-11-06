@@ -3,7 +3,7 @@
 #include "src/Entity/Relations/PortInfo.h"
 #include "src/Entity/Relations/LineInfo.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h"
-
+#include<unordered_set>
 #include <QGraphicsView>
 
 class NodeManager
@@ -69,19 +69,23 @@ public:
     void AddNode(Node*node);
     //连接两个端点
     void PortConnect(PortInfo port1, PortInfo port2);
-
+    //重新连接两个端点
+    void RePortConnect(PortInfo port1, PortInfo port2);
     //尝试连接两个类型不同的端点
     void PortConvertConnect(PortInfo port1, PortInfo port2);
+    //检查数据是否可以转换
+    bool PortIsConvertion(PortInfo port1, PortInfo port2);
 
     //删除一个端点之间所有连接的线
     void DeletePortConnect(PortInfo portinfo1);
 
 public:
     //端口连线信息列表
+
     QList<LineInfo> PortLineInfoList;
 
     //节点表
-    QList<Node*>NodeList;
+     QList<Node*>NodeList;
 
     //场景
     QGraphicsView *view;

@@ -5,6 +5,9 @@
 
 
 
+
+
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
     ProgramControlMenu = CreateSubMenu("控制");
@@ -37,11 +40,28 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     AddMenuItem(DataMenu, "比特", [](QPointF pos) { return new DataNode(pos, 0, Port::Bit); });
     AddMenuItem(DataMenu, "字符串", [](QPointF pos) { return new DataNode(pos, "", Port::String); });
 
-    AddMenuItem(FunctionMenu, "整数相加", [](QPointF pos) { return new AddNode(pos,Port::Int); });
-    AddMenuItem(FunctionMenu, "小数相加", [](QPointF pos) { return new AddNode(pos, Port::Double); });
-    AddMenuItem(FunctionMenu, "字符串相加", [](QPointF pos) { return new AddNode(pos, Port::String); });
-    AddMenuItem(FunctionMenu, "整数相减", [](QPointF pos) { return new Subtract(pos, Port::Int); });
-    AddMenuItem(FunctionMenu, "小数相减", [](QPointF pos) { return new Subtract(pos, Port::Double); });
+
+
+    IntFunctionMenu=FunctionMenu->addMenu("整数");
+    DoubleFunctionMenu=FunctionMenu->addMenu("小数");
+    StringFunctionMenu=FunctionMenu->addMenu("字符串");
+
+
+    AddMenuItem(IntFunctionMenu, "加", [](QPointF pos) { return new AddNode(pos,Port::Int); });
+    AddMenuItem(IntFunctionMenu, "减", [](QPointF pos) { return new Subtract(pos, Port::Int); });
+    AddMenuItem(IntFunctionMenu, "乘", [](QPointF pos) { return new Multiply(pos, Port::Int);});
+    AddMenuItem(IntFunctionMenu, "除", [](QPointF pos) { return new Division(pos, Port::Int);});
+    AddMenuItem(IntFunctionMenu, "Max", [](QPointF pos) { return new Max(pos, Port::Int);});
+    AddMenuItem(IntFunctionMenu, "Min", [](QPointF pos) { return new Min(pos, Port::Int);});
+
+    AddMenuItem(DoubleFunctionMenu, "加", [](QPointF pos) { return new AddNode(pos, Port::Double); });
+    AddMenuItem(DoubleFunctionMenu, "减", [](QPointF pos) { return new Subtract(pos, Port::Double); });
+    AddMenuItem(DoubleFunctionMenu, "乘", [](QPointF pos) { return new Multiply(pos, Port::Double);});
+    AddMenuItem(DoubleFunctionMenu, "除", [](QPointF pos) { return new Division(pos, Port::Double);});
+    AddMenuItem(DoubleFunctionMenu, "Max", [](QPointF pos) { return new Max(pos, Port::Double);});
+    AddMenuItem(DoubleFunctionMenu, "Min", [](QPointF pos) { return new Min(pos, Port::Double);});
+
+
     AddMenuItem(BooleanMenu, "与", [](QPointF pos) { return new Booleanlogic(pos, Booleanlogic::AND); });
     AddMenuItem(BooleanMenu, "或", [](QPointF pos) { return new Booleanlogic(pos, Booleanlogic::OR); });
     AddMenuItem(BooleanMenu, "非", [](QPointF pos) { return new Booleanlogic(pos, Booleanlogic::NO); });
