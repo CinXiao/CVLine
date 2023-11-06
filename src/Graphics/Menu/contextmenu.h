@@ -22,10 +22,14 @@
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h"
 
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/mod.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Multiply.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/max.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/min.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/equal.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/less.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/greater.h"
 class ContextMenu:public QMenu
 {
 public:
@@ -39,10 +43,20 @@ public:
         QMenu *IntFunctionMenu;
         QMenu *DoubleFunctionMenu;
         QMenu *StringFunctionMenu;
+
+    //比较运算
+    QMenu *CompareMenu;
+        QMenu *IntCompareFunctionMenu;
+        QMenu *DoubleCompareFunctionMenu;
+        QMenu *StringCompareFunctionMenu;
     //布尔逻辑运算
     QMenu *BooleanMenu;
     //图像处理
     QMenu *ImageMenu;
+            QMenu *GetImageMenu;
+            QMenu *GetImageInfoMenu;
+            QMenu *ImageoperateMenu;
+            QMenu *ImageFilterMenu;
     //程序控制
     QMenu *ProgramControlMenu;
     //输入输出

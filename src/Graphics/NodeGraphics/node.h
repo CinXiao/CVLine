@@ -96,8 +96,9 @@ public:
     virtual void execute();//节点执行逻辑
     void NodeRun();//节点运行
 
-private:
     QList<Port*> portList;//端口列表
+private:
+
 
     //节点类型标题颜色表  各种颜色都是经过哥哥我精心挑选的
     inline static QMap<NodeType,QColor> TitleColorMap

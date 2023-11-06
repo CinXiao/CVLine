@@ -19,5 +19,9 @@ public:
     {
         return PortInfo1.port!=port?PortInfo1: PortInfo2;
     }
+    PortInfo GetPortNodeInfoByPort(Port*port)
+    {
+        return PortInfo1.port==port?PortInfo1: PortInfo2;
+    }
 };
 #endif // LINEINFO_H

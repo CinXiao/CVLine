@@ -8,26 +8,37 @@
 
 
 
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
     ProgramControlMenu = CreateSubMenu("控制");
     DataMenu = CreateSubMenu("数据");
     FunctionMenu = CreateSubMenu("计算");
+    CompareMenu=CreateSubMenu("比较");
     BooleanMenu = CreateSubMenu("布尔逻辑");
     ImageMenu = CreateSubMenu("图像处理");
     IOMenu=CreateSubMenu("输入输出");
 
-    AddMenuItem(IOMenu, "打印", [](QPointF pos) { return new Print(pos); });
+    AddMenuItem(IOMenu, "打印输出", [](QPointF pos) { return new Print(pos); });
 
-    AddMenuItem(ImageMenu, "图像", [](QPointF pos) { return new ImageNode(pos); });
-    AddMenuItem(ImageMenu, "依次输出目录图像", [](QPointF pos) { return new ReadImage(pos); });
-    AddMenuItem(ImageMenu, "获取图像信息", [](QPointF pos) { return new GetImageInfo(pos); });
-    AddMenuItem(ImageMenu, "图像调整", [](QPointF pos) { return new ImageAdjustment(pos); });
-    AddMenuItem(ImageMenu, "二值化", [](QPointF pos) { return new Binarization(pos); });
-    AddMenuItem(ImageMenu, "通道分离", [](QPointF pos) { return new ChannelSeparation(pos); });
-    AddMenuItem(ImageMenu, "通道合并", [](QPointF pos) { return new ChannelMerging(pos); });
-    AddMenuItem(ImageMenu, "图像转换", [](QPointF pos) { return new ImageConversion(pos); });
-    AddMenuItem(ImageMenu, "高斯模糊", [](QPointF pos) { return new GaussianBlur(pos); });
+
+    GetImageMenu=ImageMenu->addMenu("输入");
+    GetImageInfoMenu=ImageMenu->addMenu("信息");
+    ImageoperateMenu=ImageMenu->addMenu("操作");
+    ImageFilterMenu=ImageMenu->addMenu("滤镜");
+
+    AddMenuItem(GetImageMenu, "选择图像", [](QPointF pos) { return new ImageNode(pos); });
+    AddMenuItem(GetImageMenu, "选择目录图像", [](QPointF pos) { return new ReadImage(pos); });
+
+    AddMenuItem(GetImageInfoMenu, "获取图像信息", [](QPointF pos) { return new GetImageInfo(pos); });
+    AddMenuItem(ImageoperateMenu, "图像调整", [](QPointF pos) { return new ImageAdjustment(pos); });
+    AddMenuItem(ImageoperateMenu, "二值化", [](QPointF pos) { return new Binarization(pos); });
+    AddMenuItem(ImageoperateMenu, "通道分离", [](QPointF pos) { return new ChannelSeparation(pos); });
+    AddMenuItem(ImageoperateMenu, "通道合并", [](QPointF pos) { return new ChannelMerging(pos); });
+    AddMenuItem(ImageoperateMenu, "图像转换", [](QPointF pos) { return new ImageConversion(pos); });
+
+    //滤镜
+    AddMenuItem(ImageFilterMenu, "高斯模糊", [](QPointF pos) { return new GaussianBlur(pos); });
 
 
     AddMenuItem(ProgramControlMenu, "开始", [](QPointF pos) { return new StartNode(pos); });
@@ -51,6 +62,7 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     AddMenuItem(IntFunctionMenu, "减", [](QPointF pos) { return new Subtract(pos, Port::Int); });
     AddMenuItem(IntFunctionMenu, "乘", [](QPointF pos) { return new Multiply(pos, Port::Int);});
     AddMenuItem(IntFunctionMenu, "除", [](QPointF pos) { return new Division(pos, Port::Int);});
+    AddMenuItem(IntFunctionMenu, "取模", [](QPointF pos) { return new Mod(pos, Port::Int);});
     AddMenuItem(IntFunctionMenu, "Max", [](QPointF pos) { return new Max(pos, Port::Int);});
     AddMenuItem(IntFunctionMenu, "Min", [](QPointF pos) { return new Min(pos, Port::Int);});
 
@@ -58,10 +70,24 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     AddMenuItem(DoubleFunctionMenu, "减", [](QPointF pos) { return new Subtract(pos, Port::Double); });
     AddMenuItem(DoubleFunctionMenu, "乘", [](QPointF pos) { return new Multiply(pos, Port::Double);});
     AddMenuItem(DoubleFunctionMenu, "除", [](QPointF pos) { return new Division(pos, Port::Double);});
+    AddMenuItem(DoubleFunctionMenu, "取模", [](QPointF pos) { return new Mod(pos, Port::Double);});
     AddMenuItem(DoubleFunctionMenu, "Max", [](QPointF pos) { return new Max(pos, Port::Double);});
     AddMenuItem(DoubleFunctionMenu, "Min", [](QPointF pos) { return new Min(pos, Port::Double);});
 
+    IntCompareFunctionMenu=CompareMenu->addMenu("整数");
+    DoubleCompareFunctionMenu=CompareMenu->addMenu("小数");
+    StringCompareFunctionMenu=CompareMenu->addMenu("字符串");
 
+    //整数比较
+    AddMenuItem(IntCompareFunctionMenu, "等于", [](QPointF pos) { return new equal(pos,Port::Int); });
+    AddMenuItem(IntCompareFunctionMenu, "小于", [](QPointF pos) { return new Compare::less(pos,Port::Int); });
+    AddMenuItem(IntCompareFunctionMenu, "大于", [](QPointF pos) { return new greater(pos,Port::Int); });
+    //小数比较
+    AddMenuItem(DoubleCompareFunctionMenu, "等于", [](QPointF pos) { return new equal(pos,Port::Double); });
+    AddMenuItem(DoubleCompareFunctionMenu, "小于", [](QPointF pos) { return new Compare::less(pos,Port::Double); });
+   AddMenuItem(DoubleCompareFunctionMenu, "小于", [](QPointF pos) { return new greater(pos,Port::Double); });
+
+    //逻辑运算
     AddMenuItem(BooleanMenu, "与", [](QPointF pos) { return new Booleanlogic(pos, Booleanlogic::AND); });
     AddMenuItem(BooleanMenu, "或", [](QPointF pos) { return new Booleanlogic(pos, Booleanlogic::OR); });
     AddMenuItem(BooleanMenu, "非", [](QPointF pos) { return new Booleanlogic(pos, Booleanlogic::NO); });

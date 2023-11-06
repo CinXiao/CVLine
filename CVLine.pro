@@ -13,6 +13,10 @@ SOURCES += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/max.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/min.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/mod.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/equal.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/greater.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/less.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.cpp \
@@ -47,6 +51,10 @@ HEADERS += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/max.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/min.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/mod.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/equal.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/greater.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/less.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h \

@@ -168,8 +168,11 @@ void GraphicsView::keyReleaseEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_F5)
     {
-       CVLineDebug::print("开始运行",CVLineDebug::Normal);
        nodeManager.Run();
+    }else if(event->key() == Qt::Key_Delete)
+    {
+       //删除选中的
+       nodeManager.DeleteSelected();
     }
 }
 

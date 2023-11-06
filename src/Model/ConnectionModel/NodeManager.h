@@ -79,6 +79,11 @@ public:
     //删除一个端点之间所有连接的线
     void DeletePortConnect(PortInfo portinfo1);
 
+
+    //删除选中的节点和线
+    void DeleteSelected();
+
+
 public:
     //端口连线信息列表
 

@@ -479,7 +479,7 @@ void NodeManager::DeletePortConnect(PortInfo portinfo1)
         const auto index = std::distance(PortLineInfoList.begin(), i);
         //从场景移除连接线  删除线
           BezierCurveItem *line=PortLineInfoList[index].line;
-             delete line;
+           delete line;
           line=nullptr;
           //更新两个端口连接状态
           lineinfo.PortInfo1.port->IsConnected=false;
@@ -488,6 +488,62 @@ void NodeManager::DeletePortConnect(PortInfo portinfo1)
         // 删除找到连线信息
         PortLineInfoList.erase(PortLineInfoList.constBegin() + index);
 
+     }
+
+
+}
+
+void NodeManager::DeleteSelected()
+{
+     QList<BezierCurveItem*> lines;
+     QList<Node*> nodes;
+     for(auto item:view->scene()->selectedItems())
+     {
+        BezierCurveItem*line=dynamic_cast<BezierCurveItem*>(item);
+        if(line!=nullptr)
+        {
+             lines.append(line);
+             continue;
+        }
+        Node*node=dynamic_cast<Node*>(item);
+        if(node!=nullptr)
+        {
+             nodes.append(node);
+             continue;
+        }
+
+     }
+
+     //先删除节点的端口所有连线 和节点
+     for(auto node:nodes)
+     {
+        for(auto port:node->portList)
+        {
+             PortInfo portinfo;
+             portinfo.node=node;
+             portinfo.port=port;
+             DeletePortConnect(portinfo);
+        }
+        NodeList.removeOne(node);
+        delete node;
+        node=nullptr;
+     }
+
+     //删除线
+     for(auto line:lines)
+     {
+        if(line!=nullptr)
+        {
+             //去关系里面找
+             for(auto lineinfo:PortLineInfoList)
+             {
+                    if(lineinfo.line==line)
+                    {
+                        DeletePortConnect(lineinfo.PortInfo1);
+                    }
+             }
+
+        }
      }
 
 
