@@ -42,7 +42,8 @@ SOURCES += \
      src/Graphics/NodeGraphics/Nodes/startnode.cpp \
      src/Graphics/NodeGraphics/node.cpp \
      src/Model/DebugModel/cvlinedebug.cpp \
-     src/Model/clock.cpp \
+     src/Model/ClockModel/clock.cpp \
+     src/Model/FileModel/projectfile.cpp \
      src/main.cpp \
      src/mainwindow.cpp
 
@@ -85,7 +86,8 @@ HEADERS += \
      src/Graphics/NodeGraphics/Port/Port.h \
      src/Graphics/NodeGraphics/node.h \
      src/Model/DebugModel/cvlinedebug.h \
-     src/Model/clock.h \
+     src/Model/ClockModel/clock.h \
+     src/Model/FileModel/projectfile.h \
      src/Utils/ImageConversionUtil.h \
      src/Graphics/graphicsview.h \
      src/mainwindow.h

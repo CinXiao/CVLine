@@ -11,6 +11,8 @@
 
 
 #include <opencv2/opencv.hpp>
+
+#include <src/Model/FileModel/projectfile.h>
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

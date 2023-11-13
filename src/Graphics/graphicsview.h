@@ -36,8 +36,8 @@ public:
     void keyReleaseEvent(QKeyEvent* event) override;
     void contextMenuEvent(QContextMenuEvent *event)override;
 
-private:
     NodeManager nodeManager{this};//节点管理器
+private:
 
     ContextMenu contextMenu{this};
     //画线判断标识

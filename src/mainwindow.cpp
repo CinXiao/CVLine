@@ -5,6 +5,8 @@
 
 #include <QTreeWidgetItem>
 
+#include <src/Model/FileModel/projectfile.h>
+
 
 
 
@@ -45,7 +47,6 @@ MainWindow::MainWindow(QWidget *parent)
     debug->append(str);
     });
 
-
 }
 
 MainWindow::~MainWindow()
@@ -53,4 +54,17 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+
+void MainWindow::on_actioncreat_triggered()
+{
+    (new MainWindow())->show();
+}
+
+
+void MainWindow::on_actionsave_triggered()
+{
+
+    ProjectFile::SaveProjct(view,QUrl(""));
+}
 
