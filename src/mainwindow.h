@@ -20,17 +20,23 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+
+    GraphicsView *view;//中间编辑视图窗口
 private slots:
     void on_actioncreat_triggered();
 
     void on_actionsave_triggered();
+
+    void on_actionopen_triggered();
+
+
 
 private:
     Ui::MainWindow *ui;
     QDockWidget *outdock;//下方输出窗口
     QDockWidget *rightDock;
     QDockWidget *leftDock ;
-    GraphicsView *view;//中间编辑视图窗口
 
 };
 #endif // MAINWINDOW_H

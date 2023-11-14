@@ -2,15 +2,26 @@
 
 AddNode::AddNode(QPointF pos,Port::PortDataType datatype):Node(Node::FunctionNode, pos)
 {
-    NodeName="加";
 
         QVariant val;
     if(datatype==Port::Int)
-            val=0;
+        {
+          val=0;
+        NodeName="整数加";
+        }
     if(datatype==Port::Double)
-            val=double(0.0);
+
+    {
+         val=double(0.0);
+        NodeName="小数加";
+    }
     if(datatype==Port::String)
+
+    {
         val=QString("");
+        NodeName="字符串加";
+    }
+
     //数据端口
     AddPort(new Port(0,"A",Port::Input,datatype,val));
     AddPort(new Port(1,"B",Port::Input,datatype,val));

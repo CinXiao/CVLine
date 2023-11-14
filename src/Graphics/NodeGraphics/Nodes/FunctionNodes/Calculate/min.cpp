@@ -3,13 +3,18 @@
 
 Min::Min(QPointF pos, Port::PortDataType datatype):Node(Node::FunctionNode, pos)
 {
-    NodeName="Min";
 
     QVariant val;
     if(datatype==Port::Int)
+    {
+        NodeName="整数Min";
         val=0;
+    }
     if(datatype==Port::Double)
+    {
+        NodeName="小数Min";
         val=double(0.0);
+    }
     //数据端口
     AddPort(new Port(0,"A",Port::Input,datatype,val));
     AddPort(new Port(1,"B",Port::Input,datatype,val));

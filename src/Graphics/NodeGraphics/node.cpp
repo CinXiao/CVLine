@@ -9,6 +9,7 @@ Node::Node(NodeType nodetype,QPointF pos):nodeType(nodetype)
     setFlag(QGraphicsItem::ItemIsMovable, true);
     setFlag(QGraphicsItem::ItemIsSelectable, true);
     TitleColor=TitleColorMap[nodeType];
+    NodeID=nodeIdCount++;
 }
 
 QRectF Node::boundingRect() const

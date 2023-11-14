@@ -4,13 +4,19 @@
 
 Max::Max(QPointF pos, Port::PortDataType datatype):Node(Node::FunctionNode, pos)
 {
-    NodeName="Max";
+
 
     QVariant val;
     if(datatype==Port::Int)
+    {
         val=0;
+    NodeName="整数Max";
+    }
     if(datatype==Port::Double)
+    {
         val=double(0.0);
+        NodeName="小数Max";
+    }
     //数据端口
     AddPort(new Port(0,"A",Port::Input,datatype,val));
     AddPort(new Port(1,"B",Port::Input,datatype,val));

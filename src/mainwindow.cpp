@@ -68,3 +68,40 @@ void MainWindow::on_actionsave_triggered()
     ProjectFile::SaveProjct(view,QUrl(""));
 }
 
+
+void MainWindow::on_actionopen_triggered()
+{
+    // 创建文件对话框
+    QFileDialog fileDialog;
+
+    // 设置文件对话框的属性
+    fileDialog.setFileMode(QFileDialog::ExistingFile);
+    fileDialog.setViewMode(QFileDialog::Detail);
+
+    // 打开文件对话框并获取用户选择的文件
+    if (fileDialog.exec()) {
+        // 获取所选文件的URL
+        QList<QUrl> selectedUrls = fileDialog.selectedUrls();
+
+        if (!selectedUrls.isEmpty()) {
+            // 获取第一个选定的文件的URL
+            QUrl selectedUrl = selectedUrls.first();
+
+            MainWindow *w=new MainWindow();
+            GraphicsView * view=ProjectFile::OpenProject(QUrl(selectedUrl.toString()));
+            if(w->view!=nullptr)
+            {
+                delete w->view;
+                w->view=nullptr;
+            }
+            w->view=view;
+            view->setParent(w);
+            w->setCentralWidget(view);
+            w->show();
+        }
+    }
+
+
+
+}
+

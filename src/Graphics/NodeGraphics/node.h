@@ -97,8 +97,12 @@ public:
     void NodeRun();//节点运行
 
     QList<Port*> portList;//端口列表
+
+    uint NodeID;//NodeID
 private:
 
+
+    inline static uint nodeIdCount=0;
 
     //节点类型标题颜色表  各种颜色都是经过哥哥我精心挑选的
     inline static QMap<NodeType,QColor> TitleColorMap
@@ -110,6 +114,9 @@ private:
             {DataNode,QColor(220, 200, 20)},
 
         };
+
+    //节点名称枚举用于
+
 
 };
 

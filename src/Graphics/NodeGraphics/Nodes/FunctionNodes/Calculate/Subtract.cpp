@@ -2,13 +2,19 @@
 
 Subtract::Subtract(QPointF pos, Port::PortDataType datatype):Node(Node::FunctionNode, pos)
 {
-    NodeName="减";
+
 
     QVariant val;
     if(datatype==Port::Int)
+    {
+         NodeName="整数减";
         val=0;
+    }
     if(datatype==Port::Double)
+    {
+                 NodeName="小数减";
         val=double(0.0);
+    }
 
     //添加控制端口
     AddPort(new Port(0,"A",Port::Input,datatype,val));

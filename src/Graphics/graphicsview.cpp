@@ -22,8 +22,6 @@ GraphicsView::GraphicsView()
     scene->addItem(&PreviewLine);
     scene->setBackgroundBrush(QColor(192, 192, 192));
     PreviewLine.setVisible(false);
-
-    nodeManager.AddNode(new StartNode(QPoint(0,0)));
 }
 
 
