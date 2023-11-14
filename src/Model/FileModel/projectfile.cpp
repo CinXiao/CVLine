@@ -49,18 +49,18 @@ void ProjectFile::SaveProjct(GraphicsView *view,QUrl url)
     {
         QJsonObject connectionjson;
        //节点1ID
-        connectionjson["OriginNode"]=QString::number(relation.PortInfo1.node->NodeID);
+        connectionjson["OriginNode"]=int(relation.PortInfo1.node->NodeID);
        // 节点1端口ID
-        connectionjson["OriginPort"]=QString::number(relation.PortInfo1.port->ID);
+        connectionjson["OriginPort"]=int(relation.PortInfo1.port->ID);
         //节点1端口类型
-       connectionjson["OriginPortType"]=QString::number(relation.PortInfo1.port->portType);
+       connectionjson["OriginPortType"]=int(relation.PortInfo1.port->portType);
 
        //节点2ID
-        connectionjson["TargetNode"]=QString::number(relation.PortInfo2.node->NodeID);
+        connectionjson["TargetNode"]=int(relation.PortInfo2.node->NodeID);
        // 节点2端口ID
-        connectionjson["TargetPort"]=QString::number(relation.PortInfo2.port->ID);
+        connectionjson["TargetPort"]=int(relation.PortInfo2.port->ID);
         //节点2端口类型
-       connectionjson["TargetPortType"]=QString::number(relation.PortInfo2.port->portType);
+       connectionjson["TargetPortType"]=int(relation.PortInfo2.port->portType);
 
         ConnectionArr.append(connectionjson);
     }
@@ -105,10 +105,33 @@ GraphicsView *ProjectFile:: OpenProject(QUrl fileurl)
             //菜单和函数表中pair的第二个元素是匿名函数，需要一个传入的坐标pos
             std::function<Node*(QPointF)> func=*it;
             node=func(pos);
+            node->NodeID=nodeObject["ID"].toInt();
+            //设置端口值
+
             view->nodeManager.AddNode(node);
 
         }
 
     }
+
+    //解析连接信息
+     QJsonArray connectionArray = rootObject.value("Connections").toArray();
+    foreach (const QJsonValue &connetValue, connectionArray)
+     {
+         QJsonObject connectionObject = connetValue.toObject();
+         int OriginNode=connectionObject["OriginNode"].toInt();
+         int OriginPort=connectionObject["OriginPort"].toInt();
+         int OriginPortType=connectionObject["OriginPortType"].toInt();
+         int TargetNode=connectionObject["TargetNode"].toInt();
+         int TargetPort=connectionObject["TargetPort"].toInt();
+         int TargetPortType=connectionObject["TargetPortType"].toInt();
+
+         //连接
+          view->nodeManager.PortConnectByID(OriginNode,OriginPort,OriginPortType,TargetNode,TargetPort,TargetPortType);
+
+     }
+
+
+      view->nodeManager.UpDateAlldNode();
     return view;
 }

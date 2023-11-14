@@ -48,6 +48,19 @@ public:
         {"整数取模", [](QPointF pos) { return new Mod(pos,Port::Int); }},
         {"整数Max", [](QPointF pos) { return new Max(pos,Port::Int); }},
         {"整数Min", [](QPointF pos) { return new Min(pos,Port::Int); }},
+
+
+        {"小数加", [](QPointF pos) { return new AddNode(pos,Port::Double); }},
+        {"小数减", [](QPointF pos) { return new Subtract(pos,Port::Double); }},
+        {"小数乘", [](QPointF pos) { return new Multiply(pos,Port::Double); }},
+        {"小数除", [](QPointF pos) { return new Division(pos,Port::Double); }},
+        {"小数取模", [](QPointF pos) { return new Mod(pos,Port::Double); }},
+        {"小数Max", [](QPointF pos) { return new Max(pos,Port::Double); }},
+        {"小数Min", [](QPointF pos) { return new Min(pos,Port::Double); }},
+
+
+
+
     };
 
 

@@ -29,6 +29,9 @@ public:
     //通过端口拿到与该端口连接的节点和端口信息列表  (只会拿到一个，比如输入口只能有一个输入节点)
     PortInfo GetNodeAndPortByPort(Port* port);
 
+    //通过节点ID，端口ID，端口类型拿到端口信息
+    PortInfo GetPortInfoById(int nodeId,int portid,int porttype);
+
     //拿到节点程序控制输出端口节点信息表  控制输出端口连接的所有的节点
     virtual QList<PortInfo> GetOutStreamPortInfoByNode(Node*node);
 
@@ -53,6 +56,8 @@ public:
     //更新选中的节点线的位置
     void UpDateSelectedNode();
 
+    void UpDateAlldNode();
+
     //添加一条连线关系
     void AddRelation(LineInfo info);
 
@@ -67,6 +72,9 @@ public:
 
     //添加节点
     void AddNode(Node*node);
+
+    //通过ID连接连个端点
+    void PortConnectByID(int orginNodeID,int orginPortID,int orginPortType,int targetNodeID,int targetPortID,int targetPortType);
     //连接两个端点
     void PortConnect(PortInfo port1, PortInfo port2);
     //重新连接两个端点

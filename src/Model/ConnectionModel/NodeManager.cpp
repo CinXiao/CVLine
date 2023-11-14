@@ -101,6 +101,30 @@ PortInfo NodeManager::GetNodeAndPortByPort(Port *port)
     return portInfo;
 }
 
+PortInfo NodeManager::GetPortInfoById(int nodeId, int portid, int porttype)
+{
+    PortInfo  portInfo;
+
+    for(auto node:NodeList)
+    {
+        if(node->NodeID==nodeId)
+        {
+            for(auto port:node->portList)
+            {
+                if(port->ID==portid&&port->portType==porttype)
+                {
+                    portInfo.node=node;
+                    portInfo.port=port;
+                    return portInfo;
+                }
+
+            }
+        }
+    }
+
+    return portInfo;
+}
+
 QList<PortInfo> NodeManager::GetOutStreamPortInfoByNode(Node *node)
 {
     //默认会返回所有控制输出节点
@@ -240,6 +264,23 @@ void NodeManager::UpDateSelectedNode()
      }
 }
 
+void NodeManager::UpDateAlldNode()
+{
+
+     QList<QGraphicsItem *> selecteditem=view->scene()->items();
+     QList<QGraphicsItem *> nodelist;
+
+     std::copy_if(selecteditem.begin(),selecteditem.end(),std::back_inserter(nodelist),[](QGraphicsItem * item){
+         return dynamic_cast<Node *>(item)!=nullptr;
+     });
+
+     for(auto node:nodelist)
+     {
+        UpDateNode(dynamic_cast<Node *>(node));
+     }
+
+}
+
 void NodeManager::AddRelation(LineInfo info)
 {
     PortLineInfoList.append(info);
@@ -355,6 +396,34 @@ void NodeManager::AddNode(Node *node)
 {
     NodeList.append(node);
     view->scene()->addItem(node);
+
+    QObject::connect(node,&Node::change,[this,node](){
+      UpDateSelectedNode();
+    });
+}
+
+void NodeManager::PortConnectByID(int orginNodeID, int orginPortID, int orginPortType, int targetNodeID, int targetPortID, int targetPortType)
+{
+    PortInfo portinfo1,portinfo2;
+
+    portinfo1=GetPortInfoById(orginNodeID,orginPortID,orginPortType);
+    portinfo2=GetPortInfoById(targetNodeID,targetPortID,targetPortType);
+
+
+
+    if(!portinfo1.IsEmpty()&&!portinfo2.IsEmpty())
+    {
+        bool check1= PortTypeCheck(portinfo1,portinfo2);
+        bool check2= PortMonotonicityCheck(portinfo1,portinfo2);
+        bool check3= PortDataTypeCheck(portinfo1,portinfo2);
+        if(check1&&check2&&check3)
+        {
+                 PortConnect(portinfo1,portinfo2);
+        }
+    }
+
+
+
 }
 
 void NodeManager::PortConnect(PortInfo port1,PortInfo port2)
@@ -376,6 +445,9 @@ void NodeManager::PortConnect(PortInfo port1,PortInfo port2)
     //添加一条节点和线的连接关系
      AddRelation(portline);
 
+   port1.port->IsConnected=true;
+
+    port2.port->IsConnected=true;
 }
 
 void NodeManager::RePortConnect(PortInfo port1, PortInfo port2)

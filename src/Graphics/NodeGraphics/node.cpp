@@ -341,7 +341,14 @@ void Node::mousePressEvent(QGraphicsSceneMouseEvent *event)
         setFlag(QGraphicsItem::ItemIsMovable, true);
     }
 
-     QGraphicsItem::mousePressEvent(event);
+    QGraphicsItem::mousePressEvent(event);
+}
+
+void Node::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+
+    emit change();
+    QGraphicsObject::mouseMoveEvent(event);
 }
 
 

@@ -20,9 +20,11 @@
 #include "src/Model/ClockModel/clock.h"
 typedef BezierCurveItem Line;
 
-class Node: public QGraphicsItem
+class Node: public QGraphicsObject
 {
 
+
+    Q_OBJECT
 public:
 
     //节点类型
@@ -39,6 +41,7 @@ public:
 
     void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget)override;
     void mousePressEvent(QGraphicsSceneMouseEvent* event)override;
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *event)override;
 
 
     //添加端口
@@ -99,6 +102,10 @@ public:
     QList<Port*> portList;//端口列表
 
     uint NodeID;//NodeID
+
+
+
+
 private:
 
 
@@ -115,7 +122,11 @@ private:
 
         };
 
-    //节点名称枚举用于
+signals:
+    void change();
+
+
+
 
 
 };

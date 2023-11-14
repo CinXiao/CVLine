@@ -43,8 +43,6 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
         MouseClikePos=MouseCurrentPos;
     }
 
-    //鼠标移动时更新选中的节点
-    nodeManager.UpDateSelectedNode();
     if(isDrawing)
     {
         PreviewLine.setVisible(true);
