@@ -1,4 +1,5 @@
-![88a9352d69d5a18b5376ebdcdd741b7c](https://github.com/CinXiao/CVLine/assets/54227677/1cd0796e-8952-443d-ad80-67cbd304dcf5)
+![a15d31263540871c879dd5fdeb8b0dfd](https://github.com/CinXiao/CVLine/assets/54227677/fbbb20bd-e0ec-4e7d-a20d-ce9a5e079fd0)
+
 ![image](https://github.com/CinXiao/CVLine/assets/54227677/619593a9-d89c-4710-8476-2c5290a2e365)
 
 
