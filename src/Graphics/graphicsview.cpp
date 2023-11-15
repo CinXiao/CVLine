@@ -16,6 +16,15 @@ GraphicsView::GraphicsView()
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 
+    //设置缓冲背景，加速渲染
+        setCacheMode(QGraphicsView::CacheBackground);
+
+   setDragMode(QGraphicsView::ScrollHandDrag);
+
+        // 启用框选功能
+   setDragMode(QGraphicsView::RubberBandDrag);
+
+
     QGraphicsScene *scene=new QGraphicsScene();
     setScene(scene);
     //添加连线预览线到场景
@@ -37,7 +46,6 @@ void GraphicsView::mouseMoveEvent(QMouseEvent *event)
     if (event->buttons()&Qt::RightButton)
     {
         moveviewflag=true;
-        setDragMode(QGraphicsView::ScrollHandDrag);
         QPointF delta = mapToScene(event->pos()) - mapToScene(MouseClikePos);
         setSceneRect(sceneRect().translated(-delta));
         MouseClikePos=MouseCurrentPos;
@@ -66,13 +74,10 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
     if(event->button() == Qt::LeftButton)
     {
         leftButtonPressed=true;
-        // 启用框选功能
-         setDragMode(QGraphicsView::RubberBandDrag);
        //尝试获取点击位置的端口信息
        PortInfo portinfo=nodeManager.GetPortByPos(MouseClikePos);
        if(!portinfo.IsEmpty())
        {
-           setDragMode(QGraphicsView::NoDrag);
            //设置画线标识
            isDrawing=true;
            //设置画线颜色
@@ -93,7 +98,6 @@ void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::RightButton)
     {
          rightButtonPressed=false;
-       setDragMode(QGraphicsView::NoDrag);
     }
 
 
