@@ -3,6 +3,8 @@
 #include "src/Entity/Relations/PortInfo.h"
 #include "src/Entity/Relations/LineInfo.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h"
+
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/circulateinterface.h"
 #include<unordered_set>
 #include <QGraphicsView>
 

@@ -13,6 +13,6 @@ void Print::execute()
 {
     QVariant inportDat;
     inportDat=GetPort(1,Port::Input)->Data;
-    CVLineDebug::print(inportDat.toString(),CVLineDebug::Info);
+    CVLineDebug::print(inportDat.toString());
 
 }

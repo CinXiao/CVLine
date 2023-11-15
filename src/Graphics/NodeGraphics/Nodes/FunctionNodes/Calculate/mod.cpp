@@ -39,7 +39,7 @@ void Mod::execute()
     {
         if(inportDat1.toInt()==0)
         {
-            CVLineDebug::print("除数为0，发生在:"+NodeName,CVLineDebug::Errer);
+            CVLineDebug::print("除数为0，发生在:"+NodeName);
             return;
         }
         SetPortValue(0,inportDat1.toInt()%inportDat2.toInt(),Port::Output);
@@ -48,7 +48,7 @@ void Mod::execute()
      {
         if(inportDat1.toDouble()==0)
         {
-            CVLineDebug::print("除数为0，发生在:"+NodeName,CVLineDebug::Errer);
+            CVLineDebug::print("除数为0，发生在:"+NodeName);
             return;
         }
         SetPortValue(0,fmod(inportDat1.toDouble(),inportDat2.toDouble()),Port::Output);

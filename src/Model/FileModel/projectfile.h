@@ -21,6 +21,8 @@ public:
         {"开始", [](QPointF pos) { return new StartNode(pos); }},
         {"IF", [](QPointF pos) { return new If(pos); }},
         {"Then", [](QPointF pos) { return new Then(pos); }},
+        {"Loop", [](QPointF pos) { return new Loop(pos); }},
+
 
         {"打印输出",  [](QPointF pos) { return new Print(pos); }},
 

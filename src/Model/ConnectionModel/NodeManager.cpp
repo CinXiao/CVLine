@@ -4,6 +4,7 @@
 
 
 
+
 NodeManager::NodeManager(QGraphicsView *view):view(view)
 {
 
@@ -355,6 +356,17 @@ void NodeManager::NodeRun(QList<PortInfo> portnodeinfolist)
         //该节点没有执行就执行该节点
         if( !portInfo.node->IsExecuted)
         {
+            //如果是循环节点，则先执行循环节点的循环体逻辑
+             if(dynamic_cast<CirculateInterface*>(portInfo.node)!=nullptr)
+             {
+                    //循环体逻辑执行
+               CirculateInterface *cirnode=dynamic_cast<CirculateInterface*>(portInfo.node);
+                    //把连接信息传给循环体
+                cirnode->PortLineInfoList=PortLineInfoList;
+               cirnode->executeCirculate();
+             }
+
+
             //执行改节点的运算逻辑
             portInfo.node->NodeRun();
         }

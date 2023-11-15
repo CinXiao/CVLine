@@ -21,6 +21,8 @@ SOURCES += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/circulateinterface.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/loop.cpp \
      src/Model/ConnectionModel/NodeManager.cpp \
      src/Graphics/Menu/contextmenu.cpp \
      src/Graphics/graphicsview.cpp \
@@ -60,6 +62,8 @@ HEADERS += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/channelmerging.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/circulateinterface.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/loop.h \
      src/Model/ConnectionModel/NodeManager.h \
      src/Entity/Relations/LineInfo.h \
      src/Entity/Relations/NodeInfo.h \

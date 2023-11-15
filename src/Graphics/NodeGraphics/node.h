@@ -32,6 +32,7 @@ public:
                     StartNode,
                     FunctionNode,
                     ProgrammeControlNode,
+                    ProgrammeLoopControlNode,
                     DataNode};
 
     Node(NodeType nodetype=Node::BaseNode, QPointF pos=QPointF(0,0));
@@ -117,6 +118,7 @@ private:
             {BaseNode,QColor(100,100,100)},
             {StartNode,QColor(200,0,0)},
             {ProgrammeControlNode,QColor(200,100,0)},
+            {ProgrammeLoopControlNode,QColor(200,100,0)},
             {FunctionNode,QColor(20,80,150)},
             {DataNode,QColor(220, 200, 20)},
 

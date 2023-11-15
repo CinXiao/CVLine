@@ -10,18 +10,11 @@ class CVLineDebug : public QObject
 
  public:
 
-    enum InfoType
-     {
-         Normal,
-         Info,
-         Warning,
-         Errer,
-     };
 
 
     // 获取单例的静态方法
     static CVLineDebug* getInstance(QObject *parent = nullptr);
-    static void print(QString infotext, InfoType infotype=Info);
+    static void print(QString infotext);
 
 signals:
     void Debug(QString infoText);

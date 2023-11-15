@@ -7,11 +7,11 @@ Then::Then(QPointF pos):Node(Node::ProgrammeControlNode, pos)
     //输入控制端口
     AddPort(new Port(0,"",Port::InStream,Port::Stream));
     //输出控制端口
-    AddPort(new Port(0,"Execute first",Port::OutStream,Port::Stream));
-    AddPort(new Port(1,"Execute Second",Port::OutStream,Port::Stream));
-    AddPort(new Port(2,"Execute Third",Port::OutStream,Port::Stream));
-    AddPort(new Port(3,"Execute Fourth",Port::OutStream,Port::Stream));
-    AddPort(new Port(4,"Execute Fifth",Port::OutStream,Port::Stream));
+    AddPort(new Port(0,"first",Port::OutStream,Port::Stream));
+    AddPort(new Port(1,"Second",Port::OutStream,Port::Stream));
+    AddPort(new Port(2,"Third",Port::OutStream,Port::Stream));
+    AddPort(new Port(3,"Fourth",Port::OutStream,Port::Stream));
+    AddPort(new Port(4,"Fifth",Port::OutStream,Port::Stream));
 }
 
 QList<Port *> Then::OutputStreamLogicExecution()

@@ -9,14 +9,15 @@
 
 
 
+
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
     ProgramControlMenu = CreateSubMenu("控制");
     DataMenu = CreateSubMenu("数据");
     FunctionMenu = CreateSubMenu("计算");
     CompareMenu=CreateSubMenu("比较");
-    BooleanMenu = CreateSubMenu("布尔逻辑");
-    ImageMenu = CreateSubMenu("图像处理");
+    BooleanMenu = CreateSubMenu("逻辑");
+    ImageMenu = CreateSubMenu("图像");
     IOMenu=CreateSubMenu("输入输出");
 
     AddMenuItem(IOMenu, "打印输出", [](QPointF pos) { return new Print(pos); });
@@ -44,6 +45,8 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     AddMenuItem(ProgramControlMenu, "开始", [](QPointF pos) { return new StartNode(pos); });
     AddMenuItem(ProgramControlMenu, "IF", [](QPointF pos) { return new If(pos); });
     AddMenuItem(ProgramControlMenu, "Then", [](QPointF pos) { return new Then(pos); });
+    AddMenuItem(ProgramControlMenu, "Loop", [](QPointF pos) { return new Loop(pos); });
+
 
     AddMenuItem(DataMenu, "整数", [](QPointF pos) { return new DataNode(pos, 0, Port::Int); });
     AddMenuItem(DataMenu, "小数", [](QPointF pos) { return new DataNode(pos, 0.0, Port::Double); });

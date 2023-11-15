@@ -21,6 +21,7 @@
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/gaussianblur.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Image/InAndOut/readimage.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/loop.h"
 
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/mod.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.h"

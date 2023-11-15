@@ -135,6 +135,16 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
                   painter->drawPolygon(triangle);
               }
 
+              // 创建字体对象并设置字体大小
+              QFont font;
+              QFont oldf=painter->font();
+              painter->setFont(font);
+              //画端口名字
+              painter->setPen(Qt::gray);
+              painter->drawText(i->portNameTextRect,i->TextAlign,i->Name);
+
+              painter->setFont(oldf);
+
           }
 
 
@@ -358,13 +368,8 @@ void Node::execute()
 }
 void Node::NodeRun()
 {
-
-     Clock::TimingBegin();
      //执行节点
      execute();
-
-     CVLineDebug::print(NodeName+" "+QString::number(Clock::TimingEnd())+"ms",CVLineDebug::Warning);
-
      IsExecuted=true;
 }
 

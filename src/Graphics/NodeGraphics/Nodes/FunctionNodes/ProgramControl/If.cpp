@@ -6,8 +6,8 @@ If::If(QPointF pos):Node(Node::ProgrammeControlNode, pos)
 
     //添加控制端口
     AddPort(new Port(0,"",Port::InStream,Port::Stream));
-    AddPort(new Port(0,"",Port::OutStream,Port::Stream));
-    AddPort(new Port(1,"",Port::OutStream,Port::Stream));
+    AddPort(new Port(0,"true",Port::OutStream,Port::Stream));
+    AddPort(new Port(1,"false",Port::OutStream,Port::Stream));
 
 
     //数据端口
