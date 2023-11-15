@@ -249,11 +249,13 @@ void NodeManager::UpDateNode(Node *node)
 
 void NodeManager::UpDateSelectedNode()
 {
+
      if(view->scene()->selectedItems().count()==0)
+     {
         return;
+     }
      QList<QGraphicsItem *> selecteditem=view->scene()->selectedItems();
      QList<QGraphicsItem *> nodelist;
-
      std::copy_if(selecteditem.begin(),selecteditem.end(),std::back_inserter(nodelist),[](QGraphicsItem * item){
          return dynamic_cast<Node *>(item)!=nullptr;
      });
@@ -262,6 +264,7 @@ void NodeManager::UpDateSelectedNode()
      {
         UpDateNode(dynamic_cast<Node *>(node));
      }
+
 }
 
 void NodeManager::UpDateAlldNode()

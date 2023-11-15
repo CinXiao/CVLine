@@ -23,9 +23,6 @@ Convertion::Convertion(Port::PortDataType port1type, Port::PortDataType port2typ
         AddPort(new Port(0,"",Port::Output,port2type,false));
     if(port2type==Port::String)
         AddPort(new Port(0,"",Port::Output,port2type,""));
-
-
-
 }
 
 void Convertion::execute()

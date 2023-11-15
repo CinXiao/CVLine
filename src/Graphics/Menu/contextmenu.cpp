@@ -31,7 +31,7 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     AddMenuItem(GetImageMenu, "选择目录图像", [](QPointF pos) { return new ReadImage(pos); });
 
     AddMenuItem(GetImageInfoMenu, "获取图像信息", [](QPointF pos) { return new GetImageInfo(pos); });
-    AddMenuItem(ImageoperateMenu, "图像调整", [](QPointF pos) { return new ImageAdjustment(pos); });
+    AddMenuItem(ImageoperateMenu, "亮度对比度", [](QPointF pos) { return new ImageAdjustment(pos); });
     AddMenuItem(ImageoperateMenu, "二值化", [](QPointF pos) { return new Binarization(pos); });
     AddMenuItem(ImageoperateMenu, "通道分离", [](QPointF pos) { return new ChannelSeparation(pos); });
     AddMenuItem(ImageoperateMenu, "通道合并", [](QPointF pos) { return new ChannelMerging(pos); });
@@ -85,7 +85,7 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     //小数比较
     AddMenuItem(DoubleCompareFunctionMenu, "等于", [](QPointF pos) { return new equal(pos,Port::Double); });
     AddMenuItem(DoubleCompareFunctionMenu, "小于", [](QPointF pos) { return new Compare::less(pos,Port::Double); });
-   AddMenuItem(DoubleCompareFunctionMenu, "小于", [](QPointF pos) { return new greater(pos,Port::Double); });
+   AddMenuItem(DoubleCompareFunctionMenu, "大于", [](QPointF pos) { return new greater(pos,Port::Double); });
 
     //逻辑运算
     AddMenuItem(BooleanMenu, "与", [](QPointF pos) { return new Booleanlogic(pos, Booleanlogic::AND); });

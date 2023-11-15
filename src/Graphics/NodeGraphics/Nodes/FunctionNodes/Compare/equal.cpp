@@ -3,13 +3,19 @@
 
 equal::equal(QPointF pos, Port::PortDataType datatype):Node(Node::FunctionNode, pos)
 {
-    NodeName="等于";
+
 
     QVariant val;
     if(datatype==Port::Int)
+    {
+        NodeName="整数等于";
         val=0;
+    }
     if(datatype==Port::Double)
+    {
+          NodeName="小数等于";
         val=double(0.0);
+    }
 
     //添加控制端口
     AddPort(new Port(0,"A",Port::Input,datatype,val));

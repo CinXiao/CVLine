@@ -13,7 +13,6 @@ public:
     void execute();
 
 
-private:
     TextInput* textItem;
 
 };

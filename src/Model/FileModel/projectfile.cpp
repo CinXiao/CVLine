@@ -105,14 +105,78 @@ GraphicsView *ProjectFile:: OpenProject(QUrl fileurl)
             //菜单和函数表中pair的第二个元素是匿名函数，需要一个传入的坐标pos
             std::function<Node*(QPointF)> func=*it;
             node=func(pos);
+
+
+            //判断是否是转换节点
+            if(nodeObject["Name"]=="转换")
+            {
+                if(node!=nullptr)
+                {
+                    delete node;
+                    node=nullptr;
+
+                }
+
+                 node=new Convertion(Port::PortDataType(nodeObject["Port"].toArray()[0].toObject()["DataType"].toInt()),Port::PortDataType(nodeObject["Port"].toArray()[1].toObject()["DataType"].toInt()),pos);
+
+
+            }
+
+            //设置节点ID
             node->NodeID=nodeObject["ID"].toInt();
-            //设置端口值
+
+            //jie'xi设置端口值
+            QJsonArray portArray =  nodeObject["Port"].toArray();
+            foreach (const QJsonValue &portValue, portArray)
+            {
+
+
+
+
+                  QJsonObject portObject = portValue.toObject();
+                  QString valstr= portObject["Data"].toString();
+                  QVariant val;
+                  if(Port::PortType(portObject["DataType"].toInt())==Port::Int)
+                  {
+                      val.setValue(valstr.toInt());
+                  }else if(Port::PortType(portObject["DataType"].toInt())==Port::Double)
+                  {
+                      val.setValue(valstr.toDouble());
+                  }else if(Port::PortType(portObject["DataType"].toInt())==Port::String)
+                  {
+                      val.setValue(valstr);
+                  }else if(Port::PortType(portObject["DataType"].toInt())==Port::Bool)
+                  {
+                      if(valstr=="false")
+                      val.setValue(false);
+                      else
+                       val.setValue(true);
+                  }
+
+                  //设置端口值
+                 node->SetPortValue( uint(portObject["PortID"].toInt()),val,Port::PortType(portObject["Type"].toInt()));
+
+                 //数据节点，要设置文本框的值
+                 if(node->nodeType==Node::DataNode)
+                 {
+                      DataNode *dataNode=dynamic_cast<DataNode*>(node);
+                      if(dataNode!=nullptr)
+                      {
+                          dataNode->textItem->setPlainText(val.toString());
+                      }
+                 }
+            }
+
+
+
 
             view->nodeManager.AddNode(node);
 
         }
 
     }
+
+
 
     //解析连接信息
      QJsonArray connectionArray = rootObject.value("Connections").toArray();

@@ -56,6 +56,7 @@ public:
     //更新选中的节点线的位置
     void UpDateSelectedNode();
 
+    //更新所有节点
     void UpDateAlldNode();
 
     //添加一条连线关系
