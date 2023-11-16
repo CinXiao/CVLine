@@ -22,7 +22,8 @@ public:
 
 
 
-    GraphicsView *view;//中间编辑视图窗口
+    QUrl ProjectUrl;     //项目位置
+    GraphicsView *view;  //中间编辑视图窗口
 private slots:
     void on_actioncreat_triggered();
 

@@ -22,7 +22,7 @@ void CirculateInterface::CirculateInterRun(QList<PortInfo> portnodeinfolist)
         std::copy_if(inports.begin(),inports.end(),std::back_inserter(notExPortList),[this](Port*port)
                      {
                          PortInfo info=GetNodeAndPortByPort(port);
-                         return !info.node->IsExecuted;
+            return !info.node->IsExecuted&&info.node->nodeType!=Node::ProgrammeLoopControlNode;
                      });
         //获取没有执行完成的节点的端口节点信息
         QList<PortInfo> NotExportinfo;

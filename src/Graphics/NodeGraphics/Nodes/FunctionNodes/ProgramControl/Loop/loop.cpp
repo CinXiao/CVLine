@@ -17,7 +17,7 @@ Loop::Loop(QPointF pos):CirculateInterface(pos)
 
     //数据端口
     AddPort(new Port(1,"循环次数",Port::Input,Port::Int,0));
-
+    AddPort(new Port(2,"index",Port::Output,Port::Int,0));
 }
 
 QList<Port *> Loop::OutputStreamLogicExecution()
@@ -55,9 +55,28 @@ void Loop::executeCirculate()
 
             int circulatecount=GetPortValue(1,Port::Input).toInt();
             //执行指定循环次数
-            for(int i=0;i<circulatecount;++i)
-            CirculateInterRun(portinfo);
+            for(int index=0;index<circulatecount;++index)
+            {
+                Port*port=GetPort(2,Port::Output);
 
+                //设置和index端口连接的端口值
+                if(port->IsConnected)
+                {
+                    for(auto i:PortLineInfoList)
+                    {
+                        if(i.PortInfo1.port==port||i.PortInfo2.port==port)
+                        {
+                            info=i.GetOtherPortNodeInfoByPort(port);
+                            info.port->Data=QVariant(index);
+                            break;
+                        }
+                    }
+
+                }
+
+                //执行循环体
+                CirculateInterRun(portinfo);
+            }
 
         }
     }
