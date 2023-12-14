@@ -33,7 +33,8 @@ public:
                     FunctionNode,
                     ProgrammeControlNode,
                     ProgrammeLoopControlNode,
-                    DataNode};
+                    DataNode,
+                    VarNode};
 
     Node(NodeType nodetype=Node::BaseNode, QPointF pos=QPointF(0,0));
 

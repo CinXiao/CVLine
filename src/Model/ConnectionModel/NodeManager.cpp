@@ -5,6 +5,7 @@
 
 
 
+
 NodeManager::NodeManager(QGraphicsView *view):view(view)
 {
 
@@ -209,6 +210,67 @@ bool NodeManager::PortDataTypeCheck(PortInfo info1, PortInfo info2)
 
     //端口数据类型是否能匹配
     return info1.port->portDataType==info2.port->portDataType;
+}
+
+
+
+bool NodeManager::VarNameIsDefine(Node *n,QString varName)
+{
+
+
+    for (auto node:NodeList)
+    {
+        if(node->nodeType==Node::VarNode&&node!=n)
+        {
+           VarNode *varnode= dynamic_cast<VarNode*>(node);
+            if(varnode->varNameText->toPlainText()==varName)
+                return false;
+
+        }
+
+    }
+    return true;
+}
+
+
+
+void NodeManager::SetVarValueByName(QString varName, QVariant dat)
+{
+    for (auto node:NodeList)
+    {
+        if(node->nodeType==Node::VarNode)
+        {
+            VarNode *varnode= dynamic_cast<VarNode*>(node);
+
+            if(varnode->varNameText->toPlainText()==varName&&varnode->Valid)
+            {
+                varnode->Var=dat;
+            }
+
+        }
+
+    }
+}
+
+QVariant NodeManager::GetVarValueByName(QString varName)
+{
+    QVariant var;
+    for (auto node:NodeList)
+    {
+        if(node->nodeType==Node::VarNode)
+        {
+            VarNode *varnode= dynamic_cast<VarNode*>(node);
+
+            if(varnode->varNameText->toPlainText()==varName&&varnode->Valid)
+            {
+               var= varnode->Var;
+            }
+
+        }
+
+    }
+  return var;
+
 }
 
 

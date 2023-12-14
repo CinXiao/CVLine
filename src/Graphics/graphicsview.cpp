@@ -24,6 +24,8 @@ GraphicsView::GraphicsView()
         // 启用框选功能
    setDragMode(QGraphicsView::RubberBandDrag);
 
+   //设置接受拖放
+       setAcceptDrops(true);
 
     QGraphicsScene *scene=new QGraphicsScene();
     setScene(scene);
@@ -89,7 +91,6 @@ void GraphicsView::mousePressEvent(QMouseEvent *event)
 
 void GraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
-
 
     //不显示画线预览线
     PreviewLine.setVisible(false);
@@ -194,6 +195,17 @@ void GraphicsView::contextMenuEvent(QContextMenuEvent *event)
        node->setSelected(true);
     }
     event->accept();
+}
+
+void GraphicsView::dragEnterEvent(QDragEnterEvent *event)
+{
+      //  qDebug()<<"enter";
+}
+
+void GraphicsView::dropEvent(QDropEvent *event)
+{
+
+    qDebug()<<"finished";
 }
 
 

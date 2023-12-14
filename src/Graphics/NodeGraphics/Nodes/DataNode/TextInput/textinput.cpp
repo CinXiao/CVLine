@@ -31,6 +31,27 @@ TextInput::TextInput(QRectF rect,QVariant& dat, QGraphicsItem *parent):QGraphics
 
 }
 
+TextInput::TextInput(QRectF rect, QGraphicsItem *parent):QGraphicsTextItem("",parent),rect(rect)
+{
+    setFlag(QGraphicsTextItem::ItemIsFocusable, true);
+    setPos(rect.x(),rect.y()); // 设置文本框位置
+    setTextInteractionFlags(Qt::TextEditorInteraction); // 允许编辑文本
+    setDefaultTextColor(Qt::white);
+
+
+    // 创建一个 QTextOption 并设置 wrapMode
+    QTextOption textOption;
+    textOption.setWrapMode(QTextOption::NoWrap);
+    QTextDocument *textdocment=new QTextDocument();
+    textdocment->setDefaultTextOption(textOption);
+    setDocument(textdocment);
+    QFont font;
+    font.setPointSize(15); // 设置字体大小为 12
+    font.setBold(true);
+    setFont(font);
+    setTextWidth(50);
+}
+
 void TextInput::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {

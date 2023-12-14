@@ -9,9 +9,9 @@ class Port
 {
 public:
     //端口类型
-    enum PortType { None,InStream,OutStream, Input, Output };
+    enum PortType { None,InStream,OutStream, Input, Output,InRefenrence,OutRefenrence};
     //端口数据类型
-    enum PortDataType {Stream,//控制流
+    enum PortDataType { Stream,//控制流
                         Int,//整数
                         Bool,//布尔值
                         String,//字符串
@@ -22,6 +22,8 @@ public:
                         Color,   //颜色
                         Image,//图像
                         };
+
+
 
 
     bool IsValid()
@@ -70,12 +72,18 @@ public:
             return portType==Output;
         if(traporttype==Output)
             return portType==Input;
+        if(traporttype==OutRefenrence)
+            return portType==InRefenrence;
+        if(traporttype==InRefenrence)
+            return portType==OutRefenrence;
 
         return portType==OutStream;
     }
 
     //端口存放的数据
     QVariant Data;
+
+
     //端口类型
     PortType portType;
     //端口数据类型

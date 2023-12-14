@@ -75,9 +75,15 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     for(const auto &i:portList)
     {
           //输入输出端口
-          if(i->portType==Port::Input||i->portType==Port::Output)
+          if(i->portType==Port::Input||i->portType==Port::Output||i->portType==Port::InRefenrence||i->portType==Port::OutRefenrence)
           {
               QPen pen(i->portColor,5);
+
+              //如果是引用端口就设置画笔线为虚线
+              if(i->portType==Port::InRefenrence||i->portType==Port::OutRefenrence)
+                  pen.setStyle(Qt::DotLine);
+
+
               pen.setCapStyle(Qt::RoundCap); // 设置线帽为圆滑
               pen.setJoinStyle(Qt::RoundJoin);
               painter->setPen(pen);
@@ -111,6 +117,9 @@ void Node::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
               painter->setFont(oldf);
 
           }
+
+
+
           //流程控制输入输出端口
           if(i->portType==Port::InStream||i->portType==Port::OutStream)
           {

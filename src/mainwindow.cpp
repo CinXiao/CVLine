@@ -7,6 +7,8 @@
 
 #include <src/Model/FileModel/projectfile.h>
 
+#include "src/Graphics/Menu/treemenu.h"
+
 
 
 
@@ -18,6 +20,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 创建左侧工具区
     QDockWidget *leftDock = new QDockWidget("节点",this);
+    leftDock->setWidget(new TreeMenu());
+
+
     // 创建右侧工具区
     QDockWidget *rightDock = new QDockWidget("信息",this);
 

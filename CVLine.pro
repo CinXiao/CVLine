@@ -9,6 +9,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+     src/Graphics/Menu/treemenu.cpp \
+     src/Graphics/NodeGraphics/Nodes/DataNode/varnode.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Multiply.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/max.cpp \
@@ -23,6 +25,8 @@ SOURCES += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/circulateinterface.cpp \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/loop.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/get.cpp \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/set.cpp \
      src/Model/ConnectionModel/NodeManager.cpp \
      src/Graphics/Menu/contextmenu.cpp \
      src/Graphics/graphicsview.cpp \
@@ -50,6 +54,8 @@ SOURCES += \
      src/mainwindow.cpp
 
 HEADERS += \
+     src/Graphics/Menu/treemenu.h \
+     src/Graphics/NodeGraphics/Nodes/DataNode/varnode.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/Multiply.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/division.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/Calculate/max.h \
@@ -64,6 +70,8 @@ HEADERS += \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/InAndOut/print.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/circulateinterface.h \
      src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/loop.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/get.h \
+     src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/set.h \
      src/Model/ConnectionModel/NodeManager.h \
      src/Entity/Relations/LineInfo.h \
      src/Entity/Relations/NodeInfo.h \

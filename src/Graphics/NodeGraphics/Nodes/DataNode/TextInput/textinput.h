@@ -20,7 +20,7 @@ class TextInput : public QGraphicsTextItem
 
 public:
     TextInput(QRectF rect,QVariant &dat,QGraphicsItem* parent = nullptr);
-
+    TextInput(QRectF rect,QGraphicsItem* parent = nullptr);
 
 protected:
     void keyPressEvent(QKeyEvent* event) override;

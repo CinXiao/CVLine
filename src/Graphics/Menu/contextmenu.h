@@ -31,14 +31,21 @@
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/equal.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/less.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/greater.h"
+
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/get.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/set.h"
+
+#include "src/Graphics/NodeGraphics/Nodes/DataNode/varnode.h"
 class ContextMenu:public QMenu
 {
 public:
     ContextMenu(QWidget *parent=nullptr);
     Node* GetSelectedNode(QAction *action,QPointF pos);
 
-    //数据节点
-    QMenu *DataMenu;
+    //输入数据节点
+    QMenu *InputDataMenu;
+    //变量节点
+    QMenu *VarDataMenu;
     //功能节点
     QMenu *FunctionMenu;
         QMenu *IntFunctionMenu;

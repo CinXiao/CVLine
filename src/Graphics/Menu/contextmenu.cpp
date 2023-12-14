@@ -1,27 +1,17 @@
 #include "contextmenu.h"
 
-
-
-
-
-
-
-
-
-
-
 ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
 {
     ProgramControlMenu = CreateSubMenu("控制");
-    DataMenu = CreateSubMenu("数据");
+    VarDataMenu=CreateSubMenu("变量");
+    InputDataMenu = CreateSubMenu("输入");
     FunctionMenu = CreateSubMenu("计算");
     CompareMenu=CreateSubMenu("比较");
     BooleanMenu = CreateSubMenu("逻辑");
     ImageMenu = CreateSubMenu("图像");
-    IOMenu=CreateSubMenu("输入输出");
+    IOMenu=CreateSubMenu("输出");
 
     AddMenuItem(IOMenu, "打印输出", [](QPointF pos) { return new Print(pos); });
-
 
     GetImageMenu=ImageMenu->addMenu("输入");
     GetImageInfoMenu=ImageMenu->addMenu("信息");
@@ -42,18 +32,29 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     AddMenuItem(ImageFilterMenu, "高斯模糊", [](QPointF pos) { return new GaussianBlur(pos); });
 
 
+    //变量
+    AddMenuItem(VarDataMenu, "整数", [](QPointF pos) { return new VarNode(pos, 0, Port::Int); });
+    AddMenuItem(VarDataMenu, "小数", [](QPointF pos) { return new VarNode(pos, 0.0, Port::Double); });
+    AddMenuItem(VarDataMenu, "布尔", [](QPointF pos) { return new VarNode(pos, false, Port::Bool); });
+    AddMenuItem(VarDataMenu, "比特", [](QPointF pos) { return new VarNode(pos, 0, Port::Bit); });
+    AddMenuItem(VarDataMenu, "字符串", [](QPointF pos) { return new VarNode(pos, "", Port::String); });
+
+
+
+    //控制
     AddMenuItem(ProgramControlMenu, "开始", [](QPointF pos) { return new StartNode(pos); });
     AddMenuItem(ProgramControlMenu, "IF", [](QPointF pos) { return new If(pos); });
     AddMenuItem(ProgramControlMenu, "Then", [](QPointF pos) { return new Then(pos); });
     AddMenuItem(ProgramControlMenu, "Loop", [](QPointF pos) { return new Loop(pos); });
+    AddMenuItem(ProgramControlMenu, "Set", [](QPointF pos) { return new Set(pos); });
+    AddMenuItem(ProgramControlMenu, "Get", [](QPointF pos) { return new Get(pos); });
 
 
-    AddMenuItem(DataMenu, "整数", [](QPointF pos) { return new DataNode(pos, 0, Port::Int); });
-    AddMenuItem(DataMenu, "小数", [](QPointF pos) { return new DataNode(pos, 0.0, Port::Double); });
-    AddMenuItem(DataMenu, "布尔", [](QPointF pos) { return new DataNode(pos, false, Port::Bool); });
-    AddMenuItem(DataMenu, "比特", [](QPointF pos) { return new DataNode(pos, 0, Port::Bit); });
-    AddMenuItem(DataMenu, "字符串", [](QPointF pos) { return new DataNode(pos, "", Port::String); });
-
+    AddMenuItem(InputDataMenu, "整数", [](QPointF pos) { return new DataNode(pos, 0, Port::Int); });
+    AddMenuItem(InputDataMenu, "小数", [](QPointF pos) { return new DataNode(pos, 0.0, Port::Double); });
+    AddMenuItem(InputDataMenu, "布尔", [](QPointF pos) { return new DataNode(pos, false, Port::Bool); });
+    AddMenuItem(InputDataMenu, "比特", [](QPointF pos) { return new DataNode(pos, 0, Port::Bit); });
+    AddMenuItem(InputDataMenu, "字符串", [](QPointF pos) { return new DataNode(pos, "", Port::String); });
 
 
     IntFunctionMenu=FunctionMenu->addMenu("整数");

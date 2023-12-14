@@ -4,6 +4,7 @@
 #include "src/Entity/Relations/LineInfo.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Conversion/convertion.h"
 
+#include "src/Graphics/NodeGraphics/Nodes/DataNode/varnode.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/Loop/circulateinterface.h"
 #include<unordered_set>
 #include <QGraphicsView>
@@ -46,6 +47,14 @@ public:
     bool PortMonotonicityCheck(PortInfo info1,PortInfo info2);
     //端口数据类型检测
     bool PortDataTypeCheck(PortInfo info1,PortInfo info2);
+
+    //通过遍历所有变量节点来判断某个变量名是否已经被声明了
+    bool VarNameIsDefine(Node*n, QString varName);
+
+    //通过变量名设置变量值
+    void SetVarValueByName(QString varName,QVariant dat);
+    //通过变量名获取变量值
+    QVariant GetVarValueByName(QString varName);
 
     //检测回环
     //从一个端口出发看看能不能到达这个端口，如果可以到达那么就是回环，如果最后是空的端口那么就不是回环
@@ -97,7 +106,6 @@ public:
 
 public:
     //端口连线信息列表
-
     QList<LineInfo> PortLineInfoList;
 
     //节点表

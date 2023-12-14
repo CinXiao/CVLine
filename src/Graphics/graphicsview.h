@@ -35,8 +35,11 @@ public:
     bool viewportEvent(QEvent *event)override;
     void keyReleaseEvent(QKeyEvent* event) override;
     void contextMenuEvent(QContextMenuEvent *event)override;
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dropEvent(QDropEvent *event)override;
 
-    NodeManager nodeManager{this};//节点管理器
+    //节点管理器
+    NodeManager nodeManager{this};
 private:
 
     ContextMenu contextMenu{this};
