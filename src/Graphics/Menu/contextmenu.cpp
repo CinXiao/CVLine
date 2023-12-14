@@ -32,13 +32,6 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     AddMenuItem(ImageFilterMenu, "高斯模糊", [](QPointF pos) { return new GaussianBlur(pos); });
 
 
-    //变量
-    AddMenuItem(VarDataMenu, "整数", [](QPointF pos) { return new VarNode(pos, 0, Port::Int); });
-    AddMenuItem(VarDataMenu, "小数", [](QPointF pos) { return new VarNode(pos, 0.0, Port::Double); });
-    AddMenuItem(VarDataMenu, "布尔", [](QPointF pos) { return new VarNode(pos, false, Port::Bool); });
-    AddMenuItem(VarDataMenu, "比特", [](QPointF pos) { return new VarNode(pos, 0, Port::Bit); });
-    AddMenuItem(VarDataMenu, "字符串", [](QPointF pos) { return new VarNode(pos, "", Port::String); });
-
 
 
     //控制
@@ -46,8 +39,25 @@ ContextMenu::ContextMenu(QWidget *parent):QMenu(parent)
     AddMenuItem(ProgramControlMenu, "IF", [](QPointF pos) { return new If(pos); });
     AddMenuItem(ProgramControlMenu, "Then", [](QPointF pos) { return new Then(pos); });
     AddMenuItem(ProgramControlMenu, "Loop", [](QPointF pos) { return new Loop(pos); });
-    AddMenuItem(ProgramControlMenu, "Set", [](QPointF pos) { return new Set(pos); });
-    AddMenuItem(ProgramControlMenu, "Get", [](QPointF pos) { return new Get(pos); });
+    SetterMenu=ProgramControlMenu->addMenu("Setter");
+    GetterMenu=ProgramControlMenu->addMenu("Getter");
+    AddMenuItem(SetterMenu, "整数Set", [](QPointF pos) { return new Setter(pos,Port::Int); });
+    AddMenuItem(SetterMenu, "小数Set", [](QPointF pos) { return new Setter(pos,Port::Double); });
+    AddMenuItem(SetterMenu, "字符串Set", [](QPointF pos) {return new Setter(pos,Port::String); });
+    AddMenuItem(SetterMenu, "布尔Set", [](QPointF pos) { return new Setter(pos,Port::Bool); });
+
+    AddMenuItem(GetterMenu, "整数Get", [](QPointF pos) { return new Getter(pos,Port::Int); });
+    AddMenuItem(GetterMenu, "小数Get", [](QPointF pos) { return new Getter(pos,Port::Double); });
+    AddMenuItem(GetterMenu, "字符串Get", [](QPointF pos) {return new Getter(pos,Port::String); });
+    AddMenuItem(GetterMenu, "布尔Get", [](QPointF pos) { return new Getter(pos,Port::Bool); });
+
+    //变量
+    AddMenuItem(VarDataMenu, "整数", [](QPointF pos) { return new VarNode(pos, 0, Port::Int); });
+    AddMenuItem(VarDataMenu, "小数", [](QPointF pos) { return new VarNode(pos, 0.0, Port::Double); });
+    AddMenuItem(VarDataMenu, "布尔", [](QPointF pos) { return new VarNode(pos, false, Port::Bool); });
+    AddMenuItem(VarDataMenu, "比特", [](QPointF pos) { return new VarNode(pos, 0, Port::Bit); });
+    AddMenuItem(VarDataMenu, "字符串", [](QPointF pos) { return new VarNode(pos, "", Port::String); });
+
 
 
     AddMenuItem(InputDataMenu, "整数", [](QPointF pos) { return new DataNode(pos, 0, Port::Int); });

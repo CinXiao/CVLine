@@ -26,6 +26,39 @@ void ProjectFile::SaveProjct(GraphicsView *view,QUrl url)
         //节点类型
         nodejson["NodeType"]=node->nodeType;
 
+        //通过节点类型判断是否是变量节点
+        if(node->nodeType==Node::VarNode)
+        {
+           VarNode *varnode= dynamic_cast<VarNode*>(node);
+            if(varnode!=nullptr)
+           {
+               //记录变量名和变量值
+               nodejson["VarName"]=varnode->varNameText->toPlainText();
+               nodejson["VarValue"]=varnode->Var.toString();
+
+           }
+        }
+        //通过判断节点名字是否含有get和set来判断是否是get或者set节点
+        if(node->NodeName.contains("Set")||node->NodeName.contains("Get"))
+        {
+           Setter *setnode;
+           Getter *getnode;
+           if(node->NodeName.contains("Set"))
+           {
+               setnode= dynamic_cast<Setter*>(node);
+               if(setnode!=nullptr)
+                    nodejson["VarName"]=setnode->varNameText->toPlainText();
+           }
+           if(node->NodeName.contains("Get"))
+           {
+              getnode= dynamic_cast<Getter*>(node);
+            if(getnode!=nullptr)
+                nodejson["VarName"]=getnode->varNameText->toPlainText();
+           }
+        }
+
+
+
         //记录端口
         QJsonArray nodeportarr;
         for(auto port:node->portList)
@@ -98,13 +131,60 @@ GraphicsView *ProjectFile:: OpenProject(QUrl fileurl)
 
         auto it = NodeMap.find(nodeObject["Name"].toString());
 
-        if (it != NodeMap.end()) {
+        if (it != NodeMap.end())
+        {
 
 
             Node*node;
             //菜单和函数表中pair的第二个元素是匿名函数，需要一个传入的坐标pos
             std::function<Node*(QPointF)> func=*it;
             node=func(pos);
+
+            //判断是否是变量节点，设置变量节点的节点名和节点值
+            if(node->nodeType==Node::VarNode)
+            {
+                VarNode *varnode=dynamic_cast<VarNode*>(node);
+                if(varnode!=nullptr)
+                {
+                       varnode->varNameText->setPlainText(nodeObject["VarName"].toString());
+
+                       if(nodeObject["Name"]=="整数变量")
+                            varnode->Var=nodeObject["VarValue"].toInt();
+                       if(nodeObject["Name"]=="小数变量")
+                           varnode->Var=nodeObject["VarValue"].toDouble();
+                       if(nodeObject["Name"]=="布尔值变量")
+                            varnode->Var=nodeObject["VarValue"].toBool();
+                       if(nodeObject["Name"]=="比特变量")
+                           varnode->Var=nodeObject["VarValue"].toInt();
+                       if(nodeObject["Name"]=="字符串变量")
+                            varnode->Var=nodeObject["VarValue"].toString();
+
+                }
+            }
+
+            //判断setter和getter节点
+            //通过判断节点名字是否含有get和set来判断是否是get或者set节点
+            if(node->NodeName.contains("Set")||node->NodeName.contains("Get"))
+            {
+                Setter *setnode;
+                Getter *getnode;
+                if(node->NodeName.contains("Set"))
+                {
+                       setnode= dynamic_cast<Setter*>(node);
+                       if(setnode!=nullptr)
+                          setnode->varNameText->setPlainText( nodeObject["VarName"].toString());
+                }
+                if(node->NodeName.contains("Get"))
+                {
+                       getnode= dynamic_cast<Getter*>(node);
+                       if(getnode!=nullptr)
+                           getnode->varNameText->setPlainText(nodeObject["VarName"].toString());
+                }
+            }
+
+
+
+
 
 
             //判断是否是转换节点
@@ -114,12 +194,8 @@ GraphicsView *ProjectFile:: OpenProject(QUrl fileurl)
                 {
                     delete node;
                     node=nullptr;
-
                 }
-
                  node=new Convertion(Port::PortDataType(nodeObject["Port"].toArray()[0].toObject()["DataType"].toInt()),Port::PortDataType(nodeObject["Port"].toArray()[1].toObject()["DataType"].toInt()),pos);
-
-
             }
 
             //设置节点ID
@@ -129,10 +205,6 @@ GraphicsView *ProjectFile:: OpenProject(QUrl fileurl)
             QJsonArray portArray =  nodeObject["Port"].toArray();
             foreach (const QJsonValue &portValue, portArray)
             {
-
-
-
-
                   QJsonObject portObject = portValue.toObject();
                   QString valstr= portObject["Data"].toString();
                   QVariant val;

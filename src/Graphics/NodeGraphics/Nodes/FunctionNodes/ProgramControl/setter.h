@@ -1,15 +1,15 @@
-#ifndef SET_H
-#define SET_H
+#ifndef SETTER_H
+#define SETTER_H
 
 
 #include "src/Graphics/NodeGraphics/node.h"
 #include "src/Graphics/NodeGraphics/Nodes/DataNode/TextInput/textinput.h"
 
 
-class Set:public Node
+class Setter:public Node
 {
 public:
-    Set(QPointF pos=QPointF(0,0));
+    Setter(QPointF pos=QPointF(0,0),Port::PortDataType datatype=Port::Int);
 
     TextInput* varNameText;
 
@@ -18,4 +18,4 @@ public:
 
 };
 
-#endif // SET_H
+#endif // SETTER_H

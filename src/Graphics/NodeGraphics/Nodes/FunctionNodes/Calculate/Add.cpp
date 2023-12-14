@@ -3,12 +3,12 @@
 AddNode::AddNode(QPointF pos,Port::PortDataType datatype):Node(Node::FunctionNode, pos)
 {
 
-        QVariant val;
+    QVariant val;
     if(datatype==Port::Int)
-        {
-          val=0;
-        NodeName="整数加";
-        }
+    {
+      val=0;
+    NodeName="整数加";
+    }
     if(datatype==Port::Double)
 
     {

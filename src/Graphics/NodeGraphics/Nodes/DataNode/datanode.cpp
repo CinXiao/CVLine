@@ -50,7 +50,6 @@ void DataNode::execute()
         }else if(GetPort(0,Port::Output)->portDataType==Port::Bool)
         {
                  QVariant val(textItem->toPlainText());
-                 qDebug()<<val.toBool();
                  SetPortValue(0,val.toBool(),Port::Output);
         }
 

@@ -236,6 +236,7 @@ bool NodeManager::VarNameIsDefine(Node *n,QString varName)
 
 void NodeManager::SetVarValueByName(QString varName, QVariant dat)
 {
+
     for (auto node:NodeList)
     {
         if(node->nodeType==Node::VarNode)
@@ -244,7 +245,14 @@ void NodeManager::SetVarValueByName(QString varName, QVariant dat)
 
             if(varnode->varNameText->toPlainText()==varName&&varnode->Valid)
             {
-                varnode->Var=dat;
+                if(varnode->Var.type()==QVariant::Int)
+                    varnode->Var=dat.toInt();
+                if(varnode->Var.type()==QVariant::Double)
+                    varnode->Var=dat.toDouble();
+                if(varnode->Var.type()==QVariant::String)
+                    varnode->Var=dat.toString();
+                if(varnode->Var.type()==QVariant::Bool)
+                    varnode->Var=dat.toBool();
             }
 
         }
@@ -265,12 +273,9 @@ QVariant NodeManager::GetVarValueByName(QString varName)
             {
                var= varnode->Var;
             }
-
         }
-
     }
   return var;
-
 }
 
 

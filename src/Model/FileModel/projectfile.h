@@ -45,6 +45,23 @@ public:
         {"比特", [](QPointF pos) { return new DataNode(pos, 0, Port::Bit); }},
         {"字符串", [](QPointF pos) { return new DataNode(pos, "", Port::String); }},
 
+        {"整数Set", [](QPointF pos) { return new Setter(pos,Port::Int); }},
+        {"小数Set", [](QPointF pos) { return new Setter(pos,Port::Double); }},
+        {"字符串Set", [](QPointF pos) {return new Setter(pos,Port::String); }},
+        {"布尔Set", [](QPointF pos) { return new Setter(pos,Port::Bool); }},
+
+        {"整数Get", [](QPointF pos) { return new Getter(pos,Port::Int); }},
+        {"小数Get", [](QPointF pos) { return new Getter(pos,Port::Double); }},
+        {"字符串Get", [](QPointF pos) {return new Getter(pos,Port::String); }},
+        {"布尔Get", [](QPointF pos) { return new Getter(pos,Port::Bool); }},
+
+        { "整数变量", [](QPointF pos) { return new VarNode(pos, 0, Port::Int); }},
+        { "小数变量", [](QPointF pos) { return new VarNode(pos, 0.0, Port::Double); }},
+        { "布尔值变量", [](QPointF pos) { return new VarNode(pos, false, Port::Bool); }},
+        { "比特变量", [](QPointF pos) { return new VarNode(pos, 0, Port::Bit); }},
+        { "字符串变量", [](QPointF pos) { return new VarNode(pos, "", Port::String);}},
+
+
 
         {"整数加", [](QPointF pos) { return new AddNode(pos,Port::Int); }},
         {"整数减", [](QPointF pos) { return new Subtract(pos,Port::Int); }},

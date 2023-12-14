@@ -13,7 +13,6 @@ VarNode::VarNode(QPointF pos, QVariant Dat, Port::PortDataType datatype):Node(No
     varNameText= new TextInput(QRectF(55,45,50,30), this);
     NodeHeight=120;
 
-
 }
 
 void VarNode::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)

@@ -32,8 +32,8 @@
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/less.h"
 #include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/Compare/greater.h"
 
-#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/get.h"
-#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/set.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/getter.h"
+#include "src/Graphics/NodeGraphics/Nodes/FunctionNodes/ProgramControl/setter.h"
 
 #include "src/Graphics/NodeGraphics/Nodes/DataNode/varnode.h"
 class ContextMenu:public QMenu
@@ -67,6 +67,8 @@ public:
             QMenu *ImageFilterMenu;
     //程序控制
     QMenu *ProgramControlMenu;
+           QMenu *SetterMenu;
+           QMenu *GetterMenu;
     //输入输出
     QMenu *IOMenu;
 private:

@@ -1,17 +1,17 @@
-#ifndef GET_H
-#define GET_H
+#ifndef GETTER_H
+#define GETTER_H
 
 #include "src/Graphics/NodeGraphics/node.h"
 #include "src/Graphics/NodeGraphics/Nodes/DataNode/TextInput/textinput.h"
 
 
-class Get : public Node
+class Getter : public Node
 {
 public:
-    Get(QPointF pos=QPointF(0,0));
+    Getter(QPointF pos=QPointF(0,0),Port::PortDataType datatype=Port::Int);
 
     TextInput* varNameText;
     void execute();
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 };
-#endif // GET_H
+#endif // GETTER_H
